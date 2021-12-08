@@ -1,13 +1,31 @@
-.introduction{
-    /* line-height: 27px; */
-    line-height: 1.5;
-    font-size:18px;
+#lead{
+    color:red;
 }
 
 .lead{
-    margin-bottom:0.5em;
-    text-align: center;
-    /* line-height: 54px; */
-    font-size:36px;
-    font-weight:bold;
+    color:green; /* こちらが適用 */
 }
+
+/* button{
+    color:blue;
+} */
+
+/* [class="primary"] {
+    color:green;
+} */
+
+.secondary .primary{
+    color:khaki;
+}
+
+.primary{
+    color: hotpink;
+}
+
+/* button:first-child{
+    color:green;
+}
+
+button:nth-child(2) {
+    color: lime;
+} */
