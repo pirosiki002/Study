@@ -1,31 +1,30 @@
-#lead{
-    color:red;
+#news{
+    border: 1px solid #489;
+    padding: 10px;
 }
 
-.lead{
-    color:green; /* こちらが適用 */
+#news .title{
+    border-left: 5px solid #489;
+    padding:10px;
+    font-size:18px;
+    font-weight:bold;
+    color:#489;
 }
 
-/* button{
-    color:blue;
-} */
-
-/* [class="primary"] {
-    color:green;
-} */
-
-.secondary .primary{
-    color:khaki;
+.title{
+    color:#fff;
+    background-color: #489;
 }
 
-.primary{
-    color: hotpink;
+/* 子要素のみ反映 */
+div > span {
+    color: #F80206;
 }
 
-/* button:first-child{
-    color:green;
+.theme-background{
+    background: aqua;
 }
 
-button:nth-child(2) {
-    color: lime;
-} */
+.theme-border{
+    border: 1px solid blue;
+}
