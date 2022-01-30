@@ -1,11 +1,12 @@
-body{
-  background-color: #fffeee;
-}
 
 h1{
-  color:#0bd;
+  font-family: serif;
+}
+
+h2{
+  font-family: "遊ゴシック体", "Yu Gothic", sans-serif;
 }
 
 p{
-  font-size:20px;
+  font-family: "ヒラギノ丸ゴ Pro W4", "Hiragino Maru Gothic Pro", sans-serif;
 }
