@@ -16,6 +16,27 @@
     background-color: #489;
 }
 
+.btn{
+}
+
+.btn--short{
+    width: 200px;
+}
+.btn--long{
+    width:480px;
+}
+.btn--full{
+    width:100%;
+}
+
+.button{
+    display: inline-block;
+    border: 1px solid #000;
+    padding:0.3em 1em;
+    background-color:#EEE;
+    cursor:pointer;
+}
+
 /* 子要素のみ反映 */
 div > span {
     color: #F80206;
