@@ -1,12 +1,26 @@
 
+body{
+  /* background-color: #fee; */
+  /* background-color: #f5f2e5; */
+  background-image: url(images/bg.png);
+  /* background-image: url(images/bg-airplane.jpg); */
+  background-repeat: no-repeat;
+  /* background-size: cover; */
+  /* background-position: top center; */
+  background-position: 30px 80px;
+}
 h1{
-  font-family: serif;
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  color: #0bd;
+  background-color: #faa;
 }
 
 h2{
   font-family: "遊ゴシック体", "Yu Gothic", sans-serif;
+  color:navy;
 }
 
 p{
   font-family: "ヒラギノ丸ゴ Pro W4", "Hiragino Maru Gothic Pro", sans-serif;
+  color: rgba(10, 130, 165, .5);
 }
