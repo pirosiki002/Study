@@ -1,3 +1,11 @@
+body{
+  background-color: #fffeee;
+}
+
 h1{
-  color:red;
+  color:#0bd;
+}
+
+p{
+  font-size:20px;
 }
