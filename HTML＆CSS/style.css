@@ -1,26 +1,14 @@
-
-
-p{
-  border-width: thick;
-  border-style: solid;
+.item{
+  background: #0bd;
+  color:#fff;
+  /* margin: 10px; */
+  padding: 10px;
 }
-
-div{
-  border-width: 1px 4px 8px 12px;
-  border-style: solid;
-  border-color: tan #0bd tomato #000;
-}
-
-ul{
-  list-style-type: lower-roman;
-  list-style-position: outside;
-}
-
-ol{
-  list-style-type: katakana-iroha;
-  list-style-position: inside;
-}
-
-li{
-  background-color: #0bd;
+.container{
+  /* display: flex; */
+  display: grid;
+  /* grid-template-columns: 200px 200px 200px; */
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 200px 200px;
+  gap:10px;
 }
