@@ -1,10 +1,36 @@
 
 .logo-title{
   margin-top: 6px;
-  margin-left: 6rem;
+  margin-left: 2rem;
+  /* display: flex; */
+  display: inline-box;
 }
 .logo-title img{
-  margin: 0 auto;
+  /* margin: 0 auto; */
+  margin-left:1rem;
   height: 2rem;
   width: auto;
+}
+
+.menu{
+  display: flex;
+  margin-top: 1rem;
+  margin-right: 6rem;
+  justify-content: flex-end;
+  /* text-align: right; */
+}
+
+#nav{
+  /* text-align: right; */
+}
+
+#nav ul{
+  text-align: right;
+}
+#nav li{
+  margin-left:1rem;
+  list-style: none;
+  float:left;
+  /* display: flex;   */
+  width:60px;
 }
