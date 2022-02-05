@@ -1,10 +1,14 @@
 
+body{
+  background-image:url(images/main-bg.jpg);
+  background-size: cover;
+}
 .logo-title{
   margin-top: 6px;
   margin-left: 2rem;
-  /* display: flex; */
-  display: inline-box;
+  display: flex;
 }
+
 .logo-title img{
   /* margin: 0 auto; */
   margin-left:1rem;
@@ -14,13 +18,9 @@
 
 .menu{
   display: flex;
-  margin-top: 1rem;
+  margin-top: -1rem;
   margin-right: 6rem;
   justify-content: flex-end;
-  /* text-align: right; */
-}
-
-#nav{
   /* text-align: right; */
 }
 
@@ -33,4 +33,35 @@
   float:left;
   /* display: flex;   */
   width:60px;
+}
+
+.catch-copy{
+  margin-top: 100px;
+  text-align: center;
+}
+
+.catch-copy h2{
+  font-size:2rem;
+  font-family: 'Philosopher', serif;
+  text-transform: uppercase;
+  font-weight: normal;
+}
+.catch-copy p{
+  margin-top:20px;
+  font-size: 0.5rem;
+}
+
+.menu-button{
+  text-align: center;
+  padding-top:8px;
+  margin: 0 auto;
+  margin-top: 20px;
+  height:40px;
+  width:200px;
+  background-color: rgb(12, 190, 250);
+  border-radius: 8px;
+}
+.menu-button a{
+  text-decoration: none;
+  color:#ffffff;
 }
