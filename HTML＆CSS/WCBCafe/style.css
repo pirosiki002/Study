@@ -8,8 +8,8 @@ body{
   font-family: "Yu Gothic Medium", "遊ゴシック Medium", YuGothic, "遊ゴシック体", "ヒラギノ角ゴ Pro W3", sans-serif;
   line-height: 1.7;
   color:#432;
-  background-image:url(images/main-bg.jpg);
-  background-size: cover;
+  /* background-image:url(images/main-bg.jpg); */
+  /* background-size: cover; */
 }
 
 a{
@@ -94,6 +94,27 @@ img{
 
 /* HOME
 ------------------------------ */
+/* 大きな背景画像 */
+.big-bg{
+  /* background-image: url(images/main-bg.jpg);
+  min-height: 100vh; */
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+}
+
+#home{
+  background-image: url(images/main-bg.jpg), linear-gradient(#c9ffbf, #ffafbd);
+  /* background-image: linear-gradient(#c9ffbf, #ffafbd); */
+  /* background-color: #0bd; */
+  background-blend-mode: luminosity;
+  min-height: 100vh;
+}
+
+#home .page-title{
+  text-transform: none;
+}
+
 .home-content{
   text-align: center;
   margin-top: 10%;
