@@ -16,23 +16,31 @@
     <body>
         <div id = "home" class="big-bg">
             <header class="page-header wrapper">
-                <h1><a href="index.html"><img class="logo" src="images/logo.svg" alt="WCBカフェホーム"></a></h1>
-                <nav>
-                    <ul class="main-nav">
-                        <li><a href="news.html">News</a></li>
-                        <li><a href="menu.html">Menu</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
-                </nav>
+                <div class="header-menu">
+                    <h1><a href="index.html"><img class="logo" src="images/logo.svg" alt="WCBカフェホーム"></a></h1>
+                    <nav>
+                        <ul class="main-nav">
+                            <li><a href="news.html">News</a></li>
+                            <li><a href="menu.html">Menu</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                        </ul>
+                    </nav>
+                </div>
                 <!-- <br> -->
+                <h2 class="page-title">News</h2>
             </header>
-            <!-- これをどこに持っていくか？上のpage-header構成をいじったほうがよいかも -->
-            <h2 class="page-title">News</h2>
             <div class = "wrapper-2column">
                 <article class="main wrapper">
-                    <img class="article-logo" src="#">
-                    <h2 class="article-title">店内ギャラリーの絵が新しくなりました</h2>
-                    <p class="article-subtitle">カテゴリー：お店の紹介</p>
+                    <!-- 円のロゴとタイトルの構成を考え中。Flexで崩れるのを防ぎたい -->
+                    <div class="date">
+                        <p class="day">3/30</p>
+                        <p class="year">2019</p>
+                    </div>
+                    <div class="main-title">
+                        <!-- <img class="article-logo" src="#"> -->
+                        <h2 class="article-title">店内ギャラリーの絵が新しくなりました</h2>
+                        <p class="article-subtitle">カテゴリー：お店の紹介</p>
+                    </div>
                     <img class="main-img" src="#">
                     <p class="main-explain">**************************</p>
                 </article><!-- /.home-content -->
