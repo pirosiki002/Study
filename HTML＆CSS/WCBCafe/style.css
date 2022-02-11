@@ -127,12 +127,14 @@ img{
 }
 
 .wrapper-2column{
+  margin:2rem 0;
   width: 80%;
   display: flex;
+  overflow-wrap : break-word;
 }
 
 .main{
-  width: 60%;
+  width: 100%;
 }
 
 .side{
@@ -161,4 +163,27 @@ img{
 }
 .year{
   font-size: .5rem;
+}
+
+.wall{
+  height: auto;
+  width: auto;
+}
+
+.main-explain{
+  margin-top:1rem;
+  width:auto;
+}
+
+/* Side
+------------------------------ */
+/* Footer
+------------------------------ */
+.footer{
+  text-align: center;
+  background-color: #543f2c;
+  padding: 1rem;
+}
+.footer p{
+  color:white;
 }
