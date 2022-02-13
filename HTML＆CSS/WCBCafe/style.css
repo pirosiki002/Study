@@ -101,21 +101,12 @@ img{
   width:60px;
 }
 
-/* HOME
+/* NEWS
 ------------------------------ */
-.page-header{
+#news{
   background-image: url(images/news-bg.jpg);
-  height: 260px;
-  /* max-height: 14vh; */
-}
-
-.home-content{
-  text-align: center;
-  margin-top: 10%;
-}
-.home-content p{
-  font-size:1.125rem;
-  margin: 10px 0 42px;
+  height: 270px;
+  margin-bottom:40px;
 }
 
 /* 見出し */
@@ -124,6 +115,10 @@ img{
   font-family: 'Philosopher', serif;
   text-transform: uppercase;
   font-weight: normal;
+}
+
+#news .page-title{
+  text-align: center;  
 }
 
 .wrapper-2column{
@@ -143,10 +138,7 @@ img{
 
 /* Main
 ------------------------------ */
-.main-title{
-  /* display: flex; */
-}
-
+/* 
 .date{
   background-color: #0bd;
   height: 80px;
@@ -173,17 +165,23 @@ img{
 .main-explain{
   margin-top:1rem;
   width:auto;
-}
+} */
 
 /* Side
 ------------------------------ */
 /* Footer
 ------------------------------ */
-.footer{
-  text-align: center;
+footer{
+  /* text-align: center;
   background-color: #543f2c;
-  padding: 1rem;
+  padding: 1rem; */
+  background: #432;
+  text-align: center;
+  padding: 26px 0;
+  margin-top: 50px;
 }
-.footer p{
-  color:white;
+footer p{
+  /* color:white; */
+  color:#fff;
+  font-size:0.875rem;
 }
