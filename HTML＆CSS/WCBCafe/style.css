@@ -199,37 +199,46 @@ article p {
   margin-bottom: 1rem;
 }
 
-/* 
-.date{
-  background-color: #0bd;
-  height: 80px;
-  width: 80px;
-  border-radius: 50%;
-}
-.date p{
-  line-height: 40px;
-  text-align: center;
-  color:white;
-}
-.day{
-  font-size: 1rem;
-}
-.year{
-  font-size: .5rem;
-}
-
-.wall{
-  height: auto;
-  width: auto;
-}
-
-.main-explain{
-  margin-top:1rem;
-  width:auto;
-} */
 
 /* Side
 ------------------------------ */
+.side{
+  margin-top: 1rem;
+  
+}
+
+.side a{
+  color: black;
+  text-decoration: none;
+
+}
+
+.category-menu p{
+  margin-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: solid;
+  border-color: #ebd1a7;
+  border-width: 1px;
+}
+
+.category-menu a:hover{
+  color:#0bd;
+}
+
+.category-title p{
+  font-size:1.25rem;
+  /* text-decoration: underline;
+  text-decoration-color: #0bd; */
+
+  border-width: 10px;
+  border-bottom: solid;
+  border-color: #0bd;
+}
+
+.category-explain p{
+  margin-top: 0.5rem;
+  overflow-wrap: break-word;
+}
 /* Footer
 ------------------------------ */
 footer{
