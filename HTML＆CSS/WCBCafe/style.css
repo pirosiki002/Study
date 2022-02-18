@@ -290,16 +290,47 @@ aside p{
 /* Footer
 ------------------------------ */
 footer{
-  /* text-align: center;
-  background-color: #543f2c;
-  padding: 1rem; */
   background: #432;
   text-align: center;
   padding: 26px 0;
-  /* margin-top: 50px; */
+  margin-top: 50px;
 }
 footer p{
-  /* color:white; */
-  color:#fff;
+  color:red;
   font-size:0.875rem;
+}
+
+/* smart phone */
+@media screen and (max-width: 400px) {
+
+  .logo{
+    /* 保留 */
+  }
+  /* 1columnにしたい */
+  .wrapper-2column{
+    width: 100%;
+  }
+
+  .news-contents{
+    display: block;
+  }
+  
+  article{
+    width: 100%;
+  }
+
+  .post-title{
+    margin-top: 0.5rem;
+    font-size: 1.4rem;
+  }
+
+  .post-cat{
+    text-align: center;
+    margin-top: 2.5rem;
+    margin-left: 0;
+  }
+
+  aside{
+    width: 100%;
+  }
 }
