@@ -6,10 +6,7 @@ html{
 
 body{
   font-family: "Yu Gothic Medium", "遊ゴシック Medium", YuGothic, "遊ゴシック体", "ヒラギノ角ゴ Pro W3", sans-serif;
-  /* line-height: 1.7; */
   color:#432;
-  /* background-image:url(images/main-bg.jpg); */
-  /* background-size: cover; */
 }
 
 a{
@@ -47,11 +44,6 @@ img{
   color: #0bd;
 }
 
-/* .page-header{
-  display: flex;
-  justify-content: space-between;
-} */
-
 .header-menu{
   display: flex;
   justify-content: space-between;
@@ -62,12 +54,9 @@ img{
 }
 
 .wrapper{
-  /* max-width: 1100px; */
   margin: 0 auto;
   padding: 0 4%;
 }
-
-
 
 .logo-title{
   margin-top: 6px;
@@ -76,7 +65,6 @@ img{
 }
 
 .logo-title img{
-  /* margin: 0 auto; */
   margin-left:1rem;
   height: 2rem;
   width: auto;
@@ -87,7 +75,6 @@ img{
   margin-top: -1rem;
   margin-right: 6rem;
   justify-content: flex-end;
-  /* text-align: right; */
 }
 
 #nav ul{
@@ -97,7 +84,6 @@ img{
   margin-left:1rem;
   list-style: none;
   float:left;
-  /* display: flex;   */
   width:60px;
 }
 
@@ -142,13 +128,6 @@ aside{
   justify-content: space-between;
   margin-bottom: 50px;
 }
-/* .main{
-  width: 100%;
-}
-
-.side{
-  width: 20%;
-} */
 
 /* Main
 ------------------------------ */
@@ -238,39 +217,6 @@ aside p{
   color: #0bd;
 }
 
-/* .side{
-  margin-top: 1rem;
-  
-}
-
-.side a{
-  color: black;
-  text-decoration: none;
-
-}
-
-.category-menu p{
-  margin-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  border-bottom: solid;
-  border-color: #ebd1a7;
-  border-width: 1px;
-}
-
-.category-menu a:hover{
-  color:#0bd;
-}
-
-.category-title p{
-  font-size:1.25rem;
-  /* text-decoration: underline;
-  text-decoration-color: #0bd; */
-
-  border-width: 10px;
-  border-bottom: solid;
-  border-color: #0bd;
-}
-
 .about-shop{
   margin-top: 3.5rem;
 }
@@ -289,23 +235,33 @@ aside p{
 } */
 /* Footer
 ------------------------------ */
-footer{
+.footer_ft{
+  position: absolute;
+  bottom:0;
   background: #432;
   text-align: center;
   padding: 26px 0;
   margin-top: 50px;
 }
-footer p{
-  color:red;
+.footer_ft p{
+  text-align: center;
+  color:white;
   font-size:0.875rem;
+  background-color: #432;
+  padding:26px 0;
 }
 
 /* smart phone */
 @media screen and (max-width: 400px) {
 
-  .logo{
-    /* 保留 */
+  .header-menu .logo{
+    width:100%;
   }
+
+  .page-title{
+    margin-top: 50px;
+  }
+
   /* 1columnにしたい */
   .wrapper-2column{
     width: 100%;
