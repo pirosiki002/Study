@@ -116,11 +116,17 @@ img{
 
 
 article{
-  width: 74%;
+  width: 60%;
+  order: 2;
 }
 
 aside{
   width: 22%;
+  order: 3;
+}
+
+.column3{
+  order: 1;
 }
 
 .news-contents{
