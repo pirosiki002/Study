@@ -87,9 +87,10 @@ img{
   width:60px;
 }
 
-/* NEWS
+/* MENU
 ------------------------------ */
-#news{
+
+#menu{
   background-image: url(images/menu-bg.jpg);
   background-size: 100%;
   height: 450px;
@@ -104,14 +105,15 @@ img{
   font-weight: normal;
 }
 
-#news .page-title{
-  text-align: center;  
+#menu .page-title{
+  text-align: center;
+  margin-bottom: 40px;  
 }
 
 .page-explain{
-  margin-top: 20px;
+  margin: 0 auto;
   color:red;
-
+  width:60%;
 }
 
 
@@ -158,13 +160,32 @@ img{
   margin-left: 120px;
 }
 
-article img{
+/* article img{
   margin-bottom: 20px;
-}
+} */
 article p {
+  font-size: 0.735rem;
   margin-bottom: 1rem;
+  text-align: center;
 }
 
+
+/* Grid
+------------------------------ */
+.grid{
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
+  column-gap:10px;
+  margin-bottom: 20px;
+}
+
+/* 1のみ拡大。微妙 */
+/* .grid1{
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 3;
+} */
 
 /* Side
 ------------------------------ */
@@ -235,6 +256,6 @@ aside p{
   color:white;
   font-size:0.875rem;
   background-color: #432;
-  padding:26px 0;
+  padding:20px 0;
 }
 
