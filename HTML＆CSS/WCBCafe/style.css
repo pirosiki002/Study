@@ -187,6 +187,22 @@ article p {
   grid-row-end: 3;
 } */
 
+@media (max-width:600px){
+  #menu{
+    background-size: 100%;
+    height: 400px;
+    margin-bottom:0px;
+  }
+  
+  .grid{
+    display: grid;
+    grid-template-columns:100%;
+    column-gap:10px;
+    margin-bottom: 20px;
+  }
+  
+}
+
 /* Side
 ------------------------------ */
 
