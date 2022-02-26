@@ -92,10 +92,15 @@ img{
 
 #menu{
   background-image: url(images/menu-bg.jpg);
+  background-size: contain;
   background-size: 100%;
-  height: 450px;
-  margin-bottom:40px;
 }
+
+.menu-content{
+  max-width: 560px;
+  margin-top: 10%;
+}
+
 
 /* 見出し */
 .page-title{
@@ -174,12 +179,24 @@ article p {
 ------------------------------ */
 .grid{
   display: grid;
-  grid-template-columns: 33% 33% 33%;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   column-gap:10px;
+  margin-top: 6%;
   margin-bottom: 20px;
 }
 
 /* 1のみ拡大。微妙 */
+.big-box{
+  grid-column: 1 / 3;
+  grid-row: 1 / 3;
+}
+
+.big-box img{
+  height: 91.5%;
+  width: 100%;
+  object-fit: cover;
+}
+
 /* .grid1{
   grid-column-start: 1;
   grid-column-end: 3;
@@ -190,8 +207,7 @@ article p {
 @media (max-width:600px){
   #menu{
     background-size: 100%;
-    height: 400px;
-    margin-bottom:0px;
+    min-height: 35vh;
   }
   
   .grid{
@@ -247,26 +263,64 @@ aside p{
 
 .category-explain{
   width:90%;
-  /* text-align: center; */
   margin-right: auto;
   margin-left: auto;
 }
 
 .category-explain p{
   margin-top: 0.5rem;
-  /* margin: auto 0; */
   overflow-wrap: break-word;
-} */
+}
+
+/* Contact
+------------------------------ */
+#contact{
+  background-image: url(images/contact-bg.jpg);
+  background-size: contain;
+  background-size: 100%;
+  height: 100vh;
+}
+
+.page-title{
+  text-align: left;
+}
+
+.input input{
+  margin-top: 10px;
+  margin-bottom: 20px;
+  background-color:rgba(255, 255, 255, 0.5);
+  border-radius: 5px;
+  height: 40px;
+}
+
+.input textarea{
+  margin-top: 10px;
+  margin-bottom: 20px;
+  background-color:rgba(255, 255, 255, 0.5);
+  border-radius: 5px;
+  height: 16vh;
+  width: 45%;
+}
+
+.send-button button{
+  height: 50px;
+  width: 100px;
+  border-radius: 5px;
+  background-color: #0bd;
+  color:#fff
+}
+
 /* Footer
 ------------------------------ */
 .footer_ft{
-  position: absolute;
+  /* position: absolute; */
   bottom:0;
   background: #432;
   text-align: center;
   padding: 26px 0;
-  margin-top: 50px;
+  /* margin-top: 50px; */
 }
+
 .footer_ft p{
   text-align: center;
   color:white;
