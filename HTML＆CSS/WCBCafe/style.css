@@ -276,9 +276,10 @@ aside p{
 ------------------------------ */
 #contact{
   background-image: url(images/contact-bg.jpg);
-  background-size: contain;
+  min-height: 80vh;
+  /* background-size: contain;
   background-size: 100%;
-  height: 100vh;
+  height: 100vh; */
 }
 
 .page-title{
@@ -308,6 +309,49 @@ aside p{
   border-radius: 5px;
   background-color: #0bd;
   color:#fff
+}
+
+/* Map
+------------------------------ */
+.map{
+  margin-top: 30px;
+  /* width: 80%; */
+  display: flex;
+  background-color: #fff;
+}
+
+.cafe-detail{
+  background-color: #fff;
+  width: 30%;
+}
+
+.cafe-detail-sentence{
+  margin-top: 20px;
+  /* margin-left: 20px; */
+  width: 90%;
+
+}
+
+.cafe-detail-sentence h2{
+  /* text-decoration: underline;
+  text-decoration-color: #0bd; */
+  /* border-bottom: #0bd; */
+  /* padding:20px; */
+  border-bottom: 2px solid #0bd;
+  /* padding-top: 10px;   */
+  margin-bottom: 20px;
+}
+
+.cafe-detail-sentence p{
+  width: 80%;
+}
+
+.map iframe{
+  margin-top: 20px;
+  margin-left: 20px;
+  height:450px;
+  width:800px;
+  /* width:70%; */
 }
 
 /* Footer
