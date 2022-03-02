@@ -320,6 +320,10 @@ aside p{
   background-color: #fff;
 }
 
+.map .wrapper{
+  justify-content: space-between;
+}
+
 .cafe-detail{
   background-color: #fff;
   width: 30%;
@@ -333,16 +337,12 @@ aside p{
 }
 
 .cafe-detail-sentence h2{
-  /* text-decoration: underline;
-  text-decoration-color: #0bd; */
-  /* border-bottom: #0bd; */
-  /* padding:20px; */
   border-bottom: 2px solid #0bd;
-  /* padding-top: 10px;   */
   margin-bottom: 20px;
 }
 
 .cafe-detail-sentence p{
+  margin: 0 auto;
   width: 80%;
 }
 
@@ -353,6 +353,23 @@ aside p{
   width:800px;
   /* width:70%; */
 }
+
+/* SNS
+------------------------------ */
+.sns{
+  background-color: bisque;
+  padding:  30px 150px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.sns h2{
+  border-bottom: 2px solid #0bd;
+  /* margin: 0 30px; */
+  margin-bottom: 20px;
+}
+
 
 /* Footer
 ------------------------------ */
