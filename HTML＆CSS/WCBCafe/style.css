@@ -364,13 +364,6 @@ aside p{
   width: 100%;
 }
 
-<<<<<<< HEAD
-=======
-.sns-box{
-  width:30%;
-}
-
->>>>>>> dev_local_mac
 .sns h2{
   border-bottom: 2px solid #0bd;
   /* margin: 0 30px; */
@@ -397,3 +390,37 @@ aside p{
   padding:20px 0;
 }
 
+/* スマホ対応 */
+@media screen and (max-width:480px){
+
+  /* Google Mapを囲う要素 */
+  .map {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-top: 75%; /* 比率を4:3に固定 */
+    margin-bottom: 300px;
+  }
+
+  /* Google Mapのiframe */
+  .map iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .cafe-detail{
+    width: 50%;
+    /* margin:20px 0px; */
+    margin: 0 auto;
+  }
+  .cafe-detail-sentence{
+    display: inline-block;
+    margin: 0 auto;
+  }
+
+
+}
