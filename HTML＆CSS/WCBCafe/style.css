@@ -364,6 +364,13 @@ aside p{
   width: 100%;
 }
 
+<<<<<<< HEAD
+=======
+.sns-box{
+  width:30%;
+}
+
+>>>>>>> dev_local_mac
 .sns h2{
   border-bottom: 2px solid #0bd;
   /* margin: 0 30px; */
