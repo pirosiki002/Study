@@ -364,6 +364,10 @@ aside p{
   width: 100%;
 }
 
+.sns-box{
+  width:30%;
+}
+
 .sns h2{
   border-bottom: 2px solid #0bd;
   /* margin: 0 30px; */
