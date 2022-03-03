@@ -277,6 +277,9 @@ aside p{
 #contact{
   background-image: url(images/contact-bg.jpg);
   min-height: 80vh;
+  background-size:cover;
+  /* background-size: 100%; */
+  height: 50vh;
   /* background-size: contain;
   background-size: 100%;
   height: 100vh; */
@@ -391,7 +394,7 @@ aside p{
 }
 
 /* スマホ対応 */
-@media screen and (max-width:480px){
+@media screen and (max-width:600px){
 
   /* Google Mapを囲う要素 */
   .map {
@@ -416,11 +419,14 @@ aside p{
     width: 50%;
     /* margin:20px 0px; */
     margin: 0 auto;
+    margin-top: 50px;
   }
   .cafe-detail-sentence{
     display: inline-block;
     margin: 0 auto;
   }
 
-
+  .sns{
+    display: block;
+  }
 }
