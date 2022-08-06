@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="utf-8">
+        <title>User List</title>
+        <meta name="description" content="検索機能の練習">
+        <link rel="stylesheet" href="style.css">
+        <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&display=swap" rel="stylesheet">
+     </head>
+    <body>
+      <form action="user_list.php" method="post">
+          ID:<input type="text" name="id" value="<?php echo $_POST['id']?>">
+          <?php
+              if(preg_match("/[^0-9A-Za-z]/", $_POST['id'])){
+                  echo " IDは英数字で入力してください！";
+              }
+          ?>
+          <br>
+          Name:<input type="text" name="user_name" value="<?php echo $_POST['user_name']?>"><br>
+          <input type="submit">
+      </form>
+    </body>
+</html>
