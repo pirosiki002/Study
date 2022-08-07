@@ -4,17 +4,16 @@
     <base target="_top">
   </head>
   <body>
+    <div id='dispArea'>
+    </div>
     <!-- typing part -->
-    <h1 id = "subject"></h1>
+    <h1 id="subject"></h1>
     <form name="typing" onsubmit="return false;">
       <input name="input" id="input_text" type="text">
       <!-- <button name="btn" type="button">ボタン</button> -->
     </form>
-    <p id="timer">制限時間：10秒</p>
-    <!-- <p>Enterキーで決定</p> -->
-    <!-- GAS と異なる部分start -->
-    <script type="text/javascript" src="./js.js"></script>  <!-- localコード -->
-    <!-- <?!= HtmlService.createHtmlOutputFromFile('js').getContent(); ?> --> <!-- GASコード -->
-    <!-- GAS と異なる部分end -->
+    <p>↑答えをここに入力。Enterキーで決定</p>
+    <p id="timer">制限時間：30秒</p>
+    <?!= HtmlService.createHtmlOutputFromFile('js').getContent(); ?>
   </body>
 </html>
