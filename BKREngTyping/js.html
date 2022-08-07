@@ -5,9 +5,14 @@
   //英語と日本語の設定
   const ENG_WORD_COL = 0;
   const JPN_WORD_COL = 1;
+  //問題のタイプ
+  const Q_TYPE_ENG = "英単語⇨日本語";
+  const Q_TYPE_JPN = "日本語⇨英単語";
+  let g_Q_type = Q_TYPE_ENG;  //初期設定は英語
 
   //問題数
   const Q_CNT = 5;  //とりあえず5問
+
 
   //スプレッドシートのデータ格納用配列を作る
   let g_gas_data_arr = new Array(MAX_ROW);
@@ -45,6 +50,20 @@
       }
     }
 
+    //各種設定を読み込む
+    g_Q_type = spreadsheet_data[1][4];
+    console.log("g_Q_type=", g_Q_type);
+    //問題の種類が英語か日本語化を判定（関数化する）
+    if( Q_TYPE_ENG === g_Q_type){
+      console.log("英語の問題 g_Q_type=", g_Q_type);
+    }
+    else if(Q_TYPE_JPN === g_Q_type){
+      console.log("日本語の問題 g_Q_type=", g_Q_type);
+    }
+    else{
+      console.log("Q_TYPE error");
+    }
+
     //この場所じゃダメそう。。
     //タイピング問題を初期化してスタート
     init();
@@ -78,7 +97,6 @@
     if(!state) return;  //すでに終了していたら操作させない
 
     // 正誤を判定    
-    // if(form.input.value === subject.textContent) {
     if(form.input.value === g_answer) {
       subject.textContent = '正解！';
       g_correct_cnt++;  //正解数をインクリメント
@@ -108,7 +126,6 @@
   //*********************************
   function init() {
     //ランダムで問題をひとつ生成
-    // const rnd = Math.floor(Math.random() * textList.length);
     const rnd = Math.floor(Math.random() * g_gas_data_arr.length);
     
     console.log("init() rnd=", rnd);
@@ -119,10 +136,19 @@
       return;
     }
 
-    //問題となる英単語をセット
-    subject.textContent = g_gas_data_arr[rnd][0];
-    //答えもセットしておく
-    g_answer = g_gas_data_arr[rnd][1];
+    if(Q_TYPE_ENG === g_Q_type){
+      //英語モード
+      //問題となる英単語をセット
+      subject.textContent = g_gas_data_arr[rnd][0];
+      //答えもセットしておく
+      g_answer = g_gas_data_arr[rnd][1];
+    }
+    else if(Q_TYPE_JPN === g_Q_type){
+      //日本語モード。英語モードとは設定が逆になる
+      subject.textContent = g_gas_data_arr[rnd][1];
+      g_answer = g_gas_data_arr[rnd][0];
+    }
+
 
     form.input.value = '';  //入力欄を空白で初期化
     form.input.focus();     //フォーカスをあてる

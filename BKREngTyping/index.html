@@ -10,10 +10,10 @@
     <h1 id="subject"></h1>
     <form name="typing" onsubmit="return false;">
       <input name="input" id="input_text" type="text">
-      <!-- <button name="btn" type="button">ボタン</button> -->
     </form>
     <p>↑答えをここに入力。Enterキーで決定</p>
     <p id="timer">制限時間：30秒</p>
+    <button name="finish" id ="finish" onclick="finish()" >終了</button>
     <?!= HtmlService.createHtmlOutputFromFile('js').getContent(); ?>
   </body>
 </html>
