@@ -5,6 +5,12 @@
   //英語と日本語の設定
   const ENG_WORD_COL = 0;
   const JPN_WORD_COL = 1;
+  //時間制限設定
+  const LIMIT_TIME_VALID   = 1;                 //時間制限有効
+  const LIMIT_TIME_INVALID = 0;                 //時間制限無効
+  const LIMIT_TIME         = 10;                //１問ごとの制限時間
+  let g_LTime_valid        = LIMIT_TIME_VALID;  //初期設定は時間制限有効
+
   //問題のタイプ
   const Q_TYPE_ENG = "英単語⇨日本語";
   const Q_TYPE_JPN = "日本語⇨英単語";
@@ -51,18 +57,10 @@
     }
 
     //各種設定を読み込む
+    //問題の種類が英語か日本語か
     g_Q_type = spreadsheet_data[1][4];
-    console.log("g_Q_type=", g_Q_type);
-    //問題の種類が英語か日本語化を判定（関数化する）
-    if( Q_TYPE_ENG === g_Q_type){
-      console.log("英語の問題 g_Q_type=", g_Q_type);
-    }
-    else if(Q_TYPE_JPN === g_Q_type){
-      console.log("日本語の問題 g_Q_type=", g_Q_type);
-    }
-    else{
-      console.log("Q_TYPE error");
-    }
+    //時間制限が有効か無効か？
+    g_LTime_valid = spreadsheet_data[2][4];
 
     //この場所じゃダメそう。。
     //タイピング問題を初期化してスタート
@@ -75,7 +73,7 @@
   const form = document.forms.typing;
 
   //グローバル変数定義
-  let TIME = 30;            //カウントダウン用
+  let g_time = 10;          //カウントダウン用
   let g_q_cnt = 0;          //問題数カウント用
   let g_correct_cnt = 0;    //正解数カウント用
   let g_answer = 0;         //回答のグローバル変数（あとで消す予定）
@@ -86,8 +84,19 @@
   //カウントダウン
   //*********************************
   const countdown = setInterval(function() {
-    timer.textContent = '制限時間：' + --TIME + '秒';
-    if(TIME <= 0) finish();
+
+    if(g_LTime_valid === '時間制限なし'){
+      //制限時間なしなら処理しない（暫定対応）
+      timer.textContent = '制限時間なし';
+
+      return;
+    }
+    
+    timer.textContent = '制限時間：' + --g_time + '秒';
+    if(g_time <= 0) {
+      // 次の問題へ！
+      init();
+    }
   }, 1000);  
 
   //*********************************
@@ -101,11 +110,11 @@
       subject.textContent = '正解！';
       g_correct_cnt++;  //正解数をインクリメント
       // init();   //１問分を初期化
-      setTimeout(function(){ init() },300) //3秒でタイムアウト
+      setTimeout(function(){ init() },500) //0.5秒でタイムアウト
 
     } else {
       subject.textContent = '間違いです！正解は' + g_answer;
-      setTimeout(function(){ init() },300) //3秒でタイムアウト
+      setTimeout(function(){ init() },500) //0.5秒でタイムアウト
     }
   }
 
@@ -125,6 +134,9 @@
   //初期化処理
   //*********************************
   function init() {
+    // タイマーリセット
+    g_time = LIMIT_TIME;
+
     //ランダムで問題をひとつ生成
     const rnd = Math.floor(Math.random() * g_gas_data_arr.length);
     
