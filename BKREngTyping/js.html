@@ -21,10 +21,12 @@
 
 
   //スプレッドシートのデータ格納用配列を作る
-  let g_gas_data_arr = new Array(MAX_ROW);
-  for (let i = 0; i < g_gas_data_arr.length; i++){
-    g_gas_data_arr[i] = new Array(MAX_COL);
-  }
+  // let g_gas_data_arr = new Array(MAX_ROW);
+  // for (let i = 0; i < g_gas_data_arr.length; i++){
+  //   g_gas_data_arr[i] = new Array(MAX_COL);
+  // }
+
+  let g_gas_data_arr; //単語一覧格納用のグローバル変数
 
   //*********************************
   //ファイルロード時の処理
@@ -32,11 +34,11 @@
   function loadingProcess(){
     console.log("js loadingProcess() called");
     //サーバーからスプレッドシートのデータを取得する
-    google.script.run.withSuccessHandler(getGASdata).GetSpreadsheet();    
+    google.script.run.withSuccessHandler(getGASdata).GetSpreadsheet();
   }
-  
+
   window.addEventListener('load', loadingProcess);
-  
+
 
 
   //*********************************
@@ -47,6 +49,12 @@
 
     console.log("spreadsheet_data.length = ", spreadsheet_data.length);
     
+    //代入用の配列をNew
+    g_gas_data_arr = new Array(spreadsheet_data.length);
+    for (let i = 0; i < g_gas_data_arr.length; i++){
+      g_gas_data_arr[i] = new Array(MAX_COL);
+    }
+
     for(let row = 0; row < spreadsheet_data.length; row++){
       //最初のタイトル行を削除する分、サイズを1行分-1しておく
       for(let col = 0; col < spreadsheet_data[row].length; col++){
@@ -91,13 +99,15 @@
 
       return;
     }
-    
+
     timer.textContent = '制限時間：' + --g_time + '秒';
     if(g_time <= 0) {
-      // 次の問題へ！
-      init();
+
+      // 正解を表示して次の問題へ！
+      subject.textContent = '時間切れです！正解は' + g_answer;
+      setTimeout(function(){ init() },500) //0.5秒でタイムアウト
     }
-  }, 1000);  
+  }, 1000);
 
   //*********************************
   //判定処理
@@ -105,7 +115,7 @@
   function judge() {
     if(!state) return;  //すでに終了していたら操作させない
 
-    // 正誤を判定    
+    // 正誤を判定
     if(form.input.value === g_answer) {
       subject.textContent = '正解！';
       g_correct_cnt++;  //正解数をインクリメント
@@ -139,7 +149,7 @@
 
     //ランダムで問題をひとつ生成
     const rnd = Math.floor(Math.random() * g_gas_data_arr.length);
-    
+
     console.log("init() rnd=", rnd);
 
     //暫定対応！！もし0ならやり直し
