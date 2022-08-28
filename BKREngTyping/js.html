@@ -37,7 +37,7 @@
   function getGASdata(spreadsheet_data){
     console.log("js getGASdata() called");
     console.log("spreadsheet_data.length = ", spreadsheet_data.length);
-    
+
     //代入用の配列をNew
     g_gas_data_arr = new Array(spreadsheet_data.length);
     for (let i = 0; i < g_gas_data_arr.length; i++){
@@ -61,9 +61,9 @@
     //１問ごとの設定時間
     g_LTime       = spreadsheet_data[3][4];
 
-    //この場所じゃダメそう。。
     //タイピング問題を初期化してスタート
-    init();
+    //開始ボタンからスタートするように修正したい
+    // init();
   }
 
   //まずHtmlの要素を格納
@@ -171,11 +171,24 @@
 
 
   //*********************************
+  //開始時の処理
+  //*********************************
+  function start() {
+
+    state = true;     //操作ロック解除
+    init();           //init()関数を呼ぶことでゲーム開始！
+
+  }
+
+  //*********************************
   //終了時の処理
   //*********************************
   function finish() {
-    clearInterval(countdown); //タイマーストップ
+    // clearInterval(countdown); //タイマーストップ
+    g_time = 0; //タイマーストップの代わりに残り時間を0に設定
     subject.textContent = '終了！正解数は' + g_correct_cnt + '問でした！';
+
+    g_correct_cnt = 0;  //正解数を初期化
 
     //終了後に操作できないようにする
     state = false;
