@@ -8,24 +8,14 @@
   //時間制限設定
   const LIMIT_TIME_VALID   = 1;                 //時間制限有効
   const LIMIT_TIME_INVALID = 0;                 //時間制限無効
-  const LIMIT_TIME         = 10;                //１問ごとの制限時間
+  const TIME_REMAIN        = 2000;              //次の問題に移行する時間(msec)
   let g_LTime_valid        = LIMIT_TIME_VALID;  //初期設定は時間制限有効
+  let g_LTime              = 0;                 //１問ごとの制限時間
 
   //問題のタイプ
   const Q_TYPE_ENG = "英単語⇨日本語";
   const Q_TYPE_JPN = "日本語⇨英単語";
   let g_Q_type = Q_TYPE_ENG;  //初期設定は英語
-
-  //問題数
-  const Q_CNT = 5;  //とりあえず5問
-
-
-  //スプレッドシートのデータ格納用配列を作る
-  // let g_gas_data_arr = new Array(MAX_ROW);
-  // for (let i = 0; i < g_gas_data_arr.length; i++){
-  //   g_gas_data_arr[i] = new Array(MAX_COL);
-  // }
-
   let g_gas_data_arr; //単語一覧格納用のグローバル変数
 
   //*********************************
@@ -46,7 +36,6 @@
   //*********************************
   function getGASdata(spreadsheet_data){
     console.log("js getGASdata() called");
-
     console.log("spreadsheet_data.length = ", spreadsheet_data.length);
     
     //代入用の配列をNew
@@ -69,6 +58,8 @@
     g_Q_type = spreadsheet_data[1][4];
     //時間制限が有効か無効か？
     g_LTime_valid = spreadsheet_data[2][4];
+    //１問ごとの設定時間
+    g_LTime       = spreadsheet_data[3][4];
 
     //この場所じゃダメそう。。
     //タイピング問題を初期化してスタート
@@ -81,7 +72,7 @@
   const form = document.forms.typing;
 
   //グローバル変数定義
-  let g_time = 10;          //カウントダウン用
+  let g_time = g_LTime;     //カウントダウン用
   let g_q_cnt = 0;          //問題数カウント用
   let g_correct_cnt = 0;    //正解数カウント用
   let g_answer = 0;         //回答のグローバル変数（あとで消す予定）
@@ -100,12 +91,17 @@
       return;
     }
 
+    //すでに0秒以下なら処理なし
+    if(g_time <= 0){
+      return;
+    }
+
     timer.textContent = '制限時間：' + --g_time + '秒';
     if(g_time <= 0) {
 
       // 正解を表示して次の問題へ！
       subject.textContent = '時間切れです！正解は' + g_answer;
-      setTimeout(function(){ init() },500) //0.5秒でタイムアウト
+      setTimeout(function(){ init() },TIME_REMAIN) //TIME_REMAINに設定した時間でタイムアウト
     }
   }, 1000);
 
@@ -120,19 +116,17 @@
       subject.textContent = '正解！';
       g_correct_cnt++;  //正解数をインクリメント
       // init();   //１問分を初期化
-      setTimeout(function(){ init() },500) //0.5秒でタイムアウト
+      setTimeout(function(){ init() },TIME_REMAIN) //TIME_REMAINに設定した時間でタイムアウト
 
     } else {
       subject.textContent = '間違いです！正解は' + g_answer;
-      setTimeout(function(){ init() },500) //0.5秒でタイムアウト
+      setTimeout(function(){ init() },TIME_REMAIN) //TIME_REMAINに設定した時間でタイムアウト
     }
   }
 
   //*********************************
   //Enterイベント処理
   //*********************************
-  // var input_text = document.getElementById('input_text'); //使ってなくない？？？
-
   // Enterキー押下時、送信処理が実行する
   window.document.onkeydown = function(event){
       if (event.key === 'Enter') {
@@ -145,11 +139,10 @@
   //*********************************
   function init() {
     // タイマーリセット
-    g_time = LIMIT_TIME;
+    g_time = g_LTime;
 
     //ランダムで問題をひとつ生成
     const rnd = Math.floor(Math.random() * g_gas_data_arr.length);
-
     console.log("init() rnd=", rnd);
 
     //暫定対応！！もし0ならやり直し
