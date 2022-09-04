@@ -2,6 +2,7 @@
 <html>
   <head>
     <base target="_top">
+    <?!= HtmlService.createHtmlOutputFromFile('css').getContent(); ?>
   </head>
   <body>
     <div id='dispArea'>
@@ -11,9 +12,10 @@
     <form name="typing" onsubmit="return false;">
       <input name="input" id="input_text" type="text">
     </form>
-    <p>↑答えをここに入力。Enterキーで決定</p>
-    <p id="timer">制限時間：30秒</p>
-    <button name="finish" id ="finish" onclick="finish()" >終了</button>
+    <p id="test">↑答えをここに入力。Enterキーで決定</p>
+    <p id="timer">制限時間：</p>
+    <a class="btn-square" id ="start_btn" onclick="start()">START</a>
+    <a class="btn-square" id ="finish_btn" onclick="finish()">END</a>
     <?!= HtmlService.createHtmlOutputFromFile('js').getContent(); ?>
   </body>
 </html>

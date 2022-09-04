@@ -8,7 +8,8 @@
   //時間制限設定
   const LIMIT_TIME_VALID   = 1;                 //時間制限有効
   const LIMIT_TIME_INVALID = 0;                 //時間制限無効
-  const TIME_REMAIN        = 2000;              //次の問題に移行する時間(msec)
+  const TIME_REMAIN_COLLECT = 2000;             //正解時に次の問題に移行する時間(msec)
+  const TIME_REMAIN        = 4000;              //次の問題に移行する時間(msec)
   let g_LTime_valid        = LIMIT_TIME_VALID;  //初期設定は時間制限有効
   let g_LTime              = 0;                 //１問ごとの制限時間
 
@@ -116,7 +117,7 @@
       subject.textContent = '正解！';
       g_correct_cnt++;  //正解数をインクリメント
       // init();   //１問分を初期化
-      setTimeout(function(){ init() },TIME_REMAIN) //TIME_REMAINに設定した時間でタイムアウト
+      setTimeout(function(){ init() },TIME_REMAIN_COLLECT) //TIME_REMAIN_COLLECTに設定した時間でタイムアウト
 
     } else {
       subject.textContent = '間違いです！正解は' + g_answer;
