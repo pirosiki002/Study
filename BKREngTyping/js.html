@@ -8,10 +8,13 @@
   //時間制限設定
   const LIMIT_TIME_VALID   = 1;                 //時間制限有効
   const LIMIT_TIME_INVALID = 0;                 //時間制限無効
+  const HINT_VALID   = 'あり';                   //ヒント有効
+  const HINT_INVALID = 'なし';                   //ヒント無効
   const TIME_REMAIN_COLLECT = 2000;             //正解時に次の問題に移行する時間(msec)
   const TIME_REMAIN        = 4000;              //次の問題に移行する時間(msec)
   let g_LTime_valid        = LIMIT_TIME_VALID;  //初期設定は時間制限有効
   let g_LTime              = 0;                 //１問ごとの制限時間
+  let g_hint_valid         = 0;                 //ヒント機能あり／なし
 
   //問題のタイプ
   const Q_TYPE_ENG = "英単語⇨日本語";
@@ -61,16 +64,15 @@
     g_LTime_valid = spreadsheet_data[2][4];
     //１問ごとの設定時間
     g_LTime       = spreadsheet_data[3][4];
-
-    //タイピング問題を初期化してスタート
-    //開始ボタンからスタートするように修正したい
-    // init();
+    //ヒント機能あり／なし
+    g_hint_valid  = spreadsheet_data[4][4]; 
   }
 
   //まずHtmlの要素を格納
   const subject = document.getElementById('subject');
-  const timer = document.getElementById('timer');  //カウントダウン用
-  const form = document.forms.typing;
+  const hint    = document.getElementById('hint');
+  const timer   = document.getElementById('timer');  //カウントダウン用
+  const form    = document.forms.typing;
 
   //グローバル変数定義
   let g_time = g_LTime;     //カウントダウン用
@@ -78,7 +80,6 @@
   let g_correct_cnt = 0;    //正解数カウント用
   let g_answer = 0;         //回答のグローバル変数（あとで消す予定）
   let state = true;         //問題を解いている最中かを状態管理（名前変えた方がよいかも）
-
 
   //*********************************
   //カウントダウン
@@ -115,12 +116,17 @@
     // 正誤を判定
     if(form.input.value === g_answer) {
       subject.textContent = '正解！';
+      hint.textContent = '';  //ヒントを初期化
+      hint.textContent = g_answer;
       g_correct_cnt++;  //正解数をインクリメント
       // init();   //１問分を初期化
       setTimeout(function(){ init() },TIME_REMAIN_COLLECT) //TIME_REMAIN_COLLECTに設定した時間でタイムアウト
 
     } else {
-      subject.textContent = '間違いです！正解は' + g_answer;
+      // subject.textContent = '間違いです！正解は' + g_answer;
+      subject.textContent = '間違いです！';
+      hint.textContent = '';  //ヒントを初期化
+      hint.textContent = g_answer;
       setTimeout(function(){ init() },TIME_REMAIN) //TIME_REMAINに設定した時間でタイムアウト
     }
   }
@@ -165,6 +171,16 @@
       g_answer = g_gas_data_arr[rnd][0];
     }
 
+    //ヒントを表示する
+    if(HINT_VALID === g_hint_valid){
+      console.log('ヒント機能が有効です g_answer=', g_answer.length);
+      hint.textContent = '';  //ヒントの初期化
+      //文字数の分だけ■をつける
+      for(let i = 0; i < g_answer.length; i++){
+        hint.textContent += '■';
+        //空白の時はスペースをあける？？
+      }
+    }
 
     form.input.value = '';  //入力欄を空白で初期化
     form.input.focus();     //フォーカスをあてる
