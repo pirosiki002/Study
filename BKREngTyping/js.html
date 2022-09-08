@@ -86,10 +86,12 @@
   //*********************************
   const countdown = setInterval(function() {
 
+    console.log('countdown g_time =', g_time);
+
     if(g_LTime_valid === '時間制限なし'){
       //制限時間なしなら処理しない（暫定対応）
       timer.textContent = '制限時間なし';
-      return;
+      // return;
     }
 
     //すでに0秒以下なら処理なし
@@ -97,8 +99,8 @@
       return;
     }
 
-    //残り10秒以下ならヒントを表示
-    if(g_time < 6){
+    //残り時間の半分＋3秒以下ならヒントを表示
+    if(g_time < ((g_LTime / 2) + 3)){
       if(g_hint_opacity < 1){
         g_hint_opacity += 0.1;
         console.log('g_hint_opacity =', g_hint_opacity);
@@ -106,8 +108,17 @@
       }
     }
 
-    timer.textContent = '制限時間：' + --g_time + '秒';
-    if(g_time <= 0) {
+
+
+    if('時間制限あり' === g_LTime_valid){
+      timer.textContent = '制限時間：' + --g_time + '秒';
+    }
+    else{
+      //時間制限がない場合も、内部のタイマーはデクリメントする（ヒント機能で使用するため）
+      --g_time;
+    }
+
+    if((g_time <= 0) && ('時間制限あり' === g_LTime_valid)) {
 
       // 正解を表示して次の問題へ！
       subject.textContent = '時間切れです！正解は' + g_answer;
@@ -128,25 +139,22 @@
     // 正誤を判定
     if(form.input.value === g_answer) {
       subject.textContent = '正解！';
-      hint.textContent = '';  //ヒントを初期化
-      hint.textContent = g_answer;
-      //ヒントの透過度も初期化
-      g_hint_opacity = 0;
-      blind_hint.style.opacity = 0;
+      // hint.textContent = g_answer;
 
       g_correct_cnt++;  //正解数をインクリメント
       setTimeout(function(){ init() },TIME_REMAIN_COLLECT) //TIME_REMAIN_COLLECTに設定した時間でタイムアウト
 
     } else {
-      subject.textContent = '間違いです！';
-      hint.textContent = '';  //ヒントを初期化
-      hint.textContent = g_answer;
-      //ヒントの透過度も初期化
-      g_hint_opacity = 0;
-      blind_hint.style.opacity = 0;
+      subject.textContent = '間違いです！正解は' + g_answer;
+      // hint.textContent = g_answer;
 
       setTimeout(function(){ init() },TIME_REMAIN) //TIME_REMAINに設定した時間でタイムアウト
     }
+
+    hint.textContent = '';  //ヒントを初期化
+    //透過度も初期化
+    g_hint_opacity = 0;
+    blind_hint.style.opacity = 0; 
   }
 
   //*********************************
