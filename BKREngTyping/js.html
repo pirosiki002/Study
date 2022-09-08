@@ -79,6 +79,8 @@
   let g_correct_cnt = 0;    //正解数カウント用
   let g_answer = 0;         //回答のグローバル変数（あとで消す予定）
   let g_hint_opacity = 0;   //ヒントの透明度
+  let g_hint_initial = 0;   //ヒントの頭文字
+  let g_hint_cnt_1_to_all = 0; //ヒントが頭文字から全部になるまでの時間
   let state = true;         //問題を解いている最中かを状態管理（名前変えた方がよいかも）
 
   //*********************************
@@ -101,6 +103,19 @@
 
     //残り時間の半分＋3秒以下ならヒントを表示
     if(g_time < ((g_LTime / 2) + 3)){
+
+      if(g_hint_cnt_1_to_all < 4){
+        //4秒後に頭文字だけ表示
+        blind_hint.textContent = g_hint_initial;
+        g_hint_cnt_1_to_all++;
+      }
+      else{
+        //7秒後に全て表示
+        blind_hint.textContent = g_answer;
+      }
+
+
+      //透過度を徐々にあげていく
       if(g_hint_opacity < 1){
         g_hint_opacity += 0.1;
         console.log('g_hint_opacity =', g_hint_opacity);
@@ -123,10 +138,10 @@
       // 正解を表示して次の問題へ！
       subject.textContent = '時間切れです！正解は' + g_answer;
       setTimeout(function(){ init() },TIME_REMAIN) //TIME_REMAINに設定した時間でタイムアウト
-      //ヒント透明度の初期化
+      //ヒント関連の初期化
       g_hint_opacity = 0;
       blind_hint.style.opacity = 0;
-
+      g_hint_cnt_1_to_all = 0;
     }
   }, 1000);
 
@@ -139,22 +154,21 @@
     // 正誤を判定
     if(form.input.value === g_answer) {
       subject.textContent = '正解！';
-      // hint.textContent = g_answer;
 
       g_correct_cnt++;  //正解数をインクリメント
       setTimeout(function(){ init() },TIME_REMAIN_COLLECT) //TIME_REMAIN_COLLECTに設定した時間でタイムアウト
 
     } else {
       subject.textContent = '間違いです！正解は' + g_answer;
-      // hint.textContent = g_answer;
 
       setTimeout(function(){ init() },TIME_REMAIN) //TIME_REMAINに設定した時間でタイムアウト
     }
 
-    hint.textContent = '';  //ヒントを初期化
-    //透過度も初期化
+    //ヒント情報を初期化
+    hint.textContent = '';  
     g_hint_opacity = 0;
     blind_hint.style.opacity = 0; 
+    g_hint_cnt_1_to_all = 0;
   }
 
   //*********************************
@@ -162,7 +176,10 @@
   //*********************************
   // Enterキー押下時、送信処理が実行する
   window.document.onkeydown = function(event){
-      if (event.key === 'Enter') {
+      // if (event.key === 'Enter') {
+      console.log('event.isComposing =', event.isComposing);
+      //日本語の入力変換時のEnterでは反応しないように、isComposingの結果も確認しています
+      if(event.key === 'Enter' && false === event.isComposing) {
         judge();
       }
   }
@@ -173,6 +190,8 @@
   function init() {
     // タイマーリセット
     g_time = g_LTime;
+    g_hint_cnt_1_to_all = 0;  //ヒントカウントも初期化（場所は要検討）
+    g_hint_opacity = 0;       //透過度も初期化
 
     //ランダムで問題をひとつ生成
     const rnd = Math.floor(Math.random() * g_gas_data_arr.length);
@@ -197,7 +216,7 @@
       g_answer = g_gas_data_arr[rnd][0];
     }
 
-    //ヒントを表示する
+    //ヒントを設定する
     if(HINT_VALID === g_hint_valid){
       console.log('ヒント機能が有効です g_answer=', g_answer.length);
       hint.textContent = '';  //ヒントの初期化
@@ -210,6 +229,9 @@
       //ヒントを透明化して設定しておく
       blind_hint.style.opacity = 0;
       blind_hint.textContent = g_answer;
+      //頭文字を設定
+      console.log('g_answer.charAt(0)=', g_answer.charAt(0));
+      g_hint_initial = g_answer.charAt(0);
 
     }
 
