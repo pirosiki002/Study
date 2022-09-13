@@ -1,10 +1,6 @@
 <script>
-  //スプレッドシートの最大行と列を設定
-  const MAX_ROW = 6;  //spreadsheet_data.lengthと合わせないといけない
+  //スプレッドシートの最大列を設定
   const MAX_COL = 2;
-  //英語と日本語の設定
-  const ENG_WORD_COL = 0;
-  const JPN_WORD_COL = 1;
   //時間制限設定
   const LIMIT_TIME_VALID   = 1;                 //時間制限有効
   const LIMIT_TIME_INVALID = 0;                 //時間制限無効
@@ -21,6 +17,11 @@
   const Q_TYPE_JPN = "日本語⇨英単語";
   let g_Q_type = Q_TYPE_ENG;  //初期設定は英語
   let g_gas_data_arr; //単語一覧格納用のグローバル変数
+
+  //問題の結果
+  const Q_RESULT_NG = 0;
+  const Q_RESULT_OK = 1;
+  const Q_RESULT_TIME_OUT = 2;
 
   //*********************************
   //ファイルロード時の処理
@@ -63,7 +64,7 @@
     //１問ごとの設定時間
     g_LTime       = spreadsheet_data[3][4];
     //ヒント機能あり／なし
-    g_hint_valid  = spreadsheet_data[4][4]; 
+    g_hint_valid  = spreadsheet_data[4][4];
   }
 
   //まずHtmlの要素を格納
@@ -93,7 +94,6 @@
     if(g_LTime_valid === '時間制限なし'){
       //制限時間なしなら処理しない（暫定対応）
       timer.textContent = '制限時間なし';
-      // return;
     }
 
     //すでに0秒以下なら処理なし
@@ -101,6 +101,64 @@
       return;
     }
 
+    //ヒント処理
+    do_hint();
+
+    //タイマーをデクリメント
+    --g_time
+    //制限時間を表示
+    disp_tmr_limit();
+
+    //時間制限を判定
+    if((g_time <= 0) && ('時間制限あり' === g_LTime_valid)) {
+
+      // 正解を表示して次の問題へ！
+      disp_result_1_q(Q_RESULT_TIME_OUT);
+
+      setTimeout(function(){ do_next_q() },TIME_REMAIN) //TIME_REMAINに設定した時間でタイムアウト
+      //ヒント関連の初期化(スタート時にまとめて処理する！)
+      g_hint_opacity = 0;
+      blind_hint.style.opacity = 0;
+      g_hint_cnt_1_to_all = 0;
+    }
+  }, 1000);
+
+  //*********************************
+  //1問ごとの結果を表示
+  //*********************************
+  function disp_result_1_q(type){
+    let message;
+
+    switch(type){
+      case Q_RESULT_NG:
+          message = '間違いです！正解は' + g_answer;
+        break;
+      case Q_RESULT_OK:
+          message = '正解！';
+        break;
+      case Q_RESULT_TIME_OUT:
+          message = '時間切れです！正解は' + g_answer;
+        break;
+      default:
+        break;
+    }
+    //メッセージをセット
+    subject.textContent = message;
+  }
+
+  //*********************************
+  //残りの制限時間を表示
+  //*********************************
+  function disp_tmr_limit(){
+    if('時間制限あり' === g_LTime_valid){
+      timer.textContent = '制限時間：' + g_time + '秒';
+    }    
+  }
+
+  //*********************************
+  //ヒント処理
+  //*********************************
+  function do_hint(){
     //残り時間の半分＋3秒以下ならヒントを表示
     if(g_time < ((g_LTime / 2) + 3)){
 
@@ -114,7 +172,6 @@
         blind_hint.textContent = g_answer;
       }
 
-
       //透過度を徐々にあげていく
       if(g_hint_opacity < 1){
         g_hint_opacity += 0.1;
@@ -122,28 +179,7 @@
         blind_hint.style.opacity = g_hint_opacity;
       }
     }
-
-
-
-    if('時間制限あり' === g_LTime_valid){
-      timer.textContent = '制限時間：' + --g_time + '秒';
-    }
-    else{
-      //時間制限がない場合も、内部のタイマーはデクリメントする（ヒント機能で使用するため）
-      --g_time;
-    }
-
-    if((g_time <= 0) && ('時間制限あり' === g_LTime_valid)) {
-
-      // 正解を表示して次の問題へ！
-      subject.textContent = '時間切れです！正解は' + g_answer;
-      setTimeout(function(){ init() },TIME_REMAIN) //TIME_REMAINに設定した時間でタイムアウト
-      //ヒント関連の初期化
-      g_hint_opacity = 0;
-      blind_hint.style.opacity = 0;
-      g_hint_cnt_1_to_all = 0;
-    }
-  }, 1000);
+  }
 
   //*********************************
   //判定処理
@@ -153,18 +189,19 @@
 
     // 正誤を判定
     if(form.input.value === g_answer) {
-      subject.textContent = '正解！';
+      // subject.textContent = '正解！';
+      disp_result_1_q(Q_RESULT_OK); //正解を表示
 
       g_correct_cnt++;  //正解数をインクリメント
-      setTimeout(function(){ init() },TIME_REMAIN_COLLECT) //TIME_REMAIN_COLLECTに設定した時間でタイムアウト
+      setTimeout(function(){ do_next_q() },TIME_REMAIN_COLLECT) //TIME_REMAIN_COLLECTに設定した時間でタイムアウト
 
     } else {
-      subject.textContent = '間違いです！正解は' + g_answer;
-
-      setTimeout(function(){ init() },TIME_REMAIN) //TIME_REMAINに設定した時間でタイムアウト
+      // subject.textContent = '間違いです！正解は' + g_answer;
+      disp_result_1_q(Q_RESULT_NG); //間違いを表示
+      setTimeout(function(){ do_next_q() },TIME_REMAIN) //TIME_REMAINに設定した時間でタイムアウト
     }
 
-    //ヒント情報を初期化
+    //ヒント情報を初期化（後でまとめる！）
     hint.textContent = '';
     g_hint_opacity = 0;
     blind_hint.style.opacity = 0;
@@ -185,24 +222,25 @@
   }
 
   //*********************************
-  //初期化処理
+  //問題スタート（１問）
   //*********************************
-  function init() {
-    // タイマーリセット
+  function do_next_q() {
+    // タイマーリセット(初期化)
     g_time = g_LTime;
     g_hint_cnt_1_to_all = 0;  //ヒントカウントも初期化（場所は要検討）
     g_hint_opacity = 0;       //透過度も初期化
 
     //ランダムで問題をひとつ生成
     const rnd = Math.floor(Math.random() * g_gas_data_arr.length);
-    console.log("init() rnd=", rnd);
+    console.log("do_next_q() rnd=", rnd);
 
     //暫定対応！！もし0ならやり直し
     if(0 === rnd){
-      init();
+      do_next_q();
       return;
     }
 
+    //set_answer();
     if(Q_TYPE_ENG === g_Q_type){
       //英語モード
       //問題となる英単語をセット
@@ -216,6 +254,7 @@
       g_answer = g_gas_data_arr[rnd][0];
     }
 
+    //set_hint();
     //ヒントを設定する
     if(HINT_VALID === g_hint_valid){
       console.log('ヒント機能が有効です g_answer=', g_answer.length);
@@ -241,17 +280,17 @@
 
 
   //*********************************
-  //開始時の処理
+  //開始時の処理（HTML側からCallされる)
   //*********************************
   function start() {
 
     state = true;     //操作ロック解除
-    init();           //init()関数を呼ぶことでゲーム開始！
+    do_next_q();      //do_next_q()関数を呼ぶことでゲーム開始！
 
   }
 
   //*********************************
-  //終了時の処理
+  //終了時の処理（HTML側からCallされる)
   //*********************************
   function finish() {
     // clearInterval(countdown); //タイマーストップ
