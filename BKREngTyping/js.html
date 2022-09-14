@@ -114,12 +114,8 @@
 
       // 正解を表示して次の問題へ！
       disp_result_1_q(Q_RESULT_TIME_OUT);
-
-      setTimeout(function(){ do_next_q() },TIME_REMAIN) //TIME_REMAINに設定した時間でタイムアウト
-      //ヒント関連の初期化(スタート時にまとめて処理する！)
-      g_hint_opacity = 0;
-      blind_hint.style.opacity = 0;
-      g_hint_cnt_1_to_all = 0;
+      //TIME_REMAINに設定した時間でタイムアウト
+      setTimeout(function(){ do_next_q() },TIME_REMAIN) 
     }
   }, 1000);
 
@@ -166,7 +162,10 @@
         //4秒後に頭文字だけ表示
         blind_hint.textContent = g_hint_initial;
         //空白を入れてスペース調整（debug)
-        // blind_hint.textContent = g_hint_initial + " _" + " _"+ " _" + " _";
+
+        for(let i = 0; i < (g_answer.length - 1); i++){
+          blind_hint.textContent += " _";
+        }
         g_hint_cnt_1_to_all++;
       }
       else{
@@ -202,12 +201,6 @@
       disp_result_1_q(Q_RESULT_NG); //間違いを表示
       setTimeout(function(){ do_next_q() },TIME_REMAIN) //TIME_REMAINに設定した時間でタイムアウト
     }
-
-    //ヒント情報を初期化（後でまとめる！）
-    hint.textContent = '';
-    g_hint_opacity = 0;
-    blind_hint.style.opacity = 0;
-    g_hint_cnt_1_to_all = 0;
   }
 
   //*********************************
@@ -227,10 +220,9 @@
   //問題スタート（１問）
   //*********************************
   function do_next_q() {
-    // タイマーリセット(初期化)
-    g_time = g_LTime;
-    g_hint_cnt_1_to_all = 0;  //ヒントカウントも初期化（場所は要検討）
-    g_hint_opacity = 0;       //透過度も初期化
+
+    //初期化処理
+    init();
 
     //ランダムで問題をひとつ生成
     const rnd = Math.floor(Math.random() * g_gas_data_arr.length);
@@ -248,8 +240,24 @@
     //ヒントを設定
     set_hint();
 
-    form.input.value = '';  //入力欄を空白で初期化
+    // form.input.value = '';  //入力欄を空白で初期化
     form.input.focus();     //フォーカスをあてる
+  }
+
+  //*********************************
+  // 初期化処理
+  //*********************************
+  function init() {
+    // タイマーリセット(初期化)
+    g_time = g_LTime;
+
+    // ヒント関連の初期化
+    g_hint_cnt_1_to_all = 0;  //ヒントカウント初期化
+    g_hint_opacity = 0;       //透過度の初期化
+    blind_hint.style.opacity = 0;
+
+    //入力欄を空白で初期化
+    form.input.value = '';  
   }
 
   //*********************************
@@ -278,12 +286,13 @@
     //ヒントを設定する
     if(HINT_VALID === g_hint_valid){
       console.log('ヒント機能が有効です g_answer=', g_answer.length);
-      hint.textContent = '';  //ヒントの初期化
-      //文字数の分だけ■をつける
-      for(let i = 0; i < g_answer.length; i++){
-        hint.textContent += '■';
-        //空白の時はスペースをあける？？
-      }
+      // hint.textContent = '';  //ヒントの初期化
+
+      // //文字数の分だけ■をつける
+      // for(let i = 0; i < g_answer.length; i++){
+      //   hint.textContent += '■';
+      //   //空白の時はスペースをあける？？
+      // }
 
       //ヒントを透明化して設定しておく
       blind_hint.style.opacity = 0;
