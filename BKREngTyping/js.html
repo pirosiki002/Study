@@ -102,7 +102,7 @@
     }
 
     //ヒント処理
-    do_hint();
+    disp_hint();
 
     //タイマーをデクリメント
     --g_time
@@ -158,13 +158,15 @@
   //*********************************
   //ヒント処理
   //*********************************
-  function do_hint(){
+  function disp_hint(){
     //残り時間の半分＋3秒以下ならヒントを表示
     if(g_time < ((g_LTime / 2) + 3)){
 
       if(g_hint_cnt_1_to_all < 4){
         //4秒後に頭文字だけ表示
         blind_hint.textContent = g_hint_initial;
+        //空白を入れてスペース調整（debug)
+        // blind_hint.textContent = g_hint_initial + " _" + " _"+ " _" + " _";
         g_hint_cnt_1_to_all++;
       }
       else{
@@ -213,12 +215,12 @@
   //*********************************
   // Enterキー押下時、送信処理が実行する
   window.document.onkeydown = function(event){
-      // if (event.key === 'Enter') {
-      console.log('event.isComposing =', event.isComposing);
-      //日本語の入力変換時のEnterでは反応しないように、isComposingの結果も確認しています
-      if(event.key === 'Enter' && false === event.isComposing) {
-        judge();
-      }
+    // if (event.key === 'Enter') {
+    console.log('event.isComposing =', event.isComposing);
+    //日本語の入力変換時のEnterでは反応しないように、isComposingの結果も確認しています
+    if(event.key === 'Enter' && false === event.isComposing) {
+      judge();
+    }
   }
 
   //*********************************
@@ -240,7 +242,21 @@
       return;
     }
 
-    //set_answer();
+    //答えを設定
+    set_answer(rnd);
+
+    //ヒントを設定
+    set_hint();
+
+    form.input.value = '';  //入力欄を空白で初期化
+    form.input.focus();     //フォーカスをあてる
+  }
+
+  //*********************************
+  // 答えを設定
+  // 引数：rnd : ランダムな数字
+  //*********************************
+  function set_answer(rnd) {
     if(Q_TYPE_ENG === g_Q_type){
       //英語モード
       //問題となる英単語をセット
@@ -253,8 +269,12 @@
       subject.textContent = g_gas_data_arr[rnd][1];
       g_answer = g_gas_data_arr[rnd][0];
     }
+  }
 
-    //set_hint();
+  //*********************************
+  // ヒントを設定
+  //*********************************
+  function set_hint(){
     //ヒントを設定する
     if(HINT_VALID === g_hint_valid){
       console.log('ヒント機能が有効です g_answer=', g_answer.length);
@@ -271,13 +291,8 @@
       //頭文字を設定
       console.log('g_answer.charAt(0)=', g_answer.charAt(0));
       g_hint_initial = g_answer.charAt(0);
-
     }
-
-    form.input.value = '';  //入力欄を空白で初期化
-    form.input.focus();     //フォーカスをあてる
   }
-
 
   //*********************************
   //開始時の処理（HTML側からCallされる)
@@ -293,7 +308,6 @@
   //終了時の処理（HTML側からCallされる)
   //*********************************
   function finish() {
-    // clearInterval(countdown); //タイマーストップ
     g_time = 0; //タイマーストップの代わりに残り時間を0に設定
     subject.textContent = '終了！正解数は' + g_correct_cnt + '問でした！';
 
