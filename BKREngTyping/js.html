@@ -23,6 +23,8 @@
   const Q_RESULT_OK = 1;
   const Q_RESULT_TIME_OUT = 2;
 
+  let g_f_wait_next_q = false;  //次の問題に行くためのフラグ
+
   //*********************************
   //ファイルロード時の処理
   //*********************************
@@ -68,11 +70,11 @@
   }
 
   //まずHtmlの要素を格納
-  const subject = document.getElementById('subject');
-  const hint    = document.getElementById('hint');
-  const blind_hint = document.getElementById('blind_hint');
-  const timer   = document.getElementById('timer');  //カウントダウン用
-  const form    = document.forms.typing;
+  const subject       = document.getElementById('subject');
+  const blind_hint    = document.getElementById('blind_hint');
+  const timer         = document.getElementById('timer');  //カウントダウン用
+  const placeholder   = document.getElementById('input_text');
+  const form          = document.forms.typing;
 
   //グローバル変数定義
   let g_time = g_LTime;     //カウントダウン用
@@ -90,6 +92,11 @@
   const countdown = setInterval(function() {
 
     console.log('countdown g_time =', g_time);
+
+    //すでに問題を解いた後だった場合は処理なし
+    if(true === g_f_wait_next_q){
+      return;
+    }
 
     if(g_LTime_valid === '時間制限なし'){
       //制限時間なしなら処理しない（暫定対応）
@@ -112,10 +119,11 @@
     //時間制限を判定
     if((g_time <= 0) && ('時間制限あり' === g_LTime_valid)) {
 
-      // 正解を表示して次の問題へ！
-      disp_result_1_q(Q_RESULT_TIME_OUT);
-      //TIME_REMAINに設定した時間でタイムアウト
-      setTimeout(function(){ do_next_q() },TIME_REMAIN) 
+      if(false === g_f_wait_next_q){
+        // 正解を表示して次の問題へ！
+        disp_result_1_q(Q_RESULT_TIME_OUT);
+        wait_next_q();
+      }
     }
   }, 1000);
 
@@ -161,7 +169,6 @@
       if(g_hint_cnt_1_to_all < 4){
         //4秒後に頭文字だけ表示
         blind_hint.textContent = g_hint_initial;
-        //空白を入れてスペース調整（debug)
 
         for(let i = 0; i < (g_answer.length - 1); i++){
           blind_hint.textContent += " _";
@@ -190,17 +197,24 @@
 
     // 正誤を判定
     if(form.input.value === g_answer) {
-      // subject.textContent = '正解！';
       disp_result_1_q(Q_RESULT_OK); //正解を表示
-
       g_correct_cnt++;  //正解数をインクリメント
-      setTimeout(function(){ do_next_q() },TIME_REMAIN_COLLECT) //TIME_REMAIN_COLLECTに設定した時間でタイムアウト
-
     } else {
-      // subject.textContent = '間違いです！正解は' + g_answer;
       disp_result_1_q(Q_RESULT_NG); //間違いを表示
-      setTimeout(function(){ do_next_q() },TIME_REMAIN) //TIME_REMAINに設定した時間でタイムアウト
     }
+    //次にEnterキーが押されるまで待つ
+    wait_next_q();
+
+  }
+
+  //*********************************
+  //次の問題まで待つ
+  //*********************************
+  function wait_next_q() {
+    g_f_wait_next_q = true;
+
+    placeholder.placeholder = ''; //入力欄を空白にして、Enterキーで次の問題に行くことをわかりやすくする！
+    timer.textContent = 'Enterキーで次の問題へ';
   }
 
   //*********************************
@@ -212,7 +226,14 @@
     console.log('event.isComposing =', event.isComposing);
     //日本語の入力変換時のEnterでは反応しないように、isComposingの結果も確認しています
     if(event.key === 'Enter' && false === event.isComposing) {
-      judge();
+      // judge();
+      if(false == g_f_wait_next_q){
+        judge();
+      }
+      else{
+        //解答済の後のEnterキー押下なら次の問題へ！
+        do_next_q();
+      }
     }
   }
 
@@ -240,7 +261,6 @@
     //ヒントを設定
     set_hint();
 
-    // form.input.value = '';  //入力欄を空白で初期化
     form.input.focus();     //フォーカスをあてる
   }
 
@@ -257,7 +277,14 @@
     blind_hint.style.opacity = 0;
 
     //入力欄を空白で初期化
-    form.input.value = '';  
+    form.input.value = '';
+
+    //次の問題に行くためのフラグ
+    g_f_wait_next_q = false;
+    //入力欄を初期化
+    placeholder.placeholder = '答えをここに入力。Enterキーで決定';
+
+
   }
 
   //*********************************
@@ -286,13 +313,6 @@
     //ヒントを設定する
     if(HINT_VALID === g_hint_valid){
       console.log('ヒント機能が有効です g_answer=', g_answer.length);
-      // hint.textContent = '';  //ヒントの初期化
-
-      // //文字数の分だけ■をつける
-      // for(let i = 0; i < g_answer.length; i++){
-      //   hint.textContent += '■';
-      //   //空白の時はスペースをあける？？
-      // }
 
       //ヒントを透明化して設定しておく
       blind_hint.style.opacity = 0;
