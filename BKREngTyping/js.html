@@ -18,6 +18,7 @@
   let g_Q_type = Q_TYPE_ENG;  //初期設定は英語
   let g_org_gas_data_arr;     //オリジナルの（削除前の）グローバル配列
   let g_gas_data_arr;         //単語一覧格納用のグローバル配列
+  let g_mode = 'ノーマル';
 
   //問題の結果
   const Q_RESULT_NG = 0;
@@ -71,6 +72,8 @@
     g_LTime       = spreadsheet_data[3][4];
     //ヒント機能あり／なし
     g_hint_valid  = spreadsheet_data[4][4];
+    //モード　ノーマル／エンドレス
+    g_mode  = spreadsheet_data[5][4];
   }
 
   //まずHtmlの要素を格納
@@ -272,8 +275,12 @@
     //答えを設定
     set_answer(rnd);
 
-    //問題に出した番号を配列から削除する
-    del_q(rnd);
+    console.log({g_mode});
+
+    if('ノーマル' === g_mode){
+      //問題に出した番号を配列から削除する
+      del_q(rnd);
+    }
 
     //ヒントを設定
     set_hint();
