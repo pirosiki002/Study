@@ -16,7 +16,8 @@
   const Q_TYPE_ENG = "英単語⇨日本語";
   const Q_TYPE_JPN = "日本語⇨英単語";
   let g_Q_type = Q_TYPE_ENG;  //初期設定は英語
-  let g_gas_data_arr; //単語一覧格納用のグローバル変数
+  let g_org_gas_data_arr;     //オリジナルの（削除前の）グローバル配列
+  let g_gas_data_arr;         //単語一覧格納用のグローバル配列
 
   //問題の結果
   const Q_RESULT_NG = 0;
@@ -58,6 +59,9 @@
       }
     }
 
+    //配列をコピーしておく(debug)
+    g_org_gas_data_arr = [...g_gas_data_arr];
+
     //各種設定を読み込む
     //問題の種類が英語か日本語か
     g_Q_type = spreadsheet_data[1][4];
@@ -84,7 +88,6 @@
   let g_hint_opacity = 0;   //ヒントの透明度
   let g_hint_initial = 0;   //ヒントの頭文字
   let g_hint_cnt_1_to_all = 0; //ヒントが頭文字から全部になるまでの時間
-  // let state = true;         //問題を解いている最中かを状態管理（名前変えた方がよいかも）
   let state = false;         //問題を解いている最中かを状態管理（名前変えた方がよいかも）
 
   //*********************************
@@ -246,6 +249,13 @@
     //初期化処理
     init();
 
+    //終了判定
+    if (1 >= g_gas_data_arr.length){
+      //1行目の（英単語、日本語訳、設定）はカウントしないため、１以下の時に終了処理
+      finish();
+      return;
+    }
+
     //ランダムで問題をひとつ生成
     const rnd = Math.floor(Math.random() * g_gas_data_arr.length);
     console.log("do_next_q() rnd=", rnd);
@@ -256,13 +266,29 @@
       return;
     }
 
+    //問題数をインクリメント（ここでOK?)
+    g_q_cnt++;
+
     //答えを設定
     set_answer(rnd);
+
+    //問題に出した番号を配列から削除する
+    del_q(rnd);
 
     //ヒントを設定
     set_hint();
 
     form.input.focus();     //フォーカスをあてる
+  }
+
+  //*********************************
+  // 問題に出した番号を配列から削除する
+  // 引数：rnd : ランダムな数字
+  //*********************************
+  function del_q(rnd) {
+    g_gas_data_arr.splice(rnd,1);
+    console.log({g_gas_data_arr});
+    console.log({g_org_gas_data_arr});
   }
 
   //*********************************
@@ -339,9 +365,12 @@
   //*********************************
   function finish() {
     g_time = 0; //タイマーストップの代わりに残り時間を0に設定
-    subject.textContent = '終了！正解数は' + g_correct_cnt + '問でした！';
+    subject.textContent = '終了！正解数は' + g_q_cnt + '問中' + g_correct_cnt + '問でした！';
 
+    g_q_cnt = 0;        //問題数を初期化
     g_correct_cnt = 0;  //正解数を初期化
+    //問題が出るほど、配列の中身が減っていく。終了後は問題数をもとに戻すため、オリジナルの配列をコピーする！！！！
+    g_gas_data_arr = [...g_org_gas_data_arr];
 
     //終了後に操作できないようにする
     state = false;
