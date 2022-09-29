@@ -52,10 +52,9 @@
     }
 
     for(let row = 0; row < spreadsheet_data.length; row++){
-      //最初のタイトル行を削除する分、サイズを1行分-1しておく
       for(let col = 0; col < spreadsheet_data[row].length; col++){
         //グローバル配列に設定
-        g_gas_data_arr[row][col] = spreadsheet_data[row][col];    //1行目（row=0)はタイトル文字が入っている。2行目（row=1)から設定する
+        g_gas_data_arr[row][col] = spreadsheet_data[row][col];
         console.log("g_gas_data_arr" + "[" + row + "]" + "[" + col + "]=" + g_gas_data_arr[row][col]);
       }
     }
@@ -163,7 +162,7 @@
   function disp_tmr_limit(){
     if('時間制限あり' === g_LTime_valid){
       timer.textContent = '制限時間：' + g_time + '秒';
-    }    
+    }
   }
 
   //*********************************
@@ -269,13 +268,21 @@
       return;
     }
 
-    //問題数をインクリメント（ここでOK?)
+    if(("" === g_gas_data_arr[rnd][0]) || ("" === g_gas_data_arr[rnd][1])){
+      // -------------------------------------------------
+      // もし空白だったら、答えを設定せずにスキップする。ヒントも設定しない。
+      // -------------------------------------------------
+        //問題に出した番号を配列から削除する
+        del_q(rnd);
+        do_next_q();
+        return;
+    }
+
+    // 問題数をインクリメント（ここでOK?)
     g_q_cnt++;
 
-    //答えを設定
+    // 答えを設定
     set_answer(rnd);
-
-    console.log({g_mode});
 
     if('ノーマル' === g_mode){
       //問題に出した番号を配列から削除する
