@@ -1,27 +1,50 @@
+import logo from './logo.svg';
 import './App.css';
-// import {useEffect, useState} from "react";
 
 function App() {
 
-  // const [name, setName] = useState('');
-  // const [id, setId] = useState('pirosiki002');
+  // デバッグ用のソースマップサポート
+  // 例外発生時に CoffeeScript の行番号を出すことができる
+  // require('source-map-support').install();
 
-  // useEffect(()=>{
-  //   fetch(`https://api.github.com/users/${id}`)
-  //     .then(res => res.json())
-  //     .then(data =>{
-  //       console.log(data);
-  //       setName(data.name);
-  //     })
-  //     .catch(eror => {
-  //       console.error(error);
-  //     })
-  // }, [id]);
+  // ここからが本文
+  var JapaneseHolidays = require('japanese-holidays');
+
+  // var today = new Date();
+  var today = new Date('2022-10-1');
+
+  var holiday = JapaneseHolidays.isHoliday(today);
+
+  var dayOfWeek = today.getDay() ;	// 曜日(数値)
+
+  console.log('dayOfWeek =', dayOfWeek);
+  if((6 === dayOfWeek) || (0 === dayOfWeek)){
+    console.log(today + "は 土日 です");
+  }
+  else{
+    if(holiday) {
+      console.log(today + "は " + holiday + " です");
+    } else {
+        console.log(today + "は祝日ではありません");
+    }
+  }
 
   return (
-    <div>
-      {/* <p>{id}のGitHub上の名前は{name}です</p> */}
-      <p>test</p>
+    <div className="App">
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+          edit <code>src/App.js</code> and save to reload.
+        </p>
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a>
+      </header>
     </div>
   );
 }
