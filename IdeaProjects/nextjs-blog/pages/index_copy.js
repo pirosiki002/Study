@@ -1,19 +1,42 @@
-import { CSVLink, CSVDownload } from "react-csv";
+import Head from 'next/head'
+import Layout, { siteTitle } from '../components/layout'
+import utilStyles from '../styles/utils.module.css';
+import { getSortedPostsData } from '../lib/posts';
 
-export default function Home() {
+// export async function getStaticProps() {
+export async function getServerSideProps(context) {
+  const allPostsData = getSortedPostsData();
+  return {
+    props: {
+      allPostsData,
+    },
+  };
+}
 
-  const csvData = [
-    ["firstname", "lastname", "email"],
-    ["Pirosiki", "PiroPiro", "pirosiki@gmail.com"],
-    ["太郎", "テスト", "test1@smthing.co.com"],
-    ["二郎", "テキスト", "text1@cocococo.com"]
-  ];
-
+export default function Home({ allPostsData }) {
   return (
     <>
-      こんにちは！CSVの出力テストをします！！！
-      <CSVLink data={csvData}>Download me</CSVLink>
-      {/* <CSVDownload data={csvData} target="_blank" /> */}
+    <Layout home>
+      <Head>
+        <title>{siteTitle}</title>
+      </Head>      {/* Keep the existing code here */}
+
+      {/* Add this <section> tag below the existing <section> tag */}
+      <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
+        <h2 className={utilStyles.headingLg}>Blog</h2>
+        <ul className={utilStyles.list}>
+          {allPostsData.map(({ id, date, title }) => (
+            <li className={utilStyles.listItem} key={id}>
+              {title}
+              <br />
+              {id}
+              <br />
+              {date}
+            </li>
+          ))}
+        </ul>
+      </section>
+      </Layout>
     </>
   );
 }
