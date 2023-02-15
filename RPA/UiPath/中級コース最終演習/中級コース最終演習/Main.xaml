@@ -87,7 +87,7 @@
           <av:PointCollection x:Key="ConnectorLocation">300,245.6 300,295.6</av:PointCollection>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <Sequence sap2010:Annotation.AnnotationText="Config.xlsxから情報を読み取り、変数を初期化" DisplayName="初期設定" sap:VirtualizedContainerService.HintSize="496,511.2" sap2010:WorkflowViewState.IdRef="Sequence_2">
+      <Sequence sap2010:Annotation.AnnotationText="Config.xlsxから情報を読み取り、変数を初期化" DisplayName="初期設定" sap:VirtualizedContainerService.HintSize="558.4,968.8" sap2010:WorkflowViewState.IdRef="Sequence_2">
         <Sequence.Variables>
           <Variable x:TypeArguments="x:String" Name="ExpenseSystemURL" />
         </Sequence.Variables>
@@ -97,7 +97,7 @@
             <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
-        <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Configファイル読み込み.xaml - ワークフロー ファイルを呼び出し" sap:VirtualizedContainerService.HintSize="433.6,113.6" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Configファイル読み込み.xaml">
+        <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Configファイル読み込み.xaml - ワークフロー ファイルを呼び出し" sap:VirtualizedContainerService.HintSize="496,113.6" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Configファイル読み込み.xaml">
           <ui:InvokeWorkflowFile.Arguments>
             <InArgument x:TypeArguments="x:String" x:Key="in_ExcelFileName">
               <Literal x:TypeArguments="x:String">Config.xlsx</Literal>
@@ -110,7 +110,7 @@
             </OutArgument>
           </ui:InvokeWorkflowFile.Arguments>
         </ui:InvokeWorkflowFile>
-        <Assign DisplayName="代入" sap:VirtualizedContainerService.HintSize="433.6,81.6" sap2010:WorkflowViewState.IdRef="Assign_1">
+        <Assign DisplayName="代入" sap:VirtualizedContainerService.HintSize="496,81.6" sap2010:WorkflowViewState.IdRef="Assign_1">
           <Assign.To>
             <OutArgument x:TypeArguments="x:String">[ExpenseSystemURL]</OutArgument>
           </Assign.To>
@@ -118,7 +118,35 @@
             <InArgument x:TypeArguments="x:String">[ConfigSettings("URL")]</InArgument>
           </Assign.Value>
         </Assign>
-        <ui:LogMessage DisplayName="メッセージをログ" sap:VirtualizedContainerService.HintSize="433.6,92.8" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;ExpenseSystemURL = &quot; + ExpenseSystemURL]" />
+        <Sequence DisplayName="入力ファイル名の取得（経費登録シート）" sap:VirtualizedContainerService.HintSize="496,550.4" sap2010:WorkflowViewState.IdRef="Sequence_8">
+          <Sequence.Variables>
+            <Variable x:TypeArguments="x:String" Name="ExpenseDataFileName" />
+            <Variable x:TypeArguments="x:String" Name="DesktopDirectory" />
+          </Sequence.Variables>
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <Assign DisplayName="代入" sap:VirtualizedContainerService.HintSize="433.6,81.6" sap2010:WorkflowViewState.IdRef="Assign_2">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:String">[ExpenseDataFileName]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:String">[ConfigSettings("入力ファイル")]</InArgument>
+            </Assign.Value>
+          </Assign>
+          <ui:GetEnvironmentFolder DisplayName="特殊フォルダーのパスを取得" FolderPath="[DesktopDirectory]" sap:VirtualizedContainerService.HintSize="433.6,62.4" sap2010:WorkflowViewState.IdRef="GetEnvironmentFolder_1" SpecialFolder="Desktop" />
+          <Assign DisplayName="代入" sap:VirtualizedContainerService.HintSize="433.6,81.6" sap2010:WorkflowViewState.IdRef="Assign_3">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:String">[ExpenseDataFileName]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:String">[DesktopDirectory + "\" + ExpenseDataFileName]</InArgument>
+            </Assign.Value>
+          </Assign>
+          <ui:LogMessage DisplayName="メッセージをログ" sap:VirtualizedContainerService.HintSize="433.6,92.8" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;Expense~ =&quot; + ExpenseDataFileName]" />
+        </Sequence>
       </Sequence>
       <FlowStep.Next>
         <FlowStep x:Name="__ReferenceID1">
