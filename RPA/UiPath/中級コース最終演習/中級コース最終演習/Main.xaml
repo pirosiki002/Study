@@ -76,6 +76,8 @@
       <Variable x:TypeArguments="x:String" Name="ExpenseDataFileName" />
       <Variable x:TypeArguments="x:String" Name="ExpenseDataSheetName" />
       <Variable x:TypeArguments="x:String" Name="ExpenseDetailSheetName" />
+      <Variable x:TypeArguments="sd:DataTable" Name="ExpenseData" />
+      <Variable x:TypeArguments="x:Int32" Name="CurrentTransactionNumber" />
     </Flowchart.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -127,7 +129,6 @@
         <Sequence DisplayName="入力ファイル名の取得（経費登録シート）" sap:VirtualizedContainerService.HintSize="558.4,1392" sap2010:WorkflowViewState.IdRef="Sequence_8">
           <Sequence.Variables>
             <Variable x:TypeArguments="x:String" Name="DesktopDirectory" />
-            <Variable x:TypeArguments="x:Int32" Name="CurrentTransactionNumber" />
           </Sequence.Variables>
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -223,10 +224,7 @@
               <av:PointCollection x:Key="ConnectorLocation">300,422.8 300,452.8 297.886666666667,452.8 297.886666666667,502.8</av:PointCollection>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <Sequence sap2010:Annotation.AnnotationText="経費登録シート.xlsxからデータを取得し、変数に格納する" DisplayName="経費登録内容を取得" sap:VirtualizedContainerService.HintSize="558.4,760" sap2010:WorkflowViewState.IdRef="Sequence_3">
-            <Sequence.Variables>
-              <Variable x:TypeArguments="sd:DataTable" Name="ExpenseData" />
-            </Sequence.Variables>
+          <Sequence sap2010:Annotation.AnnotationText="経費登録シート.xlsxからデータを取得し、変数に格納する" DisplayName="経費登録内容を取得" sap:VirtualizedContainerService.HintSize="200,127.2" sap2010:WorkflowViewState.IdRef="Sequence_3">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -325,7 +323,10 @@
             </Sequence>
           </Sequence>
           <FlowStep.Next>
-            <FlowDecision x:Name="__ReferenceID0" Condition="[isValidAddInfo]" DisplayName="未登録情報アリ／なし" sap:VirtualizedContainerService.HintSize="114.4,87.2" sap2010:WorkflowViewState.IdRef="FlowDecision_1">
+            <FlowDecision x:Name="__ReferenceID0" DisplayName="未登録情報アリ／なし" sap:VirtualizedContainerService.HintSize="114.4,87.2" sap2010:WorkflowViewState.IdRef="FlowDecision_1">
+              <FlowDecision.Condition>
+                <mva:VisualBasicValue x:TypeArguments="x:Boolean" ExpressionText="CurrentTransactionNumber &lt; ExpenseData.Rows.Count" />
+              </FlowDecision.Condition>
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -346,13 +347,21 @@
                       <av:PointCollection x:Key="ConnectorLocation">200,688.54 297.886666666667,688.54 297.886666666667,590</av:PointCollection>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <Sequence sap2010:Annotation.AnnotationText="経費登録シート.xlsxの経費登録データを、Web上に登録" DisplayName="経費明細登録" sap:VirtualizedContainerService.HintSize="200,127.2" sap2010:WorkflowViewState.IdRef="Sequence_4">
+                  <Sequence sap2010:Annotation.AnnotationText="経費登録シート.xlsxの経費登録データを、Web上に登録" DisplayName="経費明細登録" sap:VirtualizedContainerService.HintSize="496,224.8" sap2010:WorkflowViewState.IdRef="Sequence_4">
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                         <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
+                    <Assign DisplayName="代入" sap:VirtualizedContainerService.HintSize="433.6,81.6" sap2010:WorkflowViewState.IdRef="Assign_10">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="x:Int32">[CurrentTransactionNumber]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="x:Int32">[CurrentTransactionNumber + 1]</InArgument>
+                      </Assign.Value>
+                    </Assign>
                   </Sequence>
                   <FlowStep.Next>
                     <x:Reference>__ReferenceID0</x:Reference>
