@@ -66,7 +66,6 @@
       <AssemblyReference>UiPath.Excel</AssemblyReference>
       <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
       <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
-      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
   <Flowchart sap2010:Annotation.AnnotationText="【概要】&#xA;Excelファイルを読み取り～&#xA;&#xA;【前提】&#xA;Excelファイルを～" DisplayName="フローチャート" sap:VirtualizedContainerService.HintSize="747.2,1231.2" sap2010:WorkflowViewState.IdRef="Flowchart_1">
@@ -79,6 +78,7 @@
       <Variable x:TypeArguments="sd:DataTable" Name="ExpenseData" />
       <Variable x:TypeArguments="x:Int32" Name="CurrentTransactionNumber" />
       <Variable x:TypeArguments="x:String" Name="ExpenseSystemURL" />
+      <Variable x:TypeArguments="sd:DataRow" Name="CurrentTransaction" />
     </Flowchart.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -267,7 +267,7 @@
                   </Sequence>
                 </If.Else>
               </If>
-              <ui:ExcelApplicationScope Password="{x:Null}" DisplayName="Excel アプリケーション スコープ" sap:VirtualizedContainerService.HintSize="433.6,281.6" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_1" InstanceCachePeriod="3000" WorkbookPath="[ExpenseDataFileName]">
+              <ui:ExcelApplicationScope Password="{x:Null}" DisplayName="Excel アプリケーション スコープ" sap:VirtualizedContainerService.HintSize="483.2,52.8" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_1" InstanceCachePeriod="3000" WorkbookPath="[ExpenseDataFileName]">
                 <ui:ExcelApplicationScope.Body>
                   <ActivityAction x:TypeArguments="ui:WorkbookApplication">
                     <ActivityAction.Argument>
@@ -342,17 +342,14 @@
                       <av:PointCollection x:Key="ConnectorLocation">200,688.54 290,688.54 290,573.6</av:PointCollection>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <Sequence sap2010:Annotation.AnnotationText="経費登録シート.xlsxの経費登録データを、Web上に登録" DisplayName="経費明細登録" sap:VirtualizedContainerService.HintSize="499.2,843.2" sap2010:WorkflowViewState.IdRef="Sequence_4">
-                    <Sequence.Variables>
-                      <Variable x:TypeArguments="sd:DataRow" Name="CurrentTransaction" />
-                    </Sequence.Variables>
+                  <Sequence sap2010:Annotation.AnnotationText="経費登録シート.xlsxの経費登録データを、Web上に登録" DisplayName="経費明細登録" sap:VirtualizedContainerService.HintSize="200,127.2" sap2010:WorkflowViewState.IdRef="Sequence_4">
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                         <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
-                    <Assign DisplayName="代入" sap:VirtualizedContainerService.HintSize="436.8,81.6" sap2010:WorkflowViewState.IdRef="Assign_12">
+                    <Assign DisplayName="代入" sap:VirtualizedContainerService.HintSize="532.8,81.6" sap2010:WorkflowViewState.IdRef="Assign_12">
                       <Assign.To>
                         <OutArgument x:TypeArguments="sd:DataRow">[CurrentTransaction]</OutArgument>
                       </Assign.To>
@@ -360,37 +357,35 @@
                         <InArgument x:TypeArguments="sd:DataRow">[ExpenseData.Rows(CurrentTransactionNumber)]</InArgument>
                       </Assign.Value>
                     </Assign>
-                    <TryCatch DisplayName="トライ キャッチ" sap:VirtualizedContainerService.HintSize="436.8,456.8" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+                    <TryCatch DisplayName="トライ キャッチ" sap:VirtualizedContainerService.HintSize="532.8,601.6" sap2010:WorkflowViewState.IdRef="TryCatch_1">
                       <TryCatch.Try>
-                        <Sequence DisplayName="経費登録処理.xamlの呼び出し" sap:VirtualizedContainerService.HintSize="400,225.6" sap2010:WorkflowViewState.IdRef="Sequence_16">
+                        <Sequence DisplayName="経費登録処理.xamlの呼び出し" sap:VirtualizedContainerService.HintSize="496,347.2" sap2010:WorkflowViewState.IdRef="Sequence_16">
                           <sap:WorkflowViewStateService.ViewState>
                             <scg:Dictionary x:TypeArguments="x:String, x:Object">
                               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
-                          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="経費登録処理.xaml - ワークフロー ファイルを呼び出し" sap:VirtualizedContainerService.HintSize="337.6,113.6" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="経費登録処理.xaml">
+                          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="経費登録処理.xaml - ワークフロー ファイルを呼び出し" sap:VirtualizedContainerService.HintSize="433.6,113.6" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="経費登録処理.xaml">
                             <ui:InvokeWorkflowFile.Arguments>
-                              <InArgument x:TypeArguments="x:String" x:Key="in_ExpenseSystemURL">
-                                <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="ExpenseSystemURL" />
-                              </InArgument>
-                              <InArgument x:TypeArguments="x:String" x:Key="in_ExpenseTitle">
-                                <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="CurrentTransaction(&quot;タイトル&quot;).ToString()" />
-                              </InArgument>
-                              <InArgument x:TypeArguments="x:String" x:Key="in_ExpenseType">
-                                <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="CurrentTransaction(&quot;種別&quot;).ToString()" />
-                              </InArgument>
-                              <InArgument x:TypeArguments="x:String" x:Key="in_ExpenseAmount">
-                                <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="CurrentTransaction(&quot;金額&quot;).ToString()" />
-                              </InArgument>
-                              <InArgument x:TypeArguments="x:String" x:Key="in_ExpenseRemarks">
-                                <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="CurrentTransaction(&quot;備考&quot;).ToString()" />
-                              </InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="in_ExpenseSystemURL">[ExpenseSystemURL]</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="in_ExpenseTitle">[CurrentTransaction("タイトル").ToString()]</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="in_ExpenseType">[CurrentTransaction("種別").ToString()]</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="in_ExpenseAmount">[CurrentTransaction("金額").ToString()]</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="in_ExpenseRemarks">[CurrentTransaction("備考").ToString()]</InArgument>
                             </ui:InvokeWorkflowFile.Arguments>
                           </ui:InvokeWorkflowFile>
+                          <Assign DisplayName="代入" sap:VirtualizedContainerService.HintSize="433.6,81.6" sap2010:WorkflowViewState.IdRef="Assign_14">
+                            <Assign.To>
+                              <OutArgument x:TypeArguments="x:Object">[CurrentTransaction("登録結果")]</OutArgument>
+                            </Assign.To>
+                            <Assign.Value>
+                              <InArgument x:TypeArguments="x:Object">["成功"]</InArgument>
+                            </Assign.Value>
+                          </Assign>
                         </Sequence>
                       </TryCatch.Try>
                       <TryCatch.Catches>
-                        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="403.2,22.4" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+                        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="499.2,22.4" sap2010:WorkflowViewState.IdRef="Catch`1_1">
                           <sap:WorkflowViewStateService.ViewState>
                             <scg:Dictionary x:TypeArguments="x:String, x:Object">
                               <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -419,9 +414,38 @@
                             </Sequence>
                           </ActivityAction>
                         </Catch>
+                        <Catch x:TypeArguments="ui:BusinessRuleException" sap:VirtualizedContainerService.HintSize="499.2,22.4" sap2010:WorkflowViewState.IdRef="Catch`1_2">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <ActivityAction x:TypeArguments="ui:BusinessRuleException">
+                            <ActivityAction.Argument>
+                              <DelegateInArgument x:TypeArguments="ui:BusinessRuleException" Name="exception" />
+                            </ActivityAction.Argument>
+                            <Sequence DisplayName="例外処理" sap:VirtualizedContainerService.HintSize="496,324" sap2010:WorkflowViewState.IdRef="Sequence_18">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <Assign DisplayName="代入" sap:VirtualizedContainerService.HintSize="433.6,81.6" sap2010:WorkflowViewState.IdRef="Assign_15">
+                                <Assign.To>
+                                  <OutArgument x:TypeArguments="x:Object">[CurrentTransaction("登録結果")]</OutArgument>
+                                </Assign.To>
+                                <Assign.Value>
+                                  <InArgument x:TypeArguments="x:Object">["失敗"]</InArgument>
+                                </Assign.Value>
+                              </Assign>
+                              <ui:LogMessage DisplayName="メッセージをログ" sap:VirtualizedContainerService.HintSize="433.6,92.8" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Error" Message="[ConfigSettings(&quot;入力ファイル&quot;) + &quot;のデータに不備があります。トランザクション処理&quot; + (CurrentTransactionNumber +&#xA;1).ToString() + &quot;回目でエラーが発生しています&quot; +&#xA;Environment.NewLine + exception.Message +&#xA;Environment.NewLine + exception.StackTrace]" />
+                            </Sequence>
+                          </ActivityAction>
+                        </Catch>
                       </TryCatch.Catches>
                     </TryCatch>
-                    <Assign DisplayName="代入" sap:VirtualizedContainerService.HintSize="436.8,81.6" sap2010:WorkflowViewState.IdRef="Assign_10">
+                    <Assign DisplayName="代入：トランザクション番号を１加算" sap:VirtualizedContainerService.HintSize="532.8,81.6" sap2010:WorkflowViewState.IdRef="Assign_10">
                       <Assign.To>
                         <OutArgument x:TypeArguments="x:Int32">[CurrentTransactionNumber]</OutArgument>
                       </Assign.To>
@@ -444,13 +468,36 @@
                       <av:PointCollection x:Key="ConnectorLocation">570,755.6 570,798.4</av:PointCollection>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <Sequence sap2010:Annotation.AnnotationText="経費登録シート.xlsxに登録結果（OK/NG）を記載" DisplayName="経費登録情報を書き出し" sap:VirtualizedContainerService.HintSize="200,127.2" sap2010:WorkflowViewState.IdRef="Sequence_5">
+                  <Sequence sap2010:Annotation.AnnotationText="経費登録シート.xlsxに登録結果（OK/NG）を記載" DisplayName="経費登録情報を書き出し" sap:VirtualizedContainerService.HintSize="496,452.8" sap2010:WorkflowViewState.IdRef="Sequence_5">
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                         <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
+                    <ui:ExcelApplicationScope Password="{x:Null}" DisplayName="Excel アプリケーション スコープ" sap:VirtualizedContainerService.HintSize="433.6,309.6" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_2" InstanceCachePeriod="3000" WorkbookPath="[ExpenseDataFileName]">
+                      <ui:ExcelApplicationScope.Body>
+                        <ActivityAction x:TypeArguments="ui:WorkbookApplication">
+                          <ActivityAction.Argument>
+                            <DelegateInArgument x:TypeArguments="ui:WorkbookApplication" Name="ExcelWorkbookScope" />
+                          </ActivityAction.Argument>
+                          <Sequence DisplayName="実行" sap:VirtualizedContainerService.HintSize="400,200" sap2010:WorkflowViewState.IdRef="Sequence_19">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <ui:ExcelWriteRange AddHeaders="True" DataTable="[ExpenseData]" DisplayName="範囲に書き込み" sap:VirtualizedContainerService.HintSize="337.6,88" sap2010:WorkflowViewState.IdRef="ExcelWriteRange_1" SheetName="[ExpenseDataSheetName]">
+                              <ui:ExcelWriteRange.StartingCell>
+                                <InArgument x:TypeArguments="x:String">
+                                  <Literal x:TypeArguments="x:String" Value="" />
+                                </InArgument>
+                              </ui:ExcelWriteRange.StartingCell>
+                            </ui:ExcelWriteRange>
+                          </Sequence>
+                        </ActivityAction>
+                      </ui:ExcelApplicationScope.Body>
+                    </ui:ExcelApplicationScope>
                   </Sequence>
                   <FlowStep.Next>
                     <FlowStep x:Name="__ReferenceID4">

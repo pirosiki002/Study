@@ -7,7 +7,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>496,1205.5</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>824,1268.8</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Configファイル読み込み_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -75,7 +75,7 @@
       <AssemblyReference>System.ValueTuple</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Config.xlsx のシート「設定」を読み込みます&#xA;&#xA;入力&#xA;in_ExcelFileName  （Excelファイル名）&#xA;in_ExcelSheetName (Excelシート名）&#xA;&#xA;出力&#xA;out_Settings  （Dictionary）" DisplayName="Configファイル読み込み" sap:VirtualizedContainerService.HintSize="476,1145.5" sap2010:WorkflowViewState.IdRef="Sequence_3">
+  <Sequence sap2010:Annotation.AnnotationText="Config.xlsx のシート「設定」を読み込みます&#xA;&#xA;入力&#xA;in_ExcelFileName  （Excelファイル名）&#xA;in_ExcelSheetName (Excelシート名）&#xA;&#xA;出力&#xA;out_Settings  （Dictionary）" DisplayName="Configファイル読み込み" sap:VirtualizedContainerService.HintSize="592,1204" sap2010:WorkflowViewState.IdRef="Sequence_3">
     <Sequence.Variables>
       <Variable x:TypeArguments="sd:DataTable" Name="SettingData" />
     </Sequence.Variables>
@@ -86,7 +86,7 @@
         <x:Boolean x:Key="IsPinned">False</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <Assign sap2010:Annotation.AnnotationText="戻り値の初期化を行います。&#xA;空のDictionaryが作成されます" DisplayName="代入" sap:VirtualizedContainerService.HintSize="434,104" sap2010:WorkflowViewState.IdRef="Assign_1">
+    <Assign sap2010:Annotation.AnnotationText="戻り値の初期化を行います。&#xA;空のDictionaryが作成されます" DisplayName="代入" sap:VirtualizedContainerService.HintSize="529.6,124.8" sap2010:WorkflowViewState.IdRef="Assign_1">
       <Assign.To>
         <OutArgument x:TypeArguments="scg:Dictionary(x:String, x:String)">[out_Settings]</OutArgument>
       </Assign.To>
@@ -99,20 +99,20 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </Assign>
-    <ui:ExcelApplicationScope Password="{x:Null}" DisplayName="Excel アプリケーションスコープ" sap:VirtualizedContainerService.HintSize="434,260" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_1" WorkbookPath="[in_ExcelFileName]">
+    <ui:ExcelApplicationScope Password="{x:Null}" DisplayName="Excel アプリケーションスコープ" sap:VirtualizedContainerService.HintSize="529.6,281.6" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_1" InstanceCachePeriod="3000" WorkbookPath="[in_ExcelFileName]">
       <ui:ExcelApplicationScope.Body>
         <ActivityAction x:TypeArguments="ui:WorkbookApplication">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="ui:WorkbookApplication" Name="ExcelWorkbookScope" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="実行" sap:VirtualizedContainerService.HintSize="376,151" sap2010:WorkflowViewState.IdRef="Sequence_1">
+          <Sequence DisplayName="実行" sap:VirtualizedContainerService.HintSize="400,172" sap2010:WorkflowViewState.IdRef="Sequence_1">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                 <x:Boolean x:Key="IsPinned">False</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <ui:ExcelReadRange AddHeaders="True" DataTable="[SettingData]" DisplayName="範囲を読み込み" sap:VirtualizedContainerService.HintSize="334,59" sap2010:WorkflowViewState.IdRef="ExcelReadRange_1" SheetName="[in_ExcelSheetName]">
+            <ui:ExcelReadRange AddHeaders="True" DataTable="[SettingData]" DisplayName="範囲を読み込み" sap:VirtualizedContainerService.HintSize="337.6,60" sap2010:WorkflowViewState.IdRef="ExcelReadRange_1" SheetName="[in_ExcelSheetName]">
               <ui:ExcelReadRange.Range>
                 <InArgument x:TypeArguments="x:String">
                   <Literal x:TypeArguments="x:String" Value="" />
@@ -129,13 +129,13 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:ExcelApplicationScope>
-    <ui:ForEachRow CurrentIndex="{x:Null}" sap2010:Annotation.AnnotationText="[範囲を読み込み(ReadRange)]にて読みこんだConfig.xlsxの各行に対して処理を行います" DataTable="[SettingData]" DisplayName="繰り返し (各行)" sap:VirtualizedContainerService.HintSize="434,469.5" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
+    <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" sap2010:Annotation.AnnotationText="[範囲を読み込み(ReadRange)]にて読みこんだConfig.xlsxの各行に対して処理を行います" DataTable="[SettingData]" DisplayName="繰り返し (各行)" sap:VirtualizedContainerService.HintSize="529.6,465.6" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
       <ui:ForEachRow.Body>
         <ActivityAction x:TypeArguments="sd:DataRow">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="sd:DataRow" Name="row" />
           </ActivityAction.Argument>
-          <Sequence sap2010:Annotation.AnnotationText="Config.xlsxの&#xA;行(row)より、「キー」「値」を読み取り、&#xA;[ディクショナリ(Dictionary)]に追加します&#xA;&#xA;[ディクショナリ(Dictionary)]は、&#xA;「キー」「値」とともに、String型であるため&#xA;.ToString()に変更されます" DisplayName="Body" sap:VirtualizedContainerService.HintSize="284.5,276.5" sap2010:WorkflowViewState.IdRef="Sequence_2">
+          <Sequence sap2010:Annotation.AnnotationText="Config.xlsxの&#xA;行(row)より、「キー」「値」を読み取り、&#xA;[ディクショナリ(Dictionary)]に追加します&#xA;&#xA;[ディクショナリ(Dictionary)]は、&#xA;「キー」「値」とともに、String型であるため&#xA;.ToString()に変更されます" DisplayName="Body" sap:VirtualizedContainerService.HintSize="496,317.6" sap2010:WorkflowViewState.IdRef="Sequence_2">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -143,7 +143,7 @@
                 <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <Assign DisplayName="代入" sap:VirtualizedContainerService.HintSize="242.666666666667,60.4444444444444" sap2010:WorkflowViewState.IdRef="Assign_2">
+            <Assign DisplayName="代入" sap:VirtualizedContainerService.HintSize="433.6,81.6" sap2010:WorkflowViewState.IdRef="Assign_2">
               <Assign.To>
                 <OutArgument x:TypeArguments="x:String">[out_Settings(row("キー").ToString())]</OutArgument>
               </Assign.To>
