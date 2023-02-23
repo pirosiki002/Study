@@ -66,6 +66,7 @@
       <AssemblyReference>UiPath.Excel</AssemblyReference>
       <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
       <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
   <Flowchart sap2010:Annotation.AnnotationText="【概要】&#xA;Excelファイルを読み取り～&#xA;&#xA;【前提】&#xA;Excelファイルを～" DisplayName="フローチャート" sap:VirtualizedContainerService.HintSize="747.2,1231.2" sap2010:WorkflowViewState.IdRef="Flowchart_1">
@@ -468,7 +469,7 @@
                       <av:PointCollection x:Key="ConnectorLocation">570,755.6 570,798.4</av:PointCollection>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <Sequence sap2010:Annotation.AnnotationText="経費登録シート.xlsxに登録結果（OK/NG）を記載" DisplayName="経費登録情報を書き出し" sap:VirtualizedContainerService.HintSize="496,452.8" sap2010:WorkflowViewState.IdRef="Sequence_5">
+                  <Sequence sap2010:Annotation.AnnotationText="経費登録シート.xlsxに登録結果（OK/NG）を記載" DisplayName="経費登録情報を書き出し" sap:VirtualizedContainerService.HintSize="200,127.2" sap2010:WorkflowViewState.IdRef="Sequence_5">
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -508,13 +509,60 @@
                           <av:PointCollection x:Key="ConnectorLocation">570,925.6 570,975.6</av:PointCollection>
                         </scg:Dictionary>
                       </sap:WorkflowViewStateService.ViewState>
-                      <Sequence sap2010:Annotation.AnnotationText="ブラウザ上の経費一覧を取得後、経費登録シート.xlsxに書き出し" DisplayName="経費一覧を書き出し" sap:VirtualizedContainerService.HintSize="200,127.2" sap2010:WorkflowViewState.IdRef="Sequence_6">
+                      <Sequence sap2010:Annotation.AnnotationText="ブラウザ上の経費一覧を取得後、経費登録シート.xlsxに書き出し" DisplayName="経費一覧を書き出し" sap:VirtualizedContainerService.HintSize="545.6,796" sap2010:WorkflowViewState.IdRef="Sequence_6">
+                        <Sequence.Variables>
+                          <Variable x:TypeArguments="sd:DataTable" Name="ExpenseDetailData" />
+                          <Variable x:TypeArguments="x:Boolean" Name="Result" />
+                        </Sequence.Variables>
                         <sap:WorkflowViewStateService.ViewState>
                           <scg:Dictionary x:TypeArguments="x:String, x:Object">
                             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                             <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
+                        <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="経費一覧取得.xamlを呼び出し" sap:VirtualizedContainerService.HintSize="483.2,113.6" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="経費一覧取得.xaml">
+                          <ui:InvokeWorkflowFile.Arguments>
+                            <InArgument x:TypeArguments="x:String" x:Key="in_ExpenseSystemURL">
+                              <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="ExpenseSystemURL" />
+                            </InArgument>
+                            <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_ExpenseDetailData">
+                              <mva:VisualBasicReference x:TypeArguments="sd:DataTable" ExpressionText="ExpenseDetailData" />
+                            </OutArgument>
+                            <OutArgument x:TypeArguments="x:Boolean" x:Key="out_Result">
+                              <mva:VisualBasicReference x:TypeArguments="x:Boolean" ExpressionText="Result" />
+                            </OutArgument>
+                          </ui:InvokeWorkflowFile.Arguments>
+                        </ui:InvokeWorkflowFile>
+                        <If Condition="[Result]" DisplayName="条件分岐 (if)" sap:VirtualizedContainerService.HintSize="483.2,499.2" sap2010:WorkflowViewState.IdRef="If_3">
+                          <If.Then>
+                            <ui:ExcelApplicationScope Password="{x:Null}" DisplayName="Excel アプリケーション スコープ" sap:VirtualizedContainerService.HintSize="433.6,309.6" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_3" InstanceCachePeriod="3000" WorkbookPath="[ExpenseDataFileName]">
+                              <ui:ExcelApplicationScope.Body>
+                                <ActivityAction x:TypeArguments="ui:WorkbookApplication">
+                                  <ActivityAction.Argument>
+                                    <DelegateInArgument x:TypeArguments="ui:WorkbookApplication" Name="ExcelWorkbookScope" />
+                                  </ActivityAction.Argument>
+                                  <Sequence DisplayName="実行" sap:VirtualizedContainerService.HintSize="400,200" sap2010:WorkflowViewState.IdRef="Sequence_21">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                    <ui:ExcelWriteRange AddHeaders="True" DataTable="[ExpenseDetailData]" DisplayName="範囲に書き込み" sap:VirtualizedContainerService.HintSize="337.6,88" sap2010:WorkflowViewState.IdRef="ExcelWriteRange_2" SheetName="[ExpenseDetailSheetName]" StartingCell="A1" />
+                                  </Sequence>
+                                </ActivityAction>
+                              </ui:ExcelApplicationScope.Body>
+                            </ui:ExcelApplicationScope>
+                          </If.Then>
+                          <If.Else>
+                            <Sequence sap2010:WorkflowViewState.IdRef="Sequence_20">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                            </Sequence>
+                          </If.Else>
+                        </If>
                       </Sequence>
                       <FlowStep.Next>
                         <FlowStep x:Name="__ReferenceID5">
