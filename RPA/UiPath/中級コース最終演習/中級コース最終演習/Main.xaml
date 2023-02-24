@@ -80,6 +80,9 @@
       <Variable x:TypeArguments="x:Int32" Name="CurrentTransactionNumber" />
       <Variable x:TypeArguments="x:String" Name="ExpenseSystemURL" />
       <Variable x:TypeArguments="sd:DataRow" Name="CurrentTransaction" />
+      <Variable x:TypeArguments="x:String" Name="ResultMailSubject" />
+      <Variable x:TypeArguments="x:String" Name="ResultMailBody" />
+      <Variable x:TypeArguments="x:String" Name="ResultMailSendTo" />
     </Flowchart.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -169,11 +172,6 @@
             </Assign.Value>
           </Assign>
           <Sequence DisplayName="メール関連の設定" sap:VirtualizedContainerService.HintSize="496,436.8" sap2010:WorkflowViewState.IdRef="Sequence_9">
-            <Sequence.Variables>
-              <Variable x:TypeArguments="x:String" Name="ResultMailSubject" />
-              <Variable x:TypeArguments="x:String" Name="ResultMailBody" />
-              <Variable x:TypeArguments="x:String" Name="ResultMailSendTo" />
-            </Sequence.Variables>
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -509,7 +507,7 @@
                           <av:PointCollection x:Key="ConnectorLocation">570,925.6 570,975.6</av:PointCollection>
                         </scg:Dictionary>
                       </sap:WorkflowViewStateService.ViewState>
-                      <Sequence sap2010:Annotation.AnnotationText="ブラウザ上の経費一覧を取得後、経費登録シート.xlsxに書き出し" DisplayName="経費一覧を書き出し" sap:VirtualizedContainerService.HintSize="545.6,796" sap2010:WorkflowViewState.IdRef="Sequence_6">
+                      <Sequence sap2010:Annotation.AnnotationText="ブラウザ上の経費一覧を取得後、経費登録シート.xlsxに書き出し" DisplayName="経費一覧を書き出し" sap:VirtualizedContainerService.HintSize="200,127.2" sap2010:WorkflowViewState.IdRef="Sequence_6">
                         <Sequence.Variables>
                           <Variable x:TypeArguments="sd:DataTable" Name="ExpenseDetailData" />
                           <Variable x:TypeArguments="x:Boolean" Name="Result" />
@@ -522,15 +520,9 @@
                         </sap:WorkflowViewStateService.ViewState>
                         <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="経費一覧取得.xamlを呼び出し" sap:VirtualizedContainerService.HintSize="483.2,113.6" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="経費一覧取得.xaml">
                           <ui:InvokeWorkflowFile.Arguments>
-                            <InArgument x:TypeArguments="x:String" x:Key="in_ExpenseSystemURL">
-                              <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="ExpenseSystemURL" />
-                            </InArgument>
-                            <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_ExpenseDetailData">
-                              <mva:VisualBasicReference x:TypeArguments="sd:DataTable" ExpressionText="ExpenseDetailData" />
-                            </OutArgument>
-                            <OutArgument x:TypeArguments="x:Boolean" x:Key="out_Result">
-                              <mva:VisualBasicReference x:TypeArguments="x:Boolean" ExpressionText="Result" />
-                            </OutArgument>
+                            <InArgument x:TypeArguments="x:String" x:Key="in_ExpenseSystemURL">[ExpenseSystemURL]</InArgument>
+                            <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_ExpenseDetailData">[ExpenseDetailData]</OutArgument>
+                            <OutArgument x:TypeArguments="x:Boolean" x:Key="out_Result">[Result]</OutArgument>
                           </ui:InvokeWorkflowFile.Arguments>
                         </ui:InvokeWorkflowFile>
                         <If Condition="[Result]" DisplayName="条件分岐 (if)" sap:VirtualizedContainerService.HintSize="483.2,499.2" sap2010:WorkflowViewState.IdRef="If_3">
@@ -572,13 +564,30 @@
                               <av:Size x:Key="ShapeSize">200,127.2</av:Size>
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
-                          <Sequence sap2010:Annotation.AnnotationText="経費登録シート.xlsxをメールで送信" DisplayName="メールを送信" sap:VirtualizedContainerService.HintSize="200,127.2" sap2010:WorkflowViewState.IdRef="Sequence_7">
+                          <Sequence sap2010:Annotation.AnnotationText="経費登録シート.xlsxをメールで送信" DisplayName="メールを送信" sap:VirtualizedContainerService.HintSize="400,256.8" sap2010:WorkflowViewState.IdRef="Sequence_7">
                             <sap:WorkflowViewStateService.ViewState>
                               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                 <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
                               </scg:Dictionary>
                             </sap:WorkflowViewStateService.ViewState>
+                            <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="メール送信.xaml - ワークフロー ファイルを呼び出し" sap:VirtualizedContainerService.HintSize="337.6,113.6" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="メール送信.xaml">
+                              <ui:InvokeWorkflowFile.Arguments>
+                                <InArgument x:TypeArguments="x:String" x:Key="in_MailSubject">
+                                  <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="ResultMailSubject" />
+                                </InArgument>
+                                <InArgument x:TypeArguments="x:String" x:Key="in_MailBody">
+                                  <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="ResultMailBody" />
+                                </InArgument>
+                                <InArgument x:TypeArguments="x:String" x:Key="in_MailAccount" />
+                                <InArgument x:TypeArguments="x:String" x:Key="in_MailAttatch">
+                                  <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="ExpenseDataFileName" />
+                                </InArgument>
+                                <InArgument x:TypeArguments="x:String" x:Key="in_MailSendTo">
+                                  <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="ResultMailSendTo" />
+                                </InArgument>
+                              </ui:InvokeWorkflowFile.Arguments>
+                            </ui:InvokeWorkflowFile>
                           </Sequence>
                         </FlowStep>
                       </FlowStep.Next>
