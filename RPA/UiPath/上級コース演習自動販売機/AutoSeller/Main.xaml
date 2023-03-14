@@ -1,6 +1,6 @@
 <Activity mc:Ignorable="sap sap2010" x:Class="Main" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="755,702" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <TextExpression.NamespacesForImplementation>
-    <scg:List x:TypeArguments="x:String" Capacity="52">
+    <scg:List x:TypeArguments="x:String" Capacity="27">
       <x:String>System.Activities</x:String>
       <x:String>System.Activities.Statements</x:String>
       <x:String>System.Activities.Expressions</x:String>
@@ -31,7 +31,7 @@
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
-    <scg:List x:TypeArguments="AssemblyReference" Capacity="52">
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="27">
       <AssemblyReference>System.Activities</AssemblyReference>
       <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
       <AssemblyReference>mscorlib</AssemblyReference>
@@ -61,10 +61,11 @@
       <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Flowchart DisplayName="AutoSeller" sap:VirtualizedContainerService.HintSize="634,637" sap2010:WorkflowViewState.IdRef="Flowchart_1">
+  <Flowchart DisplayName="AutoSeller" sap:VirtualizedContainerService.HintSize="634,683.5" sap2010:WorkflowViewState.IdRef="Flowchart_1">
     <Flowchart.Variables>
       <Variable x:TypeArguments="x:String" Name="inputPrice" />
       <Variable x:TypeArguments="x:String" Name="isContinueBuy" />
+      <Variable x:TypeArguments="x:String" Name="buyDrinkName" />
     </Flowchart.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -72,12 +73,13 @@
         <av:Point x:Key="ShapeLocation">270,2.5</av:Point>
         <av:Size x:Key="ShapeSize">60,75</av:Size>
         <av:PointCollection x:Key="ConnectorLocation">300,77.5 300,127.5</av:PointCollection>
+        <x:Double x:Key="Height">646.52</x:Double>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
     <Flowchart.StartNode>
-      <x:Reference>__ReferenceID4</x:Reference>
+      <x:Reference>__ReferenceID6</x:Reference>
     </Flowchart.StartNode>
-    <FlowStep x:Name="__ReferenceID4">
+    <FlowStep x:Name="__ReferenceID6">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <av:Point x:Key="ShapeLocation">200,127.5</av:Point>
@@ -85,7 +87,7 @@
           <av:PointCollection x:Key="ConnectorLocation">300,180.5 300,230.5</av:PointCollection>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <ui:InputDialog OptionsString="{x:Null}" DisplayName="投入金額を選択" sap:VirtualizedContainerService.HintSize="200,53" sap2010:WorkflowViewState.IdRef="InputDialog_1" IsPassword="False" Label="投入金額を選択してください" Options="[{&quot;\500&quot;,&quot;\1000&quot;,&quot;\2000”}]" Title="投入金額を選択">
+      <ui:InputDialog OptionsString="{x:Null}" DisplayName="投入金額を選択" sap:VirtualizedContainerService.HintSize="200,53" sap2010:WorkflowViewState.IdRef="InputDialog_1" IsPassword="False" Label="投入金額を選択してください" Options="[{&quot;500&quot;,&quot;1000&quot;,&quot;2000&quot;}]" Title="投入金額を選択">
         <ui:InputDialog.Result>
           <OutArgument x:TypeArguments="x:String">[inputPrice]</OutArgument>
         </ui:InputDialog.Result>
@@ -101,7 +103,7 @@
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <av:Point x:Key="ShapeLocation">200,230.5</av:Point>
               <av:Size x:Key="ShapeSize">200,53</av:Size>
-              <av:PointCollection x:Key="ConnectorLocation">300,283.5 300,313.5 299.686666666667,313.5 299.686666666667,333.5</av:PointCollection>
+              <av:PointCollection x:Key="ConnectorLocation">300,283.5 300,353.52</av:PointCollection>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
           <ui:MessageBox Caption="{x:Null}" AutoCloseAfter="00:00:00" Buttons="YesNo" ChosenButton="[isContinueBuy]" DisplayName="メッセージ ボックス" sap:VirtualizedContainerService.HintSize="200,53" sap2010:WorkflowViewState.IdRef="MessageBox_2" Text="[&quot;購入を続けますか？&quot;]">
@@ -112,54 +114,93 @@
             </sap:WorkflowViewStateService.ViewState>
           </ui:MessageBox>
           <FlowStep.Next>
-            <FlowDecision x:Name="__ReferenceID1" DisplayName="フロー条件分岐" sap:VirtualizedContainerService.HintSize="78,87" sap2010:WorkflowViewState.IdRef="FlowDecision_1">
-              <FlowDecision.Condition>
-                <mva:VisualBasicValue x:TypeArguments="x:Boolean" ExpressionText="IF(isContinueBuy = &quot;Yes&quot;, True, False)" />
-              </FlowDecision.Condition>
+            <FlowStep x:Name="__ReferenceID5">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                  <av:Point x:Key="ShapeLocation">260.686666666667,333.5</av:Point>
-                  <av:Size x:Key="ShapeSize">78,87</av:Size>
-                  <av:PointCollection x:Key="TrueConnector">260.686666666667,377 230.686666666667,377 230.686666666667,377.02 210.686666666667,377.02</av:PointCollection>
-                  <av:PointCollection x:Key="FalseConnector">338.686666666667,377 368.686666666667,377 368.686666666667,377.02 388.686666666667,377.02</av:PointCollection>
+                  <av:Point x:Key="ShapeLocation">200,353.52</av:Point>
+                  <av:Size x:Key="ShapeSize">200,53</av:Size>
+                  <av:PointCollection x:Key="ConnectorLocation">300,406.52 300,436.52 299.686666666667,436.52 299.686666666667,473.5</av:PointCollection>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
-              <FlowDecision.True>
-                <FlowStep x:Name="__ReferenceID2">
+              <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" AutoCloseAfter="00:00:00" DisplayName="所持金の確認" sap:VirtualizedContainerService.HintSize="200,53" sap2010:WorkflowViewState.IdRef="MessageBox_5" Text="[inputPrice + &quot;inputPriceの単なる出力テスト。StringなのでIntに変換したい&quot;]">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </ui:MessageBox>
+              <FlowStep.Next>
+                <FlowDecision x:Name="__ReferenceID1" DisplayName="フロー条件分岐" sap:VirtualizedContainerService.HintSize="78,87" sap2010:WorkflowViewState.IdRef="FlowDecision_1">
+                  <FlowDecision.Condition>
+                    <mva:VisualBasicValue x:TypeArguments="x:Boolean" ExpressionText="IF(isContinueBuy = &quot;Yes&quot;, True, False)" />
+                  </FlowDecision.Condition>
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                      <av:Point x:Key="ShapeLocation">10.6866666666667,350.52</av:Point>
-                      <av:Size x:Key="ShapeSize">200,53</av:Size>
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      <av:Point x:Key="ShapeLocation">260.686666666667,473.5</av:Point>
+                      <av:Size x:Key="ShapeSize">78,87</av:Size>
+                      <av:PointCollection x:Key="TrueConnector">260.686666666667,517 230.686666666667,517 230.686666666667,517.02 210.686666666667,517.02</av:PointCollection>
+                      <av:PointCollection x:Key="FalseConnector">338.686666666667,517 368.686666666667,517 368.686666666667,517.02 388.686666666667,517.02</av:PointCollection>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" AutoCloseAfter="00:00:00" DisplayName="メッセージ ボックス" sap:VirtualizedContainerService.HintSize="200,53" sap2010:WorkflowViewState.IdRef="MessageBox_3" Text="[isContinueBuy + &quot;はTrueです。&quot;]">
-                    <sap:WorkflowViewStateService.ViewState>
-                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                      </scg:Dictionary>
-                    </sap:WorkflowViewStateService.ViewState>
-                  </ui:MessageBox>
-                </FlowStep>
-              </FlowDecision.True>
-              <FlowDecision.False>
-                <FlowStep x:Name="__ReferenceID3">
-                  <sap:WorkflowViewStateService.ViewState>
-                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                      <av:Point x:Key="ShapeLocation">388.686666666667,350.52</av:Point>
-                      <av:Size x:Key="ShapeSize">200,53</av:Size>
-                    </scg:Dictionary>
-                  </sap:WorkflowViewStateService.ViewState>
-                  <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" AutoCloseAfter="00:00:00" DisplayName="メッセージ ボックス" sap:VirtualizedContainerService.HintSize="334,86" sap2010:WorkflowViewState.IdRef="MessageBox_4" Text="[isContinueBuy + &quot;はFalseです&quot;]">
-                    <sap:WorkflowViewStateService.ViewState>
-                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                      </scg:Dictionary>
-                    </sap:WorkflowViewStateService.ViewState>
-                  </ui:MessageBox>
-                </FlowStep>
-              </FlowDecision.False>
-            </FlowDecision>
+                  <FlowDecision.True>
+                    <FlowStep x:Name="__ReferenceID2">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <av:Point x:Key="ShapeLocation">10.6866666666667,490.52</av:Point>
+                          <av:Size x:Key="ShapeSize">200,53</av:Size>
+                          <av:PointCollection x:Key="ConnectorLocation">110.686666666667,543.52 110.686666666667,593.52</av:PointCollection>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" AutoCloseAfter="00:00:00" DisplayName="メッセージ ボックス" sap:VirtualizedContainerService.HintSize="200,53" sap2010:WorkflowViewState.IdRef="MessageBox_3" Text="[isContinueBuy + &quot;はTrueです。処理を継続します。&quot;]">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                      </ui:MessageBox>
+                      <FlowStep.Next>
+                        <FlowStep x:Name="__ReferenceID4">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <av:Point x:Key="ShapeLocation">10.6866666666667,593.52</av:Point>
+                              <av:Size x:Key="ShapeSize">200,53</av:Size>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <ui:InputDialog OptionsString="{x:Null}" DisplayName="購入する飲み物を選択" sap:VirtualizedContainerService.HintSize="200,53" sap2010:WorkflowViewState.IdRef="InputDialog_2" IsPassword="False" Label="どの飲み物を購入しますか？" Options="[{&quot;コーヒー\300&quot;, &quot;お茶\200&quot;}]" Title="購入する飲み物を選択">
+                            <ui:InputDialog.Result>
+                              <OutArgument x:TypeArguments="x:String">[buyDrinkName]</OutArgument>
+                            </ui:InputDialog.Result>
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                          </ui:InputDialog>
+                        </FlowStep>
+                      </FlowStep.Next>
+                    </FlowStep>
+                  </FlowDecision.True>
+                  <FlowDecision.False>
+                    <FlowStep x:Name="__ReferenceID3">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <av:Point x:Key="ShapeLocation">388.686666666667,490.52</av:Point>
+                          <av:Size x:Key="ShapeSize">200,53</av:Size>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" AutoCloseAfter="00:00:00" DisplayName="メッセージ ボックス" sap:VirtualizedContainerService.HintSize="200,53" sap2010:WorkflowViewState.IdRef="MessageBox_4" Text="[isContinueBuy + &quot;はFalseです。終了します。&quot;]">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                      </ui:MessageBox>
+                    </FlowStep>
+                  </FlowDecision.False>
+                </FlowDecision>
+              </FlowStep.Next>
+            </FlowStep>
           </FlowStep.Next>
         </FlowStep>
       </FlowStep.Next>
@@ -168,5 +209,7 @@
     <x:Reference>__ReferenceID1</x:Reference>
     <x:Reference>__ReferenceID2</x:Reference>
     <x:Reference>__ReferenceID3</x:Reference>
+    <x:Reference>__ReferenceID4</x:Reference>
+    <x:Reference>__ReferenceID5</x:Reference>
   </Flowchart>
 </Activity>
