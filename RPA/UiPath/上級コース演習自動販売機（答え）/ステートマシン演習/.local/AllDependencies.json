@@ -10391,15 +10391,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\si\\.nuget\\packages\\": {}
+    "C:\\Users\\si\\.nuget\\packages\\": {},
+    "C:\\Users\\si\\AppData\\Local\\UiPath\\NugetFallbackFolder": {}
   },
   "project": {
     "restore": {
       "projectUniqueName": "ステートマシン演習",
       "projectName": "ステートマシン演習",
-      "projectPath": "\\\\Mac\\Home\\Documents\\Study\\RPA\\UiPath\\上級コース演習自動販売機（答え）\\ステートマシン演習\\.local",
+      "projectPath": "\\\\mac\\Home\\Documents\\Study\\RPA\\UiPath\\上級コース演習自動販売機（答え）\\ステートマシン演習\\.local",
       "packagesPath": "C:\\Users\\si\\.nuget\\packages\\",
-      "outputPath": "\\\\Mac\\Home\\Documents\\Study\\RPA\\UiPath\\上級コース演習自動販売機（答え）\\ステートマシン演習\\.local"
+      "outputPath": "\\\\mac\\Home\\Documents\\Study\\RPA\\UiPath\\上級コース演習自動販売機（答え）\\ステートマシン演習\\.local",
+      "fallbackFolders": [
+        "C:\\Users\\si\\AppData\\Local\\UiPath\\NugetFallbackFolder"
+      ]
     },
     "frameworks": {
       "net461": {

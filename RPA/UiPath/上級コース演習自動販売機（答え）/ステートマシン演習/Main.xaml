@@ -54,9 +54,9 @@
       <AssemblyReference>System.ValueTuple</AssemblyReference>
       <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
       <AssemblyReference>System.Memory</AssemblyReference>
-      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
       <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
       <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
   <Sequence DisplayName="シーケンス" sap:VirtualizedContainerService.HintSize="450,164" sap2010:WorkflowViewState.IdRef="Sequence_2">
@@ -120,7 +120,73 @@
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
             <Transition.To>
-              <State x:Name="__ReferenceID0" DisplayName="商品を選択" sap:VirtualizedContainerService.HintSize="145.5,62" sap2010:WorkflowViewState.IdRef="State_2">
+              <State x:Name="__ReferenceID0" DisplayName="商品を選択" sap:VirtualizedContainerService.HintSize="594,1279" sap2010:WorkflowViewState.IdRef="State_2">
+                <State.Entry>
+                  <Sequence DisplayName="シーケンス" sap:VirtualizedContainerService.HintSize="594,1363" sap2010:WorkflowViewState.IdRef="Sequence_4">
+                    <Sequence.Variables>
+                      <Variable x:TypeArguments="x:String" Name="ChosenDrink" />
+                    </Sequence.Variables>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <Assign DisplayName="代入" sap:VirtualizedContainerService.HintSize="532,83" sap2010:WorkflowViewState.IdRef="Assign_2">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="x:Int32">[DrinkPrice("コーヒー \300")]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="x:Int32">300</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                    <Assign DisplayName="代入" sap:VirtualizedContainerService.HintSize="532,83" sap2010:WorkflowViewState.IdRef="Assign_3">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="x:Int32">[DrinkPrice("お茶 \200")]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="x:Int32">200</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                    <ui:InputDialog OptionsString="{x:Null}" DisplayName="入力ダイアログ" sap:VirtualizedContainerService.HintSize="532,297" sap2010:WorkflowViewState.IdRef="InputDialog_3" IsPassword="False" Label="購入希望の飲み物を選択してください" Options="[{&quot;コーヒー \300&quot;, &quot;お茶 \200&quot;}]" Title="飲み物を選択">
+                      <ui:InputDialog.Result>
+                        <OutArgument x:TypeArguments="x:String">[ChosenDrink]</OutArgument>
+                      </ui:InputDialog.Result>
+                    </ui:InputDialog>
+                    <If Condition="[CurrentAmount &gt;= DrinkPrice(ChosenDrink)]" DisplayName="追加購入確認" sap:VirtualizedContainerService.HintSize="532,669" sap2010:WorkflowViewState.IdRef="If_1">
+                      <If.Then>
+                        <Sequence sap:VirtualizedContainerService.HintSize="496,477" sap2010:WorkflowViewState.IdRef="Sequence_5">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <Assign DisplayName="代入" sap:VirtualizedContainerService.HintSize="434,83" sap2010:WorkflowViewState.IdRef="Assign_4">
+                            <Assign.To>
+                              <OutArgument x:TypeArguments="x:Int32">[CurrentAmount]</OutArgument>
+                            </Assign.To>
+                            <Assign.Value>
+                              <InArgument x:TypeArguments="x:Int32">[CurrentAmount -DrinkPrice(ChosenDrink)]</InArgument>
+                            </Assign.Value>
+                          </Assign>
+                          <ui:InputDialog OptionsString="{x:Null}" DisplayName="入力ダイアログ" sap:VirtualizedContainerService.HintSize="434,243" sap2010:WorkflowViewState.IdRef="InputDialog_4" IsPassword="False" Label="[String.Format(&quot;購入しました！残金は、\{0}です。次はどうしますか？&quot;, CurrentAmount.ToString)]" Options="[{&quot;別の飲み物を買う&quot;,&quot;釣銭を受け取る&quot;}]" Title="飲み物を購入">
+                            <ui:InputDialog.Result>
+                              <OutArgument x:TypeArguments="x:String">[NextAction]</OutArgument>
+                            </ui:InputDialog.Result>
+                          </ui:InputDialog>
+                        </Sequence>
+                      </If.Then>
+                      <If.Else>
+                        <Sequence sap2010:WorkflowViewState.IdRef="Sequence_6">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                        </Sequence>
+                      </If.Else>
+                    </If>
+                  </Sequence>
+                </State.Entry>
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <av:Point x:Key="ShapeLocation">223,259</av:Point>

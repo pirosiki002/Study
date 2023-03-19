@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "qfxxhj+IE8lHfj3XOSmtUW74GiehqDv4I5PgIyfQazawDrRlZvwErFmxuG9my0HWTP0EJr9DXjyRR2bxLOr1Ew==",
+  "dgSpecHash": "D4HDR7MJzXXHcSWDXUTYlz1/es+/N7FS36j6uzeOkUxRgXi1k4ckMXXn8Tgg6LmtySVcUtA47IgjGVl55bVMFg==",
   "success": true,
-  "projectFilePath": "\\\\Mac\\Home\\Documents\\Study\\RPA\\UiPath\\上級コース演習自動販売機（答え）\\ステートマシン演習\\.local\\",
+  "projectFilePath": "\\\\mac\\Home\\Documents\\Study\\RPA\\UiPath\\上級コース演習自動販売機（答え）\\ステートマシン演習\\.local\\",
   "expectedPackageFiles": [
     "C:\\Users\\si\\.nuget\\packages\\automapper\\9.0.0\\automapper.9.0.0.nupkg.sha512",
     "C:\\Users\\si\\.nuget\\packages\\closedxml\\0.95.4\\closedxml.0.95.4.nupkg.sha512",
