@@ -11,7 +11,14 @@
     {
       "Path": "Main.xaml",
       "SortBy": 0,
-      "VariablesSectionElementsOrder": null,
+      "VariablesSectionElementsOrder": [
+        "GetChange&State_2",
+        "ChosenDrink&Sequence_4",
+        "CurrentAmount&StateMachine_1",
+        "NextAction&StateMachine_1",
+        "ChosenAmount&State_1",
+        "DrinkPrice&State_2"
+      ],
       "ArgumentsSectionElementsOrder": null,
       "ConstantsSectionElementsOrder": null,
       "AddedNamespaces": null
