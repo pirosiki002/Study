@@ -1,5 +1,5 @@
 {
-  "name": "UiPath_REFrameWork",
+  "name": "UiPath_REFrameWork_UiDemo",
   "description": "UiPath REFramework Template",
   "main": "Main.xaml",
   "dependencies": {
@@ -8,19 +8,27 @@
     "UiPath.UIAutomation.Activities": "[19.10.1]"
   },
   "webServices": [],
+  "entitiesStores": [],
   "schemaVersion": "4.0",
   "studioVersion": "19.10.1.0",
   "projectVersion": "1.0.0.0",
   "runtimeOptions": {
     "autoDispose": false,
+    "netFrameworkLazyLoading": false,
     "isPausable": true,
+    "isAttended": false,
     "requiresUserInteraction": true,
     "supportsPersistence": false,
+    "workflowSerialization": "DataContract",
     "excludedLoggedData": [
       "Private:*",
       "*password*"
     ],
-    "executionType": "Workflow"
+    "executionType": "Workflow",
+    "readyForPiP": false,
+    "startsInPiP": false,
+    "mustRestoreAllDependencies": false,
+    "pipType": "ChildSession"
   },
   "designOptions": {
     "projectProfile": "Developement",
@@ -29,7 +37,36 @@
       "includeOriginalXaml": false,
       "privateWorkflows": []
     },
-    "fileInfos": []
+    "processOptions": {
+      "ignoredFiles": []
+    },
+    "fileInfoCollection": [
+      {
+        "editingStatus": "InProgress",
+        "testCaseId": "67260e75-c3f6-45d8-9534-0c77a0758dc4",
+        "testCaseType": "TestCase",
+        "fileName": "UiDemoログイン・登録\\登録処理.xaml"
+      },
+      {
+        "editingStatus": "InProgress",
+        "testCaseId": "09622a99-f9f1-465e-b836-9d196f407cd4",
+        "testCaseType": "TestCase",
+        "fileName": "UiDemoログイン・登録\\初期設定.xaml"
+      }
+    ],
+    "modernBehavior": false
   },
-  "expressionLanguage": "VisualBasic"
+  "expressionLanguage": "VisualBasic",
+  "entryPoints": [
+    {
+      "filePath": "Main.xaml",
+      "uniqueId": "5305f6da-5d38-469d-a6f5-cf5462044511",
+      "input": [],
+      "output": []
+    }
+  ],
+  "isTemplate": false,
+  "templateProjectData": {},
+  "publishData": {},
+  "targetFramework": "Legacy"
 }
