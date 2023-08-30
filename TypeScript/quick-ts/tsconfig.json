@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    /* Language and Environment */
+    "target": "es2016",                                  /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
+    /* Modules */
+    "module": "commonjs",                                /* Specify what module code is generated. */
+    // a. create source map?
+    "sourceMap": true,
+    // b. output place of compile result
+    "outDir": "./dist",
+
+    /* Type Checking */
+    "strict": true,                                      /* Enable all strict type-checking options. */
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true
+  }
+}
