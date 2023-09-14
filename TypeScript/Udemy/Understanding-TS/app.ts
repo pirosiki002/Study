@@ -9,7 +9,8 @@ const add = (n1: number, n2: number, showResult: boolean, phrase: string) => {
   }
 };
 
-const num1 = 5;
+let num1: number;
+num1 = 5;
 const num2 = 2.8;
 const printResult = true;
 const resultPhrase = "Result";
