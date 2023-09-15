@@ -3,7 +3,7 @@
 //   age: number;
 // } = {
 var person = {
-  name: "piro",
-  age: 41,
+    name: "piro",
+    age: 41,
 };
-console.log(person.age);
+console.log(person.name);
