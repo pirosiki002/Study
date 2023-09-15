@@ -1,25 +1,14 @@
-// const ADMIN = 0;
-// const READ_ONLY = 1;
-// const AUTHOR = 2;
-var Role;
-(function (Role) {
-    Role[Role["ADMIN"] = 5] = "ADMIN";
-    Role[Role["READ_ONLY"] = 6] = "READ_ONLY";
-    Role[Role["AUTHOR"] = 200] = "AUTHOR";
-})(Role || (Role = {}));
-var person = {
-    name: "piro",
-    age: 41,
-    hobbies: ["English", "Programing"],
-    role: Role.ADMIN,
+var combine = function (input1, input2) {
+    var result;
+    if (typeof input1 === "number" && typeof input2 === "number") {
+        result = input1 + input2;
+    }
+    else {
+        result = input1.toString() + input2.toString();
+    }
+    return result;
 };
-var favoAct;
-favoAct = ["sport"];
-console.log(person.name);
-for (var _i = 0, _a = person.hobbies; _i < _a.length; _i++) {
-    var hobby = _a[_i];
-    console.log(hobby.toUpperCase());
-}
-if (person.role === Role.ADMIN) {
-    console.log("Auth user");
-}
+var cobineAges = combine(30, 26);
+console.log(cobineAges);
+var combinedNames = combine("Max", "Annna");
+console.log(combinedNames);

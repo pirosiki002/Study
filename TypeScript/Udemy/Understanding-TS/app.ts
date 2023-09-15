@@ -1,28 +1,15 @@
-// const ADMIN = 0;
-// const READ_ONLY = 1;
-// const AUTHOR = 2;
-
-enum Role {
-  ADMIN = 5,
-  READ_ONLY,
-  AUTHOR = 200,
-}
-
-const person = {
-  name: "piro",
-  age: 41,
-  hobbies: ["English", "Programing"],
-  role: Role.ADMIN,
+const combine = (input1: number | string, input2: number | string) => {
+  let result;
+  if (typeof input1 === "number" && typeof input2 === "number") {
+    result = input1 + input2;
+  } else {
+    result = input1.toString() + input2.toString();
+  }
+  return result;
 };
 
-let favoAct: string[];
-favoAct = ["sport"];
-console.log(person.name);
+const cobineAges = combine(30, 26);
+console.log(cobineAges);
 
-for (const hobby of person.hobbies) {
-  console.log(hobby.toUpperCase());
-}
-
-if (person.role === Role.ADMIN) {
-  console.log("Auth user");
-}
+const combinedNames = combine("Max", "Annna");
+console.log(combinedNames);
