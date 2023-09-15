@@ -14,7 +14,7 @@ var combine = function (input1, input2, resultConversion) {
     //   return result.toString();
     // }
 };
-var cobineAges = combine(30, 26, "as text");
+var cobineAges = combine(30, 26, "as number");
 console.log(cobineAges);
 var combinedStringAges = combine("30", "26", "as text");
 console.log(combinedStringAges);

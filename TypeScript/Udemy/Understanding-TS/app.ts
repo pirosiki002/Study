@@ -1,7 +1,10 @@
+type Conbinable = number | string;
+type ConversionDescriptor = "as number" | "as text";
+
 const combine = (
-  input1: number | string,
-  input2: number | string,
-  resultConversion: "as number" | "as text"
+  input1: Conbinable,
+  input2: Conbinable,
+  resultConversion: ConversionDescriptor
 ) => {
   let result;
   if (
@@ -14,11 +17,6 @@ const combine = (
   }
 
   return result;
-  // if (resultConversion === "as number") {
-  //   return +result;
-  // } else {
-  //   return result.toString();
-  // }
 };
 
 const cobineAges = combine(30, 26, "as number");
