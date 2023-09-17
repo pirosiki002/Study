@@ -1,6 +1,5 @@
 "use strict";
-let age;
-age = 41;
-const userName = "Maximum hormon";
-// userName = 3;
-console.log(userName);
+const button = document.querySelector("button");
+button.addEventListener("click", () => {
+    console.log("clicked!!");
+});
