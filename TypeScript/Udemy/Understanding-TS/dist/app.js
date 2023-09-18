@@ -1,5 +1,6 @@
 "use strict";
 const button = document.querySelector("button");
-button.addEventListener("click", () => {
-    console.log("clicked!!");
-});
+const clickHandler = (message) => {
+    console.log("ClickHandler clicked!!!" + message);
+};
+button.addEventListener("click", clickHandler.bind(null, "Your welcome!"));
