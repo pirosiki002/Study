@@ -1,2 +1,5 @@
 "use strict";
-console.log("Sending data...");
+const sendAnalytics = (data) => {
+    console.log(data);
+};
+sendAnalytics("The data");
