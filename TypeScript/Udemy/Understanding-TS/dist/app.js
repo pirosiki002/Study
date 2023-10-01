@@ -1,4 +1,5 @@
 "use strict";
+let userName = 'Max';
 const button = document.querySelector("button");
 const clickHandler = (message) => {
     console.log("ClickHandler clicked!!!" + message);
