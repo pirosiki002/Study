@@ -10,3 +10,4 @@ const clickHandler = (message) => {
     console.log("ClickHandler clicked!!!" + message);
 };
 button.addEventListener("click", clickHandler.bind(null, "Your welcome!"));
+//# sourceMappingURL=app.js.map
