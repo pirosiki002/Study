@@ -1,16 +1,20 @@
 const userName = 'Max';
 
-const add = (a: number, b: number) =>{
-  let result;
-  result = a + b;
-  return result;
+let age = 30;
+age = 29;
+
+const add = (a: number, b: number) => a+b;
+
+const printOutput : (output: string | number) => void = output =>{
+  console.log(output);
 }
 
+printOutput(add(2,5));
 
-// let age = 29;
+const button = document.querySelector('button');
 
-// if(age >= 20){
-//   let isAdult = true;
-// }
-
-// console.log(isAdult);
+if (button) {
+  button.addEventListener('click', event => {
+    console.log(event);
+  });
+}
