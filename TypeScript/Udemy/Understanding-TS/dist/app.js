@@ -13,4 +13,13 @@ if (button) {
         console.log(event);
     });
 }
+const hobbies = ['Sports', 'Cooking'];
+const activeHobbies = ['Hikingggg'];
+activeHobbies.push(...hobbies);
+console.log(activeHobbies);
+const person = {
+    name: 'max',
+    age: 30
+};
+const copiedPerson = Object.assign({}, person);
 //# sourceMappingURL=app.js.map

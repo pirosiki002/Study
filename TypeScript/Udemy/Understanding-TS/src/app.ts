@@ -18,3 +18,22 @@ if (button) {
     console.log(event);
   });
 }
+
+const hobbies = ['Sports', 'Cooking'];
+const activeHobbies = ['Hikingggg'];
+// const activeHobbies = ['Hiking', ...hobbies];
+
+activeHobbies.push(...hobbies);
+console.log(activeHobbies);
+
+const person = {
+  name:'max',
+  age: 30
+};
+
+// const copiedPerson = person; // this is pointer referense
+
+// this is object copy!
+const copiedPerson = {
+  ...person
+}
