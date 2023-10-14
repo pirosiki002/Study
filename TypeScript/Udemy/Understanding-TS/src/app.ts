@@ -1,7 +1,7 @@
-const userName = 'Max';
+// let userName = 'Max';
 
-let age = 30;
-age = 29;
+// let age = 30;
+// age = 29;
 
 const add = (a: number, b: number = 1) => a+b;
 
@@ -27,13 +27,17 @@ activeHobbies.push(...hobbies);
 console.log(activeHobbies);
 
 const person = {
-  name:'max',
+  firstName:'Max',
   age: 30
 };
 
 // const copiedPerson = person; // this is pointer referense
 
 // this is object copy!
-const copiedPerson = {
-  ...person
-}
+// const copiedPerson = {
+//   ...person
+// }
+
+
+const {firstName: userName, age} = person;
+console.log(userName, age, person);
