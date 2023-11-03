@@ -1,43 +1,36 @@
-// let userName = 'Max';
+class Department{
+  // private id: string;
+  // name: string;
+  private employees: string[] = [];
 
-// let age = 30;
-// age = 29;
+  constructor(private id:string, public name:string){
+    // this.id = id;
+    // this.name = n;
+  }
+  describe(this: Department){
+    console.log(`Department (${this.id}): ${this.name}`);
+  }
+  addEmployee(employee:string){
+    // validation etc
+    this.employees.push(employee);
+  }
 
-const add = (a: number, b: number = 1) => a+b;
-
-const printOutput : (output: string | number) => void = output =>{
-  console.log(output);
+  printEmployeeInformation(){
+    console.log(this.employees.length);
+    console.log(this.employees);
+  }
 }
 
-printOutput(add(2));
+const accounting = new Department('d1', 'accounting');
 
-const button = document.querySelector('button');
+accounting.addEmployee('Max');
+accounting.addEmployee('Manu');
 
-if (button) {
-  button.addEventListener('click', event => {
-    console.log(event);
-  });
-}
+// accounting.employees[2] = 'Anna';
 
-const hobbies = ['Sports', 'Cooking'];
-const activeHobbies = ['Hikingggg'];
-// const activeHobbies = ['Hiking', ...hobbies];
+console.log(accounting);
+accounting.describe();
+accounting.printEmployeeInformation();
 
-activeHobbies.push(...hobbies);
-console.log(activeHobbies);
-
-const person = {
-  firstName:'Max',
-  age: 30
-};
-
-// const copiedPerson = person; // this is pointer referense
-
-// this is object copy!
-// const copiedPerson = {
-//   ...person
-// }
-
-
-const {firstName: userName, age} = person;
-console.log(userName, age, person);
+// const accountingCopy = {name:'Dummy', describe: accounting.describe};
+// accountingCopy.describe();
