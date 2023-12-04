@@ -1,6 +1,9 @@
 'use server';
 
 import { z } from 'zod';
+import { sql } from '@vercel/postgres';
+import { revalidatePath } from 'next/cache';
+import { redirect } from 'next/navigation';
 
 const FormSchema = z.object({
   id: z.string(),
@@ -21,7 +24,12 @@ export async function createInvoice(formData: FormData) {
   });
   const amountInCents = amount * 100;
   const data = new Date().toISOString().split('T')[0];
-  // Test it out:
-  console.log({ customerId, amountInCents, status, data });
-  // console.log(typeof rawFormData.amount);
+
+  await sql`
+    INSERT INTO invoices (customer_id, amount, status, date)
+    VALUES (${customerId}, ${amountInCents}, ${status}, ${data})
+  `;
+
+  revalidatePath('/dashboard/invoices');
+  redirect('/dashboard/invoices');
 }
