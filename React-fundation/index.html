@@ -6,8 +6,13 @@
     <!-- Babel Script -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script type="text/jsx">
-      const app = document.getElementById('app');
-      ReactDOM.render(<h1>Develop. Preview. Ship.</h1>, app);
+      const app = document.getElementById("app")
+
+      function Header() {
+        return (<h1>Develop. Preview. Ship.</h1>)
+      }
+
+      ReactDOM.render(<Header />, app)
     </script>
   </body>
 </html>
