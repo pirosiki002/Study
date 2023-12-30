@@ -8,14 +8,18 @@
     <script type="text/jsx">
       const app = document.getElementById("app")
 
-      function Header() {
-        return (<h1>Develop. Preview. Ship.</h1>)
+      function Header(props) {
+        const {title} = props;
+        console.log(props);
+        return <h1>{title ? title : 'Default title'}</h1>;
       }
 
       function HomePage(){
         return <div>
           {/* Nesting the Header component */}
-          <Header />
+          <Header title="React" />
+          <Header title="A New title" />
+          <Header  />
         </div>;
       }
       ReactDOM.render(<HomePage />, app)
