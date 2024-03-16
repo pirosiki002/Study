@@ -27,7 +27,7 @@ const MultipleCheckBox: NextPage = () => {
   // console.log(watchAllFields);
 
   const onSubmit: SubmitHandler<SubmitData> = (data: SubmitData) => {
-    console.log("send API data", data);
+    console.log("send API data", data.myFavoriteFoods);
   };
 
   const [MyFavoriteFoods, setMyFavoriteFoods] = useState<MyFavoriteFoods[]>([
@@ -61,6 +61,7 @@ const MultipleCheckBox: NextPage = () => {
                 <input
                   id={item.id}
                   type="checkbox"
+                  value={item.id} // value属性にidを設定
                   defaultChecked={item.checked}
                   disabled={item.disabled}
                   {...register("myFavoriteFoods", {
