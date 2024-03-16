@@ -18,12 +18,16 @@ interface SubmitData {
 const MultipleCheckBox: NextPage = () => {
   const {
     register,
+    watch,
     handleSubmit,
     formState: { errors, isValid, isSubmitting },
   } = useForm<SubmitData>({ mode: "onChange" });
 
+  // const watchAllFields = watch();
+  // console.log(watchAllFields);
+
   const onSubmit: SubmitHandler<SubmitData> = (data: SubmitData) => {
-    console.log("send API data");
+    console.log("send API data", data);
   };
 
   const [MyFavoriteFoods, setMyFavoriteFoods] = useState<MyFavoriteFoods[]>([
