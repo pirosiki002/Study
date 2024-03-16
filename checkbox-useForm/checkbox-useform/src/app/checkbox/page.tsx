@@ -59,7 +59,13 @@ const MultipleCheckBox: NextPage = () => {
                   type="checkbox"
                   defaultChecked={item.checked}
                   disabled={item.disabled}
-                  {...register("myFavoriteFoods")}
+                  {...register("myFavoriteFoods", {
+                    validate: {
+                      atLeastOneRequired: (value) =>
+                        value.length >= 1 ||
+                        "At least one checkbox must be selected",
+                    },
+                  })}
                 ></input>
                 <label htmlFor={item.id}>{item.name}</label>
                 {/* <label>{item.name}</label> */}
@@ -67,6 +73,11 @@ const MultipleCheckBox: NextPage = () => {
             );
           })}
         </div>
+        {errors.myFavoriteFoods && (
+          <p>
+            {errors.myFavoriteFoods.type} : {errors.myFavoriteFoods.message}
+          </p>
+        )}
         <button type="submit">[Submit]</button>
       </form>
     </>
