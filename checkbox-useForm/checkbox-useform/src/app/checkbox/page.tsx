@@ -2,6 +2,7 @@
 "use client";
 import type { NextPage } from "next";
 import { useState } from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
 
 interface MyFavoriteFoods {
   id: string;
@@ -10,7 +11,21 @@ interface MyFavoriteFoods {
   disabled: boolean;
 }
 
+interface SubmitData {
+  myFavoriteFoods: string[];
+}
+
 const MultipleCheckBox: NextPage = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid, isSubmitting },
+  } = useForm<SubmitData>({ mode: "onChange" });
+
+  const onSubmit: SubmitHandler<SubmitData> = (data: SubmitData) => {
+    console.log("send API data");
+  };
+
   const [MyFavoriteFoods, setMyFavoriteFoods] = useState<MyFavoriteFoods[]>([
     {
       id: "sushi",
@@ -34,7 +49,7 @@ const MultipleCheckBox: NextPage = () => {
 
   return (
     <>
-      <form>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div>
           {MyFavoriteFoods.map((item) => {
             return (
@@ -44,6 +59,7 @@ const MultipleCheckBox: NextPage = () => {
                   type="checkbox"
                   defaultChecked={item.checked}
                   disabled={item.disabled}
+                  {...register("myFavoriteFoods")}
                 ></input>
                 <label htmlFor={item.id}>{item.name}</label>
                 {/* <label>{item.name}</label> */}
