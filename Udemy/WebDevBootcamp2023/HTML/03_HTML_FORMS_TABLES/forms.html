@@ -33,7 +33,7 @@
       <p>
         <label
           >number
-          <input type="number" placeholder="input Number" name="num" />
+          <input type="number" placeholder="input Number" name="num" min="1" max="1000" step="10"/>
         </label>
       </p>
       <button>send</button>
@@ -77,6 +77,10 @@
           <option value="salad" selected>salad</option>
           <option value="steak">steak</option>
         </select>
+      </p>
+      <p>
+        <label for="cheese">cheese quantity</label>
+        <input type="range" id="cheese" min="1" max="100" name="cheese_level" step="7" value="75">
       </p>
       <button>send</button>
     </form>
