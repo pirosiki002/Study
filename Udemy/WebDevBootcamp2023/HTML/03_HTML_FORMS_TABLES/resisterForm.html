@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Resister form</title>
+  </head>
+  <body>
+    <h1>Marathon resister form</h1>
+    <form action="/marathon_resister">
+      <div>
+        <p>
+          <label for="first_name">first name</label>
+          <input type="text" id="first_name" />
+          <label for="last_name">last name</label>
+          <input type="text" id="last_name" />
+        </p>
+      </div>
+      <div>
+        <p>Select your participated marathon event</p>
+        <input type="radio" name="radio_btn" />
+        <label for="radio_btn">Let's enjoy running 5km</label>
+        <br />
+        <input type="radio" name="radio_btn" />
+        <label for="radio_btn">Half marathon</label>
+        <br />
+        <input type="radio" name="radio_btn" />
+        <label for="radio_btn">full marathon</label>
+      </div>
+      <div>
+        <label for="mail">Mail</label>
+        <input type="email" id="mail" name="mail" required />
+        <label for="password">Password</label>
+        <input type="password" id="password" required />
+      </div>
+      <div>
+        <label for="age" name="age">age</label>
+        <select id="age">
+          <option value="teenage">1-19</option>
+          <option value="young">20-29</option>
+          <option value="middle">30-59</option>
+          <option value="older">60-</option>
+        </select>
+      </div>
+      <button>resister</button>
+    </form>
+  </body>
+</html>
