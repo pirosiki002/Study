@@ -4,10 +4,10 @@ h1 {
   text-decoration: #552266 underline wavy;
   letter-spacing: 15px;
   font-size: 80px;
+  /* font-family: Segoe UI, Futura, Arial, sans-serif; */
+  font-family: Fantasy;
 }
 p {
-  /* text-align: right; */
-  /* font-weight: bold; */
   line-height: 2;
 }
 
