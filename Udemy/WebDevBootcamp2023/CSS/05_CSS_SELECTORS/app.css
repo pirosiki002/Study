@@ -1,13 +1,22 @@
-* {
-  /* color: pink; */
+/* * {
+  color: pink;
   background-color: cyan;
-}
+} */
 
+body {
+  background-color: #8ecae6;
+}
 button {
   font-size: 30px;
+  background-color: #219ebc;
 }
 
 h1,
 h2 {
-  color: darkblue;
+  color: #023047;
+}
+
+#signup {
+  color: aliceblue;
+  background-color: #023047;
 }
