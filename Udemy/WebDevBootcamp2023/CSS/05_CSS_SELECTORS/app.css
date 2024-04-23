@@ -20,3 +20,13 @@ h2 {
   color: aliceblue;
   background-color: #023047;
 }
+
+span {
+  color: #d8e2dc;
+}
+
+.tag {
+  background-color: #780000;
+  color: #fefae0;
+  font-size: 16px;
+}
