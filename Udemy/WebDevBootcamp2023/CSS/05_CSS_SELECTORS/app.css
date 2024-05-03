@@ -35,10 +35,6 @@ footer a {
   color: #780000;
 }
 
-/* input + button {
-  color: orange;
-} */
-
 h2 + button {
   color: pink;
   text-decoration: underline;
@@ -46,4 +42,16 @@ h2 + button {
 
 footer > a {
   color: #023047;
+}
+
+input[type="password"] {
+  color: greenyellow;
+}
+
+/* section[class="post"] {
+  background-color: purple;
+} */
+
+a[href*="google"] {
+  color: magenta;
 }
