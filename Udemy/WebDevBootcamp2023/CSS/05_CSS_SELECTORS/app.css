@@ -23,6 +23,8 @@ h2 {
 
 .post a {
   color: #d8e2dc;
+  text-decoration: none;
+  font-weight: 700;
 }
 
 .tag {
@@ -48,10 +50,23 @@ input[type="password"] {
   color: greenyellow;
 }
 
-/* section[class="post"] {
-  background-color: purple;
-} */
-
 a[href*="google"] {
   color: magenta;
+}
+
+.post button:hover {
+  background-color: #780000;
+  color: #d8e2dc;
+}
+
+.post a:hover {
+  text-decoration: underline;
+}
+
+.post button:active {
+  background-color: aqua;
+}
+
+.post:nth-of-type(2n) {
+  background-color: #7197a9;
 }
