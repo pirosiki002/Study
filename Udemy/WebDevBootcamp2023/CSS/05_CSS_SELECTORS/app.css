@@ -82,3 +82,7 @@ p:first-line{
 ::selection{
   background-color: orange;
 }
+
+h1,h2{
+  color:yellow;
+}
