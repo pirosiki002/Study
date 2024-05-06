@@ -54,10 +54,6 @@ a[href*="google"] {
   color: magenta;
 }
 
-.post button:hover {
-  background-color: #780000;
-  color: #d8e2dc;
-}
 
 .post a:hover {
   text-decoration: underline;
@@ -83,6 +79,12 @@ p:first-line{
   background-color: orange;
 }
 
-h1,h2{
-  color:yellow;
+.post button:hover {
+  background-color: #780000;
+  color: #d8e2dc;
+}
+
+button:hover{
+  background-color: olive;
+  font-size: 10px;
 }
