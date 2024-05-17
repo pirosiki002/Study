@@ -1,9 +1,31 @@
 div{
     height: 300px;
-    width: 200px;
+    width: 300px;
     background-color: #fae1dd;
 }
 
 h1{
     background-color: pink;
+}
+
+#one{
+    background-color: #ccd5ae;
+    border-width: 5px;
+    border-color: black;
+    border-style: solid;
+    /* box-sizing:border-box; */
+}
+
+#two{
+    background-color: #faedcd;
+    border-color: #ccd5ae;
+    border-style: dashed;
+    border-left-width: 8px;
+}
+
+#three{
+    background-color: #d4a373;
+    border: solid 4px black;
+    border-left-style:dashed;
+    border-radius: 50%;
 }
