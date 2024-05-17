@@ -1,3 +1,6 @@
+body{
+    margin:0;
+}
 div{
     height: 300px;
     width: 300px;
@@ -9,6 +12,7 @@ h1{
     width: 200px;
     padding-left:100px;
     padding-top:50px;
+    margin:0;
 }
 
 #one{
@@ -17,6 +21,8 @@ h1{
     border-color: black;
     border-style: solid;
     /* box-sizing:border-box; */
+    margin-left: 50px;
+    margin-bottom: 100px;
 }
 
 #two{
@@ -25,6 +31,7 @@ h1{
     border-style: dashed;
     border-left-width: 8px;
     padding-right: 50px;
+    margin:200px;
 }
 
 #three{
@@ -36,4 +43,9 @@ h1{
 
 button{
     padding: 10px 20px 30px 40px;
+}
+
+span{
+    margin-left:30px;
+    margin-top:30px;
 }
