@@ -6,6 +6,9 @@ div{
 
 h1{
     background-color: pink;
+    width: 200px;
+    padding-left:100px;
+    padding-top:50px;
 }
 
 #one{
@@ -21,6 +24,7 @@ h1{
     border-color: #ccd5ae;
     border-style: dashed;
     border-left-width: 8px;
+    padding-right: 50px;
 }
 
 #three{
@@ -28,4 +32,8 @@ h1{
     border: solid 4px black;
     border-left-style:dashed;
     border-radius: 50%;
+}
+
+button{
+    padding: 10px 20px 30px 40px;
 }
