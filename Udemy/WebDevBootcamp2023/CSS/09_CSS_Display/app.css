@@ -1,0 +1,20 @@
+/* block */
+h1{
+    background-color: palegoldenrod;
+    border: 1px solid black;
+    /* display: inline; */
+    width: 300px;
+    height: 200px;
+    padding: 50px;
+    margin:100px;
+}
+
+/* inline */
+span{
+    background-color: turquoise;
+    border: 1px solid black;
+    /* display:block; */
+    width: 500px;
+    padding:100px;
+    margin:50px;
+}
