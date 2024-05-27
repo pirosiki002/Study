@@ -1,33 +1,49 @@
-section{
+/* section{
     background-color: #e76f51;
     height: 800px;
     width: 400px;
+} */
+html{
+    font-size: 30px;
 }
 
-div{
+#percentages{
+    background-color: #e76f51;
+    width: 400px;
+    height: 800px;
+}
+#percentages div{
     background-color: green;
     width: 70%;
     height: 20%;
 }
 
-h1{
+#ems h1{
     font-size: 40px;
     border: 1px solid black;
     line-height: 200%;
     /* line-height: 80px; */
 }
-h2{
-    font-size: 5em;
+#ems h2{
+    font-size: 2em;
     margin-left: 1em;
 }
-article{
-    font-size: 100px;
-}
-p{
+/* article{
+    font-size: 30px;
+} */
+#ems p{
     font-size: 1em;
 }
-h3{
+#ems h3{
     font-size: 1.5em;
+}
+
+#ems ul{
+    font-size: 0.8em;
+}
+
+#ems {
+    font-size: 15px;
 }
 button{
     font-size: 1em;
@@ -35,4 +51,20 @@ button{
     border-radius: 0.5em;
     background-color: green;
     color: white;
+}
+
+#rems h2{
+    font-size: 3rem;
+}
+
+#rems h3{
+    font-size: 2rem;
+}
+
+#rems ul{
+    font-size: 1.2rem;
+}
+
+#rems button{
+    font-size: 1.5rem;
 }
