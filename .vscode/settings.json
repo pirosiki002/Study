@@ -1,5 +1,14 @@
 {
   "editor.formatOnSave": true,
   // Prettier をデフォルトのフォーマッタとして設定（オプション）
-  "editor.defaultFormatter": "esbenp.prettier-vscode"
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.quickSuggestions": {
+    "comments": "on",
+    "strings": "on"
+  },
+  "editor.suggest.snippetsPreventQuickSuggestions": true,
+  "emmet.useInlineCompletions": true,
+  "emmet.triggerExpansionOnTab": true,
+  "github.copilot.editor.enableCodeActions": false,
+  "github.copilot.editor.enableAutoCompletions": false
 }
