@@ -1,11 +1,9 @@
-import "./Example.css";
+// import "./Example.css";
+// import { List, a } from "./components/List.jsx";
+import Child from "./components/Child";
 
 const Example = () => {
-  return (
-    <div className="component">
-      <h3>Hello Component</h3>
-    </div>
-  );
+  return <Child />;
 };
 
 export default Example;
