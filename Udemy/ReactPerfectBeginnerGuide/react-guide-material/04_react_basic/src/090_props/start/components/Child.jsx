@@ -5,9 +5,14 @@
 
 import "./Child.css";
 
-const Child = () => {
+// const Child = (props) => {
+const Child = ({ color: c = "green" }) => {
   return (
-    <div className="component">
+    // <div className="component">
+    // <div className="component red">
+    // <div className={`component ${props.color}`}>
+    // <div className={`component ${color}`}>
+    <div className={`component ${c}`}>
       <h3>Hello Component</h3>
     </div>
   );
