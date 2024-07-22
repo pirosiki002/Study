@@ -1,0 +1,7 @@
+img {
+  /* width: 100px; */
+  width: 30%;
+  /* margin: 20px; */
+  /* margin: 1.66666%; */
+  margin: calc(10% / 6);
+}
