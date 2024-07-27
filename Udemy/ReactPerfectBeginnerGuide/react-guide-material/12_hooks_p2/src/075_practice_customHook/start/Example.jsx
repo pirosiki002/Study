@@ -1,12 +1,7 @@
-import { useState } from "react";
-
+import useCount from "./hooks";
 const Example = () => {
-  const [count, setCount] = useState(0);
+  const { onClick, count } = useCount();
 
-  onclick = (num) => {
-    const addCnt = count + 1;
-    setCount(addCnt);
-  };
   return (
     <>
       <h3>練習問題</h3>
@@ -15,7 +10,8 @@ const Example = () => {
         startフォルダの中にhooks.jsというファイルを作成しその中でuseCountというカスタムフックを作成してください。
       </p>
       <div>Counts: {count}</div>
-      <button onClick={() => {}}>Count Up!</button>
+      {/* <button onClick={() => {}}>Count Up!</button> */}
+      <button onClick={onClick}>Count Up!</button>
     </>
   );
 };
