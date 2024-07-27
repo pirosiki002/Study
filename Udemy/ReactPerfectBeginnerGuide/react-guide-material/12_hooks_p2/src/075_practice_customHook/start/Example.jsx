@@ -1,6 +1,6 @@
-import useCount from "./hooks";
+import { useCount } from "./hooks";
 const Example = () => {
-  const { onClick, count } = useCount();
+  const { countUp, count } = useCount();
 
   return (
     <>
@@ -11,7 +11,7 @@ const Example = () => {
       </p>
       <div>Counts: {count}</div>
       {/* <button onClick={() => {}}>Count Up!</button> */}
-      <button onClick={onClick}>Count Up!</button>
+      <button onClick={countUp}>Count Up!</button>
     </>
   );
 };
