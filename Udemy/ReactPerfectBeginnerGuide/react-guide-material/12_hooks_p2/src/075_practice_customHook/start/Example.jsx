@@ -1,4 +1,7 @@
+import { useCount } from "./hooks";
 const Example = () => {
+  const { countUp, count } = useCount();
+
   return (
     <>
       <h3>練習問題</h3>
@@ -6,8 +9,9 @@ const Example = () => {
         記述を変更し、完成コードと同じ状態になるようにしてください。
         startフォルダの中にhooks.jsというファイルを作成しその中でuseCountというカスタムフックを作成してください。
       </p>
-      <div>Counts: {}</div>
-      <button onClick={() => {}}>Count Up!</button>
+      <div>Counts: {count}</div>
+      {/* <button onClick={() => {}}>Count Up!</button> */}
+      <button onClick={countUp}>Count Up!</button>
     </>
   );
 };
