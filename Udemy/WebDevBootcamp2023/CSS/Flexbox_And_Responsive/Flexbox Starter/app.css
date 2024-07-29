@@ -11,12 +11,17 @@ h1 {
   margin: 0 auto;
   border: 5px solid #003049;
   display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: center;
+  flex-wrap: wrap-reverse;
+  align-items: flex-end;
+  /* align-items: center; */
+  /* flex-wrap: wrap-reverse; */
 }
 
 #container div {
-  width: 500px;
+  /* font-size: 50px; */
+  text-align: center;
+  width: 200px;
   height: 200px;
 }
