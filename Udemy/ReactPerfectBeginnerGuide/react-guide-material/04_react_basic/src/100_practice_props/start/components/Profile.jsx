@@ -1,13 +1,13 @@
 import "./Profile.css";
 
-const Profile = (props) => {
-  const { name, age, country } = props;
+const Profile = ({ name = "John Doe", age = "???", country = "Japan" }) => {
+  // const { name, age, country } = props;
   return (
     <>
       <div className="profile">
-        <div className="name">Name:{name}</div>
-        <div className="age">Age:{age}</div>
-        <div className="country">From:{country}</div>
+        <h3 className="name">Name:{name}</h3>
+        <h3 className="age">Age:{age}</h3>
+        <h3 className="country">From:{country}</h3>
       </div>
     </>
   );

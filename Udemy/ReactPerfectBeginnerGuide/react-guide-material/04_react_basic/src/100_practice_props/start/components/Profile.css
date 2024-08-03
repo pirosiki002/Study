@@ -15,12 +15,8 @@
   font-size: 20px;
 }
 
-.name {
-  margin: 20px;
-}
-.age {
-  margin: 20px;
-}
+.name,
+.age,
 .country {
   margin: 20px;
 }
