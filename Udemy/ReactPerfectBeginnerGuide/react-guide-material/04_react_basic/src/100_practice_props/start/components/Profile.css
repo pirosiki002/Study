@@ -10,3 +10,13 @@
 .App-start .profile p {
   font-size: 1.3em;
 }
+
+.profile {
+  font-size: 20px;
+}
+
+.name,
+.age,
+.country {
+  margin: 20px;
+}
