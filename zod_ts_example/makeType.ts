@@ -10,12 +10,13 @@ type SchemaType = z.infer<typeof schema>;
 
 // テスト関数
 function validateSchema(data: unknown): SchemaType | null {
-  try {
-    // バリデーション
-    return schema.parse(data);
-  } catch (e) {
-    // バリデーションエラーの場合はnullを返す
-    console.error(e);
+  // safeParseを使用してバリデーション
+  const result = schema.safeParse(data);
+
+  if (result.success) {
+    return result.data;
+  } else {
+    console.error(result.error);
     return null;
   }
 }
