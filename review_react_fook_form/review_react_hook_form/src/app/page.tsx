@@ -14,14 +14,11 @@ export default function Home() {
   const {
     register,
     handleSubmit,
-    watch,
+    trigger,
     formState: { errors },
   } = useForm<Inputs>();
 
   const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
-
-  // watch
-  const lastName = watch("lastName");
 
   return (
     <>
@@ -39,6 +36,17 @@ export default function Home() {
                   type="text"
                   {...register("lastName", {
                     required: "input your Last name",
+                    minLength: {
+                      value: 2,
+                      message: "2文字以上で入力してください",
+                    },
+                    // maxLength: {
+                    //   value: 10,
+                    //   message: "10文字以下で入力してください",
+                    // },
+                    onBlur: (e) => {
+                      trigger("lastName");
+                    },
                   })}
                 />
               </label>
@@ -51,7 +59,6 @@ export default function Home() {
             </div>
           </form>
         </section>
-        <p>Last name: {lastName}</p>
       </div>
     </>
   );
