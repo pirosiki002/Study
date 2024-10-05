@@ -1,22 +1,30 @@
 // import { FC, ChangeEvent, useState } from "react";
 // import "./styles.css";
 "use client";
-import { useState, ChangeEvent } from "react";
+import { useState, ChangeEvent, useEffect } from "react";
 
 export default function Home() {
   // input info
   const [lastName, setLastName] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [comment, setComment] = useState("");
+  // const [firstName, setFirstName] = useState("");
+  // const [comment, setComment] = useState("");
 
   // error message
   const [lastNameErrorMessage, setLastNameErrorMessage] = useState("");
-  const [firstNameErrorMessage, setFirstNameErrorMessage] = useState("");
-  const [commentErrorMessage, setCommentErrorMessage] = useState("");
+  // const [firstNameErrorMessage, setFirstNameErrorMessage] = useState("");
+  // const [commentErrorMessage, setCommentErrorMessage] = useState("");
 
   // submit process
-  const onSubmit = () => {
-    console.log("send form data");
+  const onSubmit = (event: React.FormEvent) => {
+    event.preventDefault(); // prevent page reload
+    // initialize error message
+    setLastNameErrorMessage("");
+
+    // Which is the emptyLastName null or somthing?
+    const emptyLastName = lastName === "";
+    if (emptyLastName) setLastNameErrorMessage("Please input your Last name");
+
+    console.log("send form data, last name=", lastName);
   };
 
   const onChangeLastName = (e: ChangeEvent<HTMLInputElement>) => {
@@ -26,7 +34,6 @@ export default function Home() {
   return (
     <>
       <div className="wrapper">
-        {/* <>test</> */}
         <h1>React Form</h1>
         <section className="section">
           <h2>useState Form</h2>
@@ -47,8 +54,12 @@ export default function Home() {
                 <p className="error-message">{lastNameErrorMessage}</p>
               )}
             </div>
+            <div className="submit-button">
+              <button type="submit">Submit button</button>
+            </div>
           </form>
         </section>
+        <p>Last name: {lastName}</p>
       </div>
     </>
   );
