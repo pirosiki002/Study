@@ -2,6 +2,7 @@
 
 import React, { useState } from "react"; // ReactとuseStateフックをインポート
 import { DndContext, DragOverEvent } from "@dnd-kit/core"; // DndContextをインポート
+import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
 import { SortableContext } from "@dnd-kit/sortable"; // SortableContextをインポート
 import Draggable from "../conponents/Draggable"; // Draggableコンポーネントをインポート
 
@@ -48,7 +49,11 @@ const App = () => {
 
   return (
     // DndContextでドラッグ＆ドロップのコンテキストを提供
-    <DndContext onDragOver={handleDragOver}>
+    <DndContext
+      // ドラッグ時に垂直方向にしか動かないように
+      modifiers={[restrictToVerticalAxis]}
+      onDragOver={handleDragOver}
+    >
       <div className="App">
         {/* SortableContextでソート可能なコンテキストを提供 */}
         <SortableContext items={items}>
