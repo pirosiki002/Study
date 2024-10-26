@@ -25,15 +25,17 @@ const Draggable = (props: DraggableProps) => {
 
   // ボタン要素を返す
   return (
-    <button
+    <div
       className="cards" // クラス名を設定
       ref={setNodeRef} // 要素の参照を設定
       style={style} // スタイルを適用
       {...listeners} // イベントリスナーを適用
       {...attributes} // 属性を適用
     >
+      <p>{`画像URL`}</p> {/* props.numを表示 */}
       <p>{props.num}</p> {/* props.numを表示 */}
-    </button>
+      <div>{`代替テキスト`}</div> {/* props.numを表示 */}
+    </div>
   );
 };
 
