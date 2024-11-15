@@ -40,12 +40,11 @@ const Example = () => {
           // })}
           .map((animal) => {
             // return <li key={animal}>{animal + (animal === "Dog" && "★")}</li>;
-            const animalStr = animal ?? "nullかundefinedです。";
-
+            // const animalStr = animal ?? "nullかundefinedです。";
             return (
-              <li key={animalStr}>
-                {animalStr}
-                {animalStr === "Dog" && "★"}
+              <li key={animal}>
+                {animal ?? "null, undefined"}
+                {animal === "Dog" && "★"}
               </li>
             );
           })}
