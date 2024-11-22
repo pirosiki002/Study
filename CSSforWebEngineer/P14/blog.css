@@ -1,0 +1,21 @@
+/* article h1 {
+  border-bottom: 2px solid #000;
+  margin-bottom: 1em;
+  padding: 10px;
+  font-size: 24px;
+  font-weight: bold;
+} */
+/* div h2 {
+  border-bottom: 2px solid #000;
+  margin-bottom: 1em;
+  padding: 10px;
+  font-size: 24px;
+  font-weight: bold;
+} */
+.entry-title {
+  border-bottom: 2px solid #000;
+  margin-bottom: 1em;
+  padding: 10px;
+  font-size: 24px;
+  font-weight: bold;
+}
