@@ -1,4 +1,6 @@
+"use client";
 import Profile from "./components/Profile";
+import { useState } from "react";
 
 const persons = [
   {
@@ -19,16 +21,27 @@ const persons = [
 ];
 
 const Example = () => {
+  const [keyword, setKeyword] = useState("");
+
   return (
     <>
-      <h3>練習問題</h3>
-      <p>入力欄を設置して、入力値と名前が一致したもののみ表示する仕組みを作成してください。</p>
+      <input
+        onChange={(e) => {
+          setKeyword(e.target.value);
+        }}
+      ></input>
       <ul>
-        {persons.map((person) => (
-          <li key={person.name}>
-            <Profile {...person} />
-          </li>
-        ))}
+        {persons
+          // .filter((person) => person.name.includes(keyword))
+          .filter((person) => {
+            const isMatch = person.name.indexOf(keyword) !== -1;
+            return isMatch;
+          })
+          .map((person) => (
+            <li key={person.name}>
+              <Profile {...person} />
+            </li>
+          ))}
       </ul>
     </>
   );
