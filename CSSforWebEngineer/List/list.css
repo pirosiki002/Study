@@ -1,0 +1,25 @@
+.tableview {
+  overflow: hidden;
+  border-radius: 8px;
+  border: 1px solid #999999;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.tableview__item {
+  padding: 1em;
+  background-color: #dddddd;
+}
+
+.tableview__item + .tableview__item {
+  border-top: 1px solid #eeeeee;
+}
+
+/* .tableview__item > a { */
+.tableview__target {
+  display: block;
+  margin: -1em;
+  padding: 1em;
+  text-decoration: none;
+}
