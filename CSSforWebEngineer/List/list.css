@@ -22,4 +22,29 @@
   margin: -1em;
   padding: 1em;
   text-decoration: none;
+  /* add */
+  position: relative;
+  padding-right: 2.4em;
+}
+
+/* icon */
+.ico {
+  display: inline-block;
+  /* background-image: url(spritesheets.png); */
+  background-image: url("spritesheets.png"); /* スプライトシート画像のパス */
+}
+.ico--arrow {
+  width: 16px;
+  height: 16px;
+  background-position: 0 -16px;
+}
+
+.tableview__target-icon {
+  position: absolute;
+  /* ここのトップで位置を調整しているけど、もっと効率の良い方法がありそう。flex etc... */
+  top: 16px; /* top and bottom, ついになるプロパティを持たせて領域をつくる */
+  bottom: 0;
+  right: 0.6em; /* iconが右端いっぱいに表示されないようにする */
+  margin: auto; /* virtical center */
+  font-size: 24px; /* アイコンのサイズを変更 */
 }
