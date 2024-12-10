@@ -43,8 +43,10 @@
   position: absolute;
   /* ここのトップで位置を調整しているけど、もっと効率の良い方法がありそう。flex etc... */
   top: 16px; /* top and bottom, ついになるプロパティを持たせて領域をつくる */
+  /* top: 50%; */
   bottom: 0;
   right: 0.6em; /* iconが右端いっぱいに表示されないようにする */
   margin: auto; /* virtical center */
+  /* margin-top: -8px; */
   font-size: 24px; /* アイコンのサイズを変更 */
 }
