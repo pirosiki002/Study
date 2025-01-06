@@ -107,7 +107,7 @@
 }
 
 /*
-! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com
+! tailwindcss v3.4.16 | MIT License | https://tailwindcss.com
 */
 
 /*
@@ -558,6 +558,14 @@ video {
   margin: 2.5rem;
 }
 
+.h-16 {
+  height: 4rem;
+}
+
+.w-16 {
+  width: 4rem;
+}
+
 .bg-amber-100 {
   --tw-bg-opacity: 1;
   background-color: rgb(254 243 199 / var(--tw-bg-opacity, 1));
@@ -573,8 +581,9 @@ video {
   background-color: rgb(217 119 6 / var(--tw-bg-opacity, 1));
 }
 
-.p-4 {
-  padding: 1rem;
+.bg-blue-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(59 130 246 / var(--tw-bg-opacity, 1));
 }
 
 .px-4 {
