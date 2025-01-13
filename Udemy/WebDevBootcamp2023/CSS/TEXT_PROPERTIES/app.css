@@ -5,8 +5,9 @@ h1 {
   font-weight: 700;
   text-decoration: #552266 underline wavy;
   letter-spacing: 15px;
-  /* font-size: 80px; */
+  font-size: 80px;
   /* font-family: Segoe UI, Futura, Arial, sans-serif; */
+  font-family: Futura, Segoe UI, Arial;
   /* font-family: Fantasy; */
 }
 p {
