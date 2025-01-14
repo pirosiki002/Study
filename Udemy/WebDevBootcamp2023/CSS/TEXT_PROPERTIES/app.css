@@ -1,14 +1,19 @@
 h1 {
   text-align: center;
-  font-weight: 100;
+  /* width: 50%; */
+  /* font-weight: 100; */
+  font-weight: 700;
   text-decoration: #552266 underline wavy;
   letter-spacing: 15px;
   font-size: 80px;
   /* font-family: Segoe UI, Futura, Arial, sans-serif; */
-  font-family: Fantasy;
+  font-family: Futura, Segoe UI, Arial;
+  /* font-family: Fantasy; */
 }
 p {
+  /* text-align: right; */
   line-height: 2;
+  /* font-weight: bold; */
 }
 
 a {
