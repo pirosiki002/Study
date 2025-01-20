@@ -5,6 +5,8 @@ const Example = () => {
 
   const handleChange = (e) => setFruit(e.target.value);
 
+  const RADIO_COLLECTION = ["Apple", "Banana", "Cherry"];
+
   return (
     <>
       <p style={{ textAlign: "center" }}>
@@ -12,7 +14,20 @@ const Example = () => {
         <br />
         練習用に使ってください！
       </p>
-      <label>
+      {RADIO_COLLECTION.map((value) => {
+        return (
+          <label key={value}>
+            <input
+              type="radio"
+              value={value}
+              checked={fruit === value}
+              onChange={handleChange}
+            />
+            {value}
+          </label>
+        );
+      })}
+      {/* <label>
         <input
           type="radio"
           value="Apple"
@@ -38,7 +53,7 @@ const Example = () => {
           onChange={handleChange}
         />
         Cherry
-      </label>
+      </label> */}
       <h3>I'd like to eat a {fruit}</h3>
     </>
   );
