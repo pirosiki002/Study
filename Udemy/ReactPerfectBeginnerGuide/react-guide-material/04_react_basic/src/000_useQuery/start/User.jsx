@@ -29,7 +29,8 @@ function User() {
   });
 
   // クエリの状態とデータをコンソールにログ出力
-  console.log({ status, data, error });
+  // console.log({ status, data, error });
+  console.log(status);
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
