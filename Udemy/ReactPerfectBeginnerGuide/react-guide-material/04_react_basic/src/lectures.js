@@ -2,6 +2,7 @@
  * レクチャーID（フォルダ名）を追加
  */
 const lectures = [
+  "000_useQuery",
   "050_project_sample",
   "060_styling",
   "070_component_nest",
