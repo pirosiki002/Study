@@ -2,17 +2,26 @@ import { useState } from "react";
 
 const Example = () => {
   const [isChecked, setIsChecked] = useState(false);
-  const [text, setText] = useState("OFF!");
+  // const [text, setText] = useState("OFF!");
 
-  const handleClick = () => {
-    const newIsChecked = !isChecked;
-    setIsChecked(newIsChecked);
-    if (newIsChecked) {
-      setText("ON");
-    } else {
-      setText("OFF");
-    }
-  };
+  // const handleClick = () => {
+  //   const newIsChecked = !isChecked;
+  //   setIsChecked(newIsChecked);
+  //   if (newIsChecked) {
+  //     setText("ON");
+  //   } else {
+  //     setText("OFF");
+  //   }
+  // };
+
+  // const toggleCheck = () => {
+  // setIsChecked(!isChecked);
+  // setIsChecked((prevState) => {
+  //   let state = !prevState;
+  //   return state;
+  // });
+  //   setIsChecked((prevState) => !prevState);
+  // };
 
   return (
     <p style={{ textAlign: "center" }}>
@@ -24,9 +33,13 @@ const Example = () => {
         type="checkbox"
         id="my-check"
         checked={isChecked}
-        onClick={handleClick}
+        // onClick={handleClick}
+        // onChange={toggleCheck}
+        onChange={() => {
+          setIsChecked((prevState) => !prevState);
+        }}
       ></input>
-      {text}
+      {isChecked ? "ON" : "OFF"}
     </p>
   );
 };
