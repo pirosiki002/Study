@@ -7,7 +7,8 @@ export const ClientPage = () => {
   return (
     <>
       <p>current url = {currentUrl}</p>
-      <Link href={'/urltest'}>move to urltest page</Link>
+      {/* <Link href={'/urltest'}>move to urltest page</Link> */}
+      <Link href="/urltest?page=55&category=teacher">move to urltest page</Link>
     </>
   );
 };
