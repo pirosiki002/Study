@@ -29,17 +29,38 @@ const Example = () => {
     //   }
     // });
 
+    // let sumVal = 0;
+    // newFruits.forEach((fruit) => {
+    //   // if (fruit.checked === true) {
+    //   if (fruit.checked) {
+    //     sumVal += fruit.value;
+    //     // setSum(sumVal);
+    //   }
+    // });
+
+    // setSum(sumVal);
+
     // filter + forEachバージョン
     // let sumVal = 0;
     // newFruits
     //   .filter((fruit) => fruit.checked)
     //   .forEach((fruit) => (sumVal = sumVal + fruit.value));
 
-    // filter + reduceバージョン
-    let sumVal = newFruits
+    let sumVal = 0;
+    newFruits
       .filter((fruit) => fruit.checked)
-      .reduce((sumVal, fruit) => sumVal + fruit.value, 0);
+      // .forEach((fruit) => {
+      //   sumVal += fruit.value;
+      // });
+      .forEach((fruit) => (sumVal += fruit.value));
+
     setSum(sumVal);
+
+    // filter + reduceバージョン
+    // let sumVal = newFruits
+    //   .filter((fruit) => fruit.checked)
+    //   .reduce((sumVal, fruit) => sumVal + fruit.value, 0);
+    // setSum(sumVal);
   };
   return (
     <div>
