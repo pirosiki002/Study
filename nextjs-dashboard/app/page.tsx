@@ -1,11 +1,17 @@
-import { SearchBar } from './search-bar'; // Client Components
+import { UserInfo } from './UserInfo'; // Server Components
+import { SideMenu } from './side-menu'; // Client Components
 
-// page.tsxなどのServer Componentsから利用される
-export default function Header() {
+/**
+ * Client Components(`<SideMenu>`)の子要素として
+ * Server Components(`<UserInfo>`)を渡せる
+ */
+export default function Page() {
   return (
-    <header>
-      <h1>My App</h1>
-      <SearchBar />
-    </header>
+    <div>
+      <SideMenu>
+        <UserInfo />
+      </SideMenu>
+      <main>{/* ... */}</main>
+    </div>
   );
 }
