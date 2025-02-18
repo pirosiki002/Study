@@ -1,12 +1,11 @@
-import { ClientPage } from './page.client';
+import { SearchBar } from './search-bar'; // Client Components
 
-const postgres_user = process.env.POSTGRES_USER;
-console.log(postgres_user, 'POSTGRES_USER=');
-
-export default function Page() {
+// page.tsxなどのServer Componentsから利用される
+export default function Header() {
   return (
-    <>
-      <ClientPage />
-    </>
+    <header>
+      <h1>My App</h1>
+      <SearchBar />
+    </header>
   );
 }
