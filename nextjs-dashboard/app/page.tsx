@@ -1,17 +1,22 @@
-import { UserInfo } from './UserInfo'; // Server Components
-import { SideMenu } from './side-menu'; // Client Components
+import { setTimeout } from 'node:timers/promises';
+import { Suspense } from 'react';
+import { Clock } from './clock';
 
-/**
- * Client Components(`<SideMenu>`)の子要素として
- * Server Components(`<UserInfo>`)を渡せる
- */
+export const dynamic = 'force-dynamic';
+
 export default function Page() {
   return (
     <div>
-      <SideMenu>
-        <UserInfo />
-      </SideMenu>
-      <main>{/* ... */}</main>
+      <h1>Streaming SSR</h1>
+      <Clock />
+      <Suspense fallback={<>loading...</>}>
+        <LazyComponent />
+      </Suspense>
     </div>
   );
+}
+
+async function LazyComponent() {
+  await setTimeout(3000);
+  return <p>Lazy Component</p>;
 }
