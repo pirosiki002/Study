@@ -1,3 +1,4 @@
+import Clientpage from './page.client';
 type SearchParamsValue = string | string[] | undefined;
 
 export default async function Page({
@@ -14,6 +15,7 @@ export default async function Page({
     <>
       {sort}
       {id}
+      <Clientpage />
     </>
   );
 }
