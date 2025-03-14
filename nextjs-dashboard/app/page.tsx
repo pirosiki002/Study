@@ -1,16 +1,19 @@
 import { setTimeout } from 'node:timers/promises';
 import { Suspense } from 'react';
 import { Clock } from './clock';
-import { notFound } from "next/navigation";
-
+import { redirect } from 'next/navigation';
 export const dynamic = 'force-dynamic';
+
+// let redirected = false;
 
 export default async function Page() {
 
-  // const user = await fetchUser("122");
-  const user = await fetchUser("123");
-  if (!user) {
-    return notFound();
+  const team = await fetchTeam("3");
+  // if (!team && !redirected) {
+  if (!team) {
+    // redirect("/otherpage");
+    // redirected = true;
+    console.log("redirected");
   }
 
   return (
@@ -22,6 +25,17 @@ export default async function Page() {
       </Suspense>
     </div>
   );
+}
+
+async function fetchTeam(id: string) {
+  // 仮のチームデータ
+  const teams = [
+    { id: "1", name: "Team Alpha" },
+    { id: "2", name: "Team Beta" }
+  ];
+
+  // id に一致するチームを検索
+  return teams.find(team => team.id === id) || null;
 }
 
 async function LazyComponent() {
