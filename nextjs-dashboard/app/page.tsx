@@ -1,19 +1,19 @@
 import { setTimeout } from 'node:timers/promises';
 import { Suspense } from 'react';
 import { Clock } from './clock';
-import { redirect } from 'next/navigation';
+import { permanentRedirect, redirect } from 'next/navigation';
 export const dynamic = 'force-dynamic';
 
 // let redirected = false;
 
 export default async function Page() {
-
-  const team = await fetchTeam("3");
+  const team = await fetchTeam('5');
   // if (!team && !redirected) {
   if (!team) {
-    // redirect("/otherpage");
     // redirected = true;
-    console.log("redirected");
+    // redirect('/cookies');
+    // permanentRedirect('/cookies');
+    console.log('redirected');
   }
 
   return (
@@ -30,8 +30,8 @@ export default async function Page() {
 async function fetchTeam(id: string) {
   // 仮のチームデータ
   const teams = [
-    { id: "1", name: "Team Alpha" },
-    { id: "2", name: "Team Beta" }
+    { id: '1', name: 'Team Alpha' },
+    { id: '2', name: 'Team Beta' },
   ];
 
   // id に一致するチームを検索
@@ -44,8 +44,8 @@ async function LazyComponent() {
 }
 
 async function fetchUser(id: string) {
-  if (id === "123") {
-    return { id: "123", name: "Taro" };
+  if (id === '123') {
+    return { id: '123', name: 'Taro' };
   } else {
     return null;
   }
