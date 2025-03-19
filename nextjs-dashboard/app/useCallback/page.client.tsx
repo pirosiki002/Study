@@ -1,12 +1,16 @@
 'use client';
-import { useState } from 'react';
+import { useState, useCallback, FC } from 'react';
 
-export default function ClientPage() {
+const ClientPage: FC = () => {
   const [count, setCount] = useState(0);
 
-  const handleCount = () => {
+  //   const handleCount = () => {
+  //     setCount(count + 1);
+  //   };
+
+  const handleCount = useCallback(() => {
     setCount(count + 1);
-  };
+  }, [count]);
 
   return (
     <>
@@ -14,4 +18,6 @@ export default function ClientPage() {
       <p>current count:{count}</p>
     </>
   );
-}
+};
+
+export default ClientPage;
