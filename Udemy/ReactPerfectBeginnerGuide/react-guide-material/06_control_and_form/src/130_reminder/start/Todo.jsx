@@ -44,10 +44,15 @@ const Todo = () => {
         </div>
       ))}
       {/* Form.jsに移動する */}
-      {/* <form> */}
-      <input value={input} onChange={(e) => setInput(e.target.value)} />
-      <button onClick={addList}>追加</button>
-      {/* </form> */}
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          addList();
+        }}
+      >
+        <input value={input} onChange={(e) => setInput(e.target.value)} />
+        <button type="submit">追加</button>
+      </form>
     </>
   );
 };
