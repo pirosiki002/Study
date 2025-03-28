@@ -16,11 +16,22 @@ const todosList = [
 ];
 
 const Todo = () => {
+  const [input, setInput] = useState("");
   const [list, setList] = useState(todosList);
 
   const onDelete = (id) => {
     const newList = list.filter((todo) => todo.id !== id);
     setList(newList);
+  };
+
+  // リストに追加する
+  const addList = () => {
+    // 入力した値をリストに追加
+    // const newList = list.push({ id: {list.length + 1}, content: { input } });
+    const newList = [...list, { id: list.length + 1, content: input }];
+    setList(newList);
+    // input をクリア
+    setInput("");
   };
 
   return (
@@ -32,6 +43,11 @@ const Todo = () => {
           <p style={{ margin: 0 }}>{todo.content}</p>
         </div>
       ))}
+      {/* Form.jsに移動する */}
+      {/* <form> */}
+      <input value={input} onChange={(e) => setInput(e.target.value)} />
+      <button onClick={addList}>追加</button>
+      {/* </form> */}
     </>
   );
 };
