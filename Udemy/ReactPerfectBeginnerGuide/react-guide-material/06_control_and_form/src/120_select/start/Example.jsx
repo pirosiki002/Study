@@ -1,10 +1,32 @@
+"use client";
+import { useState } from "react";
+
 const Example = () => {
+  const fruits = ["Banana", "Apple", "Cherry"];
+  const [fruit, setFruit] = useState(fruits[0]);
+
   return (
-    <p style={{ textAlign: "center" }}>
-      startフォルダの内容が表示されます。
+    <>
+      <select value={fruit} onChange={(e) => setFruit(e.target.value)}>
+        {/* {fruits.map((item) => {
+          return (
+            <option key={item} value={item}>
+              {item}
+            </option>
+          );
+        })} */}
+        {/* {fruits.map((item) => (
+          <option key={item}>{item}</option>
+        ))} */}
+        {fruits.map((item) => (
+          <option key={item} value={item}>
+            {item}
+          </option>
+        ))}
+      </select>
       <br />
-      練習用に使ってください！
-    </p>
+      選択された果物：{fruit}
+    </>
   );
 };
 
