@@ -1,4 +1,5 @@
 import { useState } from "react";
+import List from "./List";
 
 const todosList = [
   {
@@ -19,11 +20,6 @@ const Todo = () => {
   const [input, setInput] = useState("");
   const [list, setList] = useState(todosList);
 
-  const onDelete = (id) => {
-    const newList = list.filter((todo) => todo.id !== id);
-    setList(newList);
-  };
-
   // リストに追加する
   const addList = () => {
     // 入力した値をリストに追加
@@ -36,13 +32,7 @@ const Todo = () => {
 
   return (
     <>
-      {/* List.jsに移動する */}
-      {list.map((todo) => (
-        <div key={todo.id} style={{ display: "flex", alignItems: "center" }}>
-          <button onClick={() => onDelete(todo.id)}>完了</button>
-          <p style={{ margin: 0 }}>{todo.content}</p>
-        </div>
-      ))}
+      <List list={list} setList={setList} />
       {/* Form.jsに移動する */}
       <form
         onSubmit={(e) => {
