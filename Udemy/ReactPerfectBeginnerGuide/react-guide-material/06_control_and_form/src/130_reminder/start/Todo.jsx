@@ -1,5 +1,6 @@
 import { useState } from "react";
 import List from "./List";
+import Form from "./Form";
 
 const todosList = [
   {
@@ -22,6 +23,7 @@ const Todo = () => {
 
   // リストに追加する
   const addList = () => {
+    if (!input) return; // if brank input, return
     // 入力した値をリストに追加
     // const newList = list.push({ id: {list.length + 1}, content: { input } });
     const newList = [...list, { id: list.length + 1, content: input }];
@@ -34,15 +36,7 @@ const Todo = () => {
     <>
       <List list={list} setList={setList} />
       {/* Form.jsに移動する */}
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          addList();
-        }}
-      >
-        <input value={input} onChange={(e) => setInput(e.target.value)} />
-        <button type="submit">追加</button>
-      </form>
+      <Form input={input} setInput={setInput} addList={addList} />
     </>
   );
 };
