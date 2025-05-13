@@ -74,11 +74,12 @@ const Timer = (props) => {
 
   // タイマースタートと一時停止を制御する関数
   const toggle = () => {
-    if (isRunning) {
-      setIsrunnning(false);
-    } else {
-      setIsrunnning(true);
-    }
+    // if (isRunning) {
+    //   setIsrunnning(false);
+    // } else {
+    //   setIsrunnning(true);
+    // }
+    setIsrunnning((prev) => !prev);
   };
 
   // タイマーリセットする関数
