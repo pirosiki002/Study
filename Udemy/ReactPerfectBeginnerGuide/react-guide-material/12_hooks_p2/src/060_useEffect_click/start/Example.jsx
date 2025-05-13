@@ -3,11 +3,12 @@ import PropTypes from "prop-types";
 
 const Example = () => {
   const [isDisp, setIsDisp] = useState(true);
-  const [timerStart, setTimerStart] = useState(false);
+  // const [timerStart, setTimerStart] = useState(false);
+  const [isRunning, setIsrunnning] = useState(false);
 
   // 非表示にする関数
   const onClickDisp = () => {
-    setTimerStart(false);
+    setIsrunnning(false);
     setIsDisp((prev) => !prev);
   };
 
@@ -15,8 +16,8 @@ const Example = () => {
     <>
       <Timer
         isDisp={isDisp}
-        timerStart={timerStart}
-        setTimerStart={setTimerStart}
+        isRunning={isRunning}
+        setIsrunnning={setIsrunnning}
       />
       <button onClick={() => onClickDisp((prev) => !prev)}>
         {isDisp ? "非表示" : "表示"}
@@ -26,17 +27,17 @@ const Example = () => {
 };
 
 const Timer = (props) => {
-  const { isDisp, timerStart, setTimerStart } = props;
+  const { isDisp, isRunning, setIsrunnning } = props;
   const [time, setTime] = useState(0);
   // JSなので、この形で型定義
   Timer.propTypes = {
     isDisp: PropTypes.bool.isRequired,
-    timerStart: PropTypes.bool.isRequired,
-    setTimerStart: PropTypes.func.isRequired,
+    isRunning: PropTypes.bool.isRequired,
+    setIsrunnning: PropTypes.func.isRequired,
   };
   // タイマーを１秒ずつ足していくuseEffect
   useEffect(() => {
-    if (timerStart) {
+    if (isRunning) {
       // console.log('init');
       let intervalId = null;
       intervalId = window.setInterval(() => {
@@ -48,7 +49,7 @@ const Timer = (props) => {
         // console.log('end');
       };
     }
-  }, [timerStart]);
+  }, [isRunning]);
 
   // タイマーをストレージにセットして、タブ錠にも表示するuseEffect
   useEffect(() => {
@@ -71,18 +72,18 @@ const Timer = (props) => {
     }
   }, []);
 
-  // タイマースタートする関数
-  const startStopTmr = () => {
-    if (timerStart) {
-      setTimerStart(false);
+  // タイマースタートと一時停止を制御する関数
+  const toggle = () => {
+    if (isRunning) {
+      setIsrunnning(false);
     } else {
-      setTimerStart(true);
+      setIsrunnning(true);
     }
   };
 
   // タイマーリセットする関数
-  const resetTmr = () => {
-    setTimerStart(false);
+  const reset = () => {
+    setIsrunnning(false);
     setTime(0);
   };
 
@@ -94,10 +95,10 @@ const Timer = (props) => {
             <time>{time}</time>
             <span>秒経過</span>
           </h3>
-          <button onClick={() => startStopTmr()}>
-            {timerStart ? "一時停止" : "スタート"}
+          <button onClick={toggle}>
+            {isRunning ? "一時停止" : "スタート"}
           </button>
-          <button onClick={() => resetTmr()}>リセット</button>
+          <button onClick={reset}>リセット</button>
           <br />
         </>
       )}
