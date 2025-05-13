@@ -3,56 +3,22 @@ import PropTypes from "prop-types";
 
 const Example = () => {
   const [isDisp, setIsDisp] = useState(true);
-  const [time, setTime] = useState(0);
-  const [timerStart, setTimerStart] = useState(false);
-  // タイマースタートする関数
-  const startStopTmr = () => {
-    if (timerStart) {
-      setTimerStart(false);
-    } else {
-      setTimerStart(true);
-    }
-  };
-
-  // タイマーリセットする関数
-  const resetTmr = () => {
-    setTimerStart(false);
-    setTime(0);
-  };
-
-  // 非表示にする関数
-  const onClickDisp = () => {
-    setTimerStart(false);
-    setIsDisp((prev) => !prev);
-  };
 
   return (
     <>
-      {isDisp && (
-        <Timer time={time} setTime={setTime} timerStart={timerStart} />
-      )}
-      <button onClick={() => startStopTmr()}>
-        {timerStart ? "一時停止" : "スタート"}
-      </button>
-      {/* <button onClick={() => setTime(0)}>リセット</button> */}
-      <button onClick={() => resetTmr()}>リセット</button>
-      <br />
-      {/* <button onClick={() => setIsDisp((prev) => !prev)}>非表示</button> */}
-      <button onClick={() => onClickDisp((prev) => !prev)}>
-        {isDisp ? "非表示" : "表示"}
-      </button>
+      <Timer isDisp={isDisp} setIsDisp={setIsDisp} />
     </>
   );
 };
 
 const Timer = (props) => {
-  const { time, setTime, timerStart } = props;
-  // const [time, setTime] = useState(0);
+  const { isDisp, setIsDisp } = props;
+  const [time, setTime] = useState(0);
+  const [timerStart, setTimerStart] = useState(false);
   // JSなので、この形で型定義
   Timer.propTypes = {
-    time: PropTypes.number.isRequired,
-    setTime: PropTypes.func.isRequired,
-    timerStart: PropTypes.bool.isRequired,
+    isDisp: PropTypes.bool.isRequired,
+    setIsDisp: PropTypes.func.isRequired,
   };
   // タイマーを１秒ずつ足していくuseEffect
   useEffect(() => {
@@ -91,11 +57,46 @@ const Timer = (props) => {
     }
   }, []);
 
+  // タイマースタートする関数
+  const startStopTmr = () => {
+    if (timerStart) {
+      setTimerStart(false);
+    } else {
+      setTimerStart(true);
+    }
+  };
+
+  // タイマーリセットする関数
+  const resetTmr = () => {
+    setTimerStart(false);
+    setTime(0);
+  };
+
+  // 非表示にする関数
+  const onClickDisp = () => {
+    setTimerStart(false);
+    setIsDisp((prev) => !prev);
+  };
+
   return (
-    <h3>
-      <time>{time}</time>
-      <span>秒経過</span>
-    </h3>
+    <>
+      {isDisp && (
+        <>
+          <h3>
+            <time>{time}</time>
+            <span>秒経過</span>
+          </h3>
+          <button onClick={() => startStopTmr()}>
+            {timerStart ? "一時停止" : "スタート"}
+          </button>
+          <button onClick={() => resetTmr()}>リセット</button>
+          <br />
+        </>
+      )}
+      <button onClick={() => onClickDisp((prev) => !prev)}>
+        {isDisp ? "非表示" : "表示"}
+      </button>
+    </>
   );
 };
 
