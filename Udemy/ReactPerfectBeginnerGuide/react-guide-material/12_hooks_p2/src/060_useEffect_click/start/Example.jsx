@@ -37,18 +37,21 @@ const Timer = (props) => {
   };
   // タイマーを１秒ずつ足していくuseEffect
   useEffect(() => {
+    console.log("init");
+    let intervalId = null;
+
     if (isRunning) {
-      // console.log('init');
-      let intervalId = null;
+      console.log("timer start ");
       intervalId = window.setInterval(() => {
-        // console.log('interval running');
+        console.log("interval running");
         setTime((prev) => prev + 1);
       }, 1000);
-      return () => {
-        window.clearInterval(intervalId);
-        // console.log('end');
-      };
     }
+
+    return () => {
+      window.clearInterval(intervalId);
+      console.log("end");
+    };
   }, [isRunning]);
 
   // タイマーをストレージにセットして、タブ錠にも表示するuseEffect
