@@ -3,22 +3,36 @@ import PropTypes from "prop-types";
 
 const Example = () => {
   const [isDisp, setIsDisp] = useState(true);
+  const [timerStart, setTimerStart] = useState(false);
+
+  // 非表示にする関数
+  const onClickDisp = () => {
+    setTimerStart(false);
+    setIsDisp((prev) => !prev);
+  };
 
   return (
     <>
-      <Timer isDisp={isDisp} setIsDisp={setIsDisp} />
+      <Timer
+        isDisp={isDisp}
+        timerStart={timerStart}
+        setTimerStart={setTimerStart}
+      />
+      <button onClick={() => onClickDisp((prev) => !prev)}>
+        {isDisp ? "非表示" : "表示"}
+      </button>
     </>
   );
 };
 
 const Timer = (props) => {
-  const { isDisp, setIsDisp } = props;
+  const { isDisp, timerStart, setTimerStart } = props;
   const [time, setTime] = useState(0);
-  const [timerStart, setTimerStart] = useState(false);
   // JSなので、この形で型定義
   Timer.propTypes = {
     isDisp: PropTypes.bool.isRequired,
-    setIsDisp: PropTypes.func.isRequired,
+    timerStart: PropTypes.bool.isRequired,
+    setTimerStart: PropTypes.func.isRequired,
   };
   // タイマーを１秒ずつ足していくuseEffect
   useEffect(() => {
@@ -72,12 +86,6 @@ const Timer = (props) => {
     setTime(0);
   };
 
-  // 非表示にする関数
-  const onClickDisp = () => {
-    setTimerStart(false);
-    setIsDisp((prev) => !prev);
-  };
-
   return (
     <>
       {isDisp && (
@@ -93,9 +101,6 @@ const Timer = (props) => {
           <br />
         </>
       )}
-      <button onClick={() => onClickDisp((prev) => !prev)}>
-        {isDisp ? "非表示" : "表示"}
-      </button>
     </>
   );
 };
