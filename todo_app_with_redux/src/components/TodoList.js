@@ -1,12 +1,25 @@
 // 型定義機能を提供するPropTypesをImportします。
 import PropTypes from "prop-types";
 import { toggleTodo } from "../actions";
+import Todo from "./Todo";
 // todoList Component には、TodoList Containerで定義した
 // todos and toggleTodoが渡されています。
 const TodoList = ({ todos, toggleTodo }) => (
+  // <ul>
+  //   {todos.map((todo) => (
+  //     <li>{todo.text}</li>
+  //   ))}
+  // </ul>
   <ul>
     {todos.map((todo) => (
-      <li>{todo.text}</li>
+      // ここでtodo コンポーネントを描画します。
+      // onClickには、toggleTodo（引数はtodoのid）を渡します
+      <Todo
+        key={todo.id}
+        text={todo.text}
+        completed={todo.completed}
+        onClick={() => toggleTodo(todo.id)}
+      />
     ))}
   </ul>
 );
