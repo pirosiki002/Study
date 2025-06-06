@@ -1,0 +1,61 @@
+# ワークフローの名前。GitHub Actionsの実行画面で表示されます
+name: Pull Request Review
+
+# ワークフローを実行するトリガー（きっかけ）を定義
+on:
+  # プルリクエスト関連のイベント
+  pull_request:
+    # 以下のタイミングで実行
+    types: [opened, synchronize, reopened] # プルリクエストが作成/更新/再オープンされたとき
+    # mainブランチへのプルリクエストの場合のみ実行
+    branches:
+      - main
+
+# 実行するジョブの定義
+jobs:
+  # レビュージョブの定義
+  review:
+    # ジョブを実行する環境を指定（Ubuntuの最新版）
+    runs-on: ubuntu-latest
+    # 実行するステップの定義
+    steps:
+      # ステップ1: リポジトリのコードをチェックアウト
+      # actions/checkout@v4は、GitHubが公式に提供しているアクション
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # ステップ2: Node.jsのセットアップ
+      # actions/setup-node@v3は、Node.jsの実行環境を準備する公式アクション
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          # Node.jsのバージョンを指定
+          node-version: "20"
+
+      # ステップ3: 依存関係のインストール
+      # package.jsonに記載された依存パッケージをインストール
+      - name: Install dependencies
+        run: npm install
+
+      # ステップ4: テストの実行
+      # index.jsを実行してテストを実施
+      - name: Run tests
+        run: node index.js
+
+      # ステップ5: プルリクエストにコメントを追加
+      # actions/github-script@v6は、GitHubのAPIを操作するためのアクション
+      - name: Add PR comment
+        uses: actions/github-script@v6
+        with:
+          # GitHubのAPIを使用してコメントを追加
+          script: |
+            github.rest.issues.createComment({
+              # プルリクエストの番号（自動的に設定される）
+              issue_number: context.issue.number,
+              # リポジトリのオーナー名（自動的に設定される）
+              owner: context.repo.owner,
+              # リポジトリ名（自動的に設定される）
+              repo: context.repo.repo,
+              # コメントの内容
+              body: '✅ テストが成功しました！\n\nレビュアーの確認をお願いします。\n\n- [ ] コードレビュー\n- [ ] 動作確認\n- [ ] セキュリティチェック'
+            })
