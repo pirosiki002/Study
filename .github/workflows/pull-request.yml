@@ -47,15 +47,10 @@ jobs:
       - name: Add PR comment
         uses: actions/github-script@v6
         with:
-          # GitHubのAPIを使用してコメントを追加
           script: |
             github.rest.issues.createComment({
-              # プルリクエストの番号（自動的に設定される）
               issue_number: context.issue.number,
-              # リポジトリのオーナー名（自動的に設定される）
               owner: context.repo.owner,
-              # リポジトリ名（自動的に設定される）
               repo: context.repo.repo,
-              # コメントの内容
               body: '✅ テストが成功しました！\n\nレビュアーの確認をお願いします。\n\n- [ ] コードレビュー\n- [ ] 動作確認\n- [ ] セキュリティチェック'
             })
