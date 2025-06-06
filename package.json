@@ -1,0 +1,11 @@
+{
+  "name": "github-actions-test",
+  "version": "1.0.0",
+  "description": "GitHub Actionsのテスト用プロジェクト",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
