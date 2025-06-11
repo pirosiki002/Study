@@ -1,0 +1,50 @@
+name: Manual Trigger Test
+
+on:
+  # 手動実行のトリガーを定義
+  workflow_dispatch:
+    # 手動実行時の入力パラメータを定義
+    inputs:
+      environment:
+        description: '実行環境を選択'
+        required: true
+        default: 'development'
+        type: choice
+        options:
+          - development
+          - staging
+          - production
+      run_tests:
+        description: 'テストを実行するかどうか'
+        required: true
+        type: boolean
+        default: true
+
+jobs:
+  manual-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Show selected environment
+        run: echo "Selected environment: ${{ github.event.inputs.environment }}"
+
+      - name: Run tests
+        if: ${{ github.event.inputs.run_tests }}
+        run: node index.js
+
+      - name: Add workflow summary
+        run: |
+          echo "## ワークフロー実行結果" >> $GITHUB_STEP_SUMMARY
+          echo "- 実行環境: ${{ github.event.inputs.environment }}" >> $GITHUB_STEP_SUMMARY
+          echo "- テスト実行: ${{ github.event.inputs.run_tests }}" >> $GITHUB_STEP_SUMMARY
+          echo "- 実行日時: $(date)" >> $GITHUB_STEP_SUMMARY 
