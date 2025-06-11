@@ -28,10 +28,10 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Show selected environment
-        run: echo "Selected environment: ${{ github.event.inputs.environment }}"
+        run: echo "Selected environment: ${{ inputs.environment }}"
 
       - name: Run dummy test
-        if: github.event.inputs.run_tests == true
+        if: inputs.run_tests == true
         run: |
           echo "Running dummy test..."
           echo "Test completed successfully!"
@@ -39,6 +39,6 @@ jobs:
       - name: Add workflow summary
         run: |
           echo "## ワークフロー実行結果" >> $GITHUB_STEP_SUMMARY
-          echo "- 実行環境: ${{ github.event.inputs.environment }}" >> $GITHUB_STEP_SUMMARY
-          echo "- テスト実行: ${{ github.event.inputs.run_tests }}" >> $GITHUB_STEP_SUMMARY
+          echo "- 実行環境: ${{ inputs.environment }}" >> $GITHUB_STEP_SUMMARY
+          echo "- テスト実行: ${{ inputs.run_tests }}" >> $GITHUB_STEP_SUMMARY
           echo "- 実行日時: $(date)" >> $GITHUB_STEP_SUMMARY 
