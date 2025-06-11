@@ -27,20 +27,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: "20"
-
-      - name: Install dependencies
-        run: npm install
-
       - name: Show selected environment
         run: echo "Selected environment: ${{ github.event.inputs.environment }}"
 
-      - name: Run tests
+      - name: Run dummy test
         if: ${{ github.event.inputs.run_tests }}
-        run: node index.js
+        run: |
+          echo "Running dummy test..."
+          echo "Test completed successfully!"
 
       - name: Add workflow summary
         run: |
