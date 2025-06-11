@@ -31,7 +31,7 @@ jobs:
         run: echo "Selected environment: ${{ github.event.inputs.environment }}"
 
       - name: Run dummy test
-        if: ${{ github.event.inputs.run_tests }}
+        if: github.event.inputs.run_tests == true
         run: |
           echo "Running dummy test..."
           echo "Test completed successfully!"
