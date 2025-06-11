@@ -3,11 +3,12 @@ name: Run JavaScript in GitHub Actions
 
 # ワークフローを実行するトリガー（きっかけ）を定義
 on:
-  # pushイベントが発生したとき
   push:
-    # mainブランチへのプッシュの場合のみ実行
     branches:
-      - main
+      - "main" # シングルクォートで囲む
+    paths-ignore: # 特定のパスが変更された場合は実行しない
+      - "**.md"
+      - ".github/**"
 
 # 実行するジョブの定義
 jobs:
