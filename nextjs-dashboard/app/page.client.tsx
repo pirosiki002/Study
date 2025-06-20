@@ -1,14 +1,34 @@
 'use client';
-import { usePathname } from 'next/navigation';
-import Link from 'next/link';
+import React, { useState, useTransition } from 'react';
+
+const items = Array.from({ length: 70000 }, (_, i) => `item-${i}`);
 
 export const ClientPage = () => {
-  const currentUrl = usePathname();
+  const [query, setQuery] = useState('');
+  const [filtered, setFiltered] = useState(items);
+
+  const [isPending, startTransition] = useTransition();
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setQuery(value);
+    // フィルタリングの処理を「低優先度」で実行
+    startTransition(() => {
+      setFiltered(items.filter(item => item.includes(value)));
+    });
+  };
+
+  // const filtered = items.filter(item => item.includes(query));
+
   return (
     <>
-      <p>current url = {currentUrl}</p>
-      {/* <Link href={'/urltest'}>move to urltest page</Link> */}
-      <Link href="/urltest?page=55&category=teacher">move to urltest page</Link>
+      <input value={query} onChange={handleChange} placeholder="search" />
+      {isPending && <span>now renewing...</span>}
+      <ul>
+        {filtered.map(item => (
+          <li key={item}>{item}</li>
+        ))}
+      </ul>
     </>
   );
 };
