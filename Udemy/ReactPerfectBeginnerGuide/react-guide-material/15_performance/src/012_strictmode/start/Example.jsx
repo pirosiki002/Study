@@ -1,20 +1,26 @@
-import { useState } from "react";
-import "./Example.css";
+import { useState, StrictMode } from 'react';
+import './Example.css';
+
+const StrictComp = () => {
+  return (
+    <StrictMode>
+      <Example />
+    </StrictMode>
+  );
+};
 
 const Example = () => {
-  console.log("render");
-  
   const [countA, setCountA] = useState({
-    val: 0
+    val: 0,
   });
 
-  const obj1 = {val:0};
-  const obj3 = {val:0};
-  const obj2 = { ...obj1};
-  const isSame = Object.is("",false);
-  const isSameEqual = "" == false;
+  const obj1 = { val: 0 };
+  const obj3 = { val: 0 };
+  const obj2 = { ...obj1 };
+  const isSame = Object.is('', false);
+  const isSameEqual = '' == false;
   console.log(isSameEqual);
-  
+
   return (
     <div className="parent">
       <div>
@@ -38,4 +44,4 @@ const Example = () => {
   );
 };
 
-export default Example;
+export default StrictComp;
