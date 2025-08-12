@@ -27,10 +27,17 @@ export default async function Page({
 
       {/* テスト用リンク */}
       <div style={{ marginBottom: '20px' }}>
-        <h3>テスト用リンク:</h3>
-        <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+        <h3>パターン1: 同じキーを複数回 (?tags=food&tags=japan)</h3>
+        <div
+          style={{
+            display: 'flex',
+            gap: '10px',
+            flexWrap: 'wrap',
+            marginBottom: '15px',
+          }}
+        >
           <a
-            href="/?color=red"
+            href="/?tags=food"
             style={{
               padding: '8px 16px',
               backgroundColor: '#007bff',
@@ -39,10 +46,10 @@ export default async function Page({
               borderRadius: '4px',
             }}
           >
-            1つだけ (?color=red)
+            1つだけ (?tags=food)
           </a>
           <a
-            href="/?color=red&color=blue"
+            href="/?tags=food&tags=japan"
             style={{
               padding: '8px 16px',
               backgroundColor: '#28a745',
@@ -51,20 +58,69 @@ export default async function Page({
               borderRadius: '4px',
             }}
           >
-            2つ (?color=red&color=blue)
+            2つ (?tags=food&tags=japan)
           </a>
+        </div>
+
+        <h3>パターン2: 配列記法 (?tags[]=food&tags[]=japan)</h3>
+        <div
+          style={{
+            display: 'flex',
+            gap: '10px',
+            flexWrap: 'wrap',
+            marginBottom: '15px',
+          }}
+        >
           <a
-            href="/?color=red&color=blue&color=green"
+            href="/?tags[]=food"
             style={{
               padding: '8px 16px',
-              backgroundColor: '#ffc107',
-              color: 'black',
+              backgroundColor: '#17a2b8',
+              color: 'white',
               textDecoration: 'none',
               borderRadius: '4px',
             }}
           >
-            3つ (?color=red&color=blue&color=green)
+            1つだけ (?tags[]=food)
           </a>
+          <a
+            href="/?tags[]=food&tags[]=japan"
+            style={{
+              padding: '8px 16px',
+              backgroundColor: '#6f42c1',
+              color: 'white',
+              textDecoration: 'none',
+              borderRadius: '4px',
+            }}
+          >
+            2つ (?tags[]=food&tags[]=japan)
+          </a>
+        </div>
+
+        <h3>パターン3: カンマ区切り (?tags=food,japan)</h3>
+        <div
+          style={{
+            display: 'flex',
+            gap: '10px',
+            flexWrap: 'wrap',
+            marginBottom: '15px',
+          }}
+        >
+          <a
+            href="/?tags=food,japan"
+            style={{
+              padding: '8px 16px',
+              backgroundColor: '#fd7e14',
+              color: 'white',
+              textDecoration: 'none',
+              borderRadius: '4px',
+            }}
+          >
+            カンマ区切り (?tags=food,japan)
+          </a>
+        </div>
+
+        <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
           <a
             href="/"
             style={{
@@ -121,14 +177,22 @@ export default async function Page({
         <h3>💡 動作のポイント:</h3>
         <ul>
           <li>
-            <strong>1つだけ:</strong> <code>?color=red</code> →{' '}
-            <code>color: &quot;red&quot;</code> (string)
+            <strong>パターン1:</strong> <code>?tags=food&tags=japan</code> →{' '}
+            <code>tags: [&quot;food&quot;, &quot;japan&quot;]</code> (array)
           </li>
           <li>
-            <strong>2つ以上:</strong> <code>?color=red&color=blue</code> →{' '}
-            <code>color: [&quot;red&quot;, &quot;blue&quot;]</code> (array)
+            <strong>パターン2:</strong> <code>?tags[]=food&tags[]=japan</code> →{' '}
+            <code>tags: [&quot;food&quot;, &quot;japan&quot;]</code> (array)
+          </li>
+          <li>
+            <strong>パターン3:</strong> <code>?tags=food,japan</code> →{' '}
+            <code>tags: &quot;food,japan&quot;</code> (string)
           </li>
         </ul>
+        <p style={{ marginTop: '10px', fontSize: '14px' }}>
+          <strong>注意:</strong>{' '}
+          パターン2でも、1つだけの場合は文字列として受け取られる可能性があります。
+        </p>
       </div>
     </div>
   );
