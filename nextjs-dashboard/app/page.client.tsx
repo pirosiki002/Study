@@ -1,14 +1,15 @@
 'use client';
-import { usePathname } from 'next/navigation';
-import Link from 'next/link';
-
+import React, { useState, useOptimistic } from 'react';
 export const ClientPage = () => {
-  const currentUrl = usePathname();
+  // サーバーから取得した「本当のいいね数」
+  const [likeCount, setLikeCount] = useState(100);
+  const [optimisticLikeCount, addOptimisticLike] = useOptimistic(
+    likeCount,
+    currentCount => currentCount + 1
+  );
   return (
     <>
-      <p>current url = {currentUrl}</p>
-      {/* <Link href={'/urltest'}>move to urltest page</Link> */}
-      <Link href="/urltest?page=55&category=teacher">move to urltest page</Link>
+      <p>Page client</p>
     </>
   );
 };
