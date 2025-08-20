@@ -7,7 +7,7 @@ const Example = () => {
   useEffect(() => {
     console.log('useEffect called');
     const getUser = async () => {
-      const res = await axios.get(' http://127.0.0.1:3003/user');
+      const res = await axios.get('http://127.0.0.1:3003/user');
       // console.log(res.data);
       setUsers(res.data);
     };
