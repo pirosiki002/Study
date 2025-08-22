@@ -1,21 +1,24 @@
-import { useState } from "react";
-import { useDispatchTodos } from "../context/TodoContext";
-const Form = ({ createTodo }) => {
-  const [enteredTodo, setEnteredTodo] = useState("");
+import { useState } from 'react';
+import { useDispatchTodos } from '../context/TodoContext';
+import todoApi from '../api/todo';
+
+const Form = () => {
+  const [enteredTodo, setEnteredTodo] = useState('');
   const dispatch = useDispatchTodos();
 
-  const addTodo = (e) => {
+  const addTodo = e => {
     e.preventDefault();
 
     const newTodo = {
       id: Math.floor(Math.random() * 1e5),
       content: enteredTodo,
-      editing: false
+      editing: false,
     };
 
-    dispatch({ type: 'todo/add', todo: newTodo});
-
-    setEnteredTodo("");
+    todoApi.post(newTodo).then(newTodo => {
+      dispatch({ type: 'todo/add', todo: newTodo });
+      setEnteredTodo('');
+    });
   };
   return (
     <div>
@@ -23,7 +26,7 @@ const Form = ({ createTodo }) => {
         <input
           type="text"
           value={enteredTodo}
-          onChange={(e) => setEnteredTodo(e.target.value)}
+          onChange={e => setEnteredTodo(e.target.value)}
         />
         <button>追加</button>
       </form>
