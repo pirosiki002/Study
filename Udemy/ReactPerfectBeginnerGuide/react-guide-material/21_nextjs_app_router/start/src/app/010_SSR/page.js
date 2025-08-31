@@ -1,17 +1,11 @@
-'use client';
-import { useState, useEffect } from 'react';
+import './lib';
+import ClientComp from './components/ClientComp';
 
 export default function SSR() {
-  const [state, setState] = useState(undefined);
-
-  useEffect(() => {
-    setState('client loaded');
-  }, []);
-
   return (
     <>
       <div className="page">SSR Page</div>
-      <div>{state}</div>
+      <ClientComp />
     </>
   );
 }
