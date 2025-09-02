@@ -31,62 +31,10 @@
       "date": "Mar 6, 2022"
     },
     {
-      "id": "492f",
-      "msg": null
-    },
-    {
-      "id": "6f8c",
-      "msg": null
-    },
-    {
-      "id": "ade1",
-      "msg": "エラーが発生しました。"
-    },
-    {
-      "id": "d5b3",
-      "msg": "エラーが発生しました。"
-    },
-    {
-      "id": "f83e",
-      "msg": null
-    },
-    {
-      "id": "df4c",
-      "msg": null
-    },
-    {
-      "id": "5a4f",
-      "msg": null
-    },
-    {
-      "id": "5e3f"
-    },
-    {
-      "id": "ac46",
-      "msg": null
-    },
-    {
-      "id": "12f5",
-      "msg": null
-    },
-    {
-      "id": "a7a6",
-      "msg": null
-    },
-    {
-      "id": "040d"
-    },
-    {
-      "id": "12",
-      "title": "12"
-    },
-    {
-      "id": "",
-      "title": ""
-    },
-    {
-      "id": "1",
-      "title": "1"
+      "id": "6",
+      "title": "Sed id risus",
+      "text": "et, commodo at, libero. Morbi accumsan laoreet ipsum. Curabitur consequat, lectus sit amet luctus vulputate, nisi sem semper erat, in consectetuer ipsum nunc id enim. Curabitur massa. Vestibulum accumsan neque et nunc. Quisque ornare tortor at risus. Nunc ac sem ut dolor dapibus gravida. Aliquam tincidunt, nunc ac mattis ornare,",
+      "date": "Mar 6, 2022"
     }
   ]
 }
