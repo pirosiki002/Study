@@ -1,6 +1,16 @@
 import { ENDPOINT } from '@/constants';
 import Article from '../../../components/article';
 
+export async function generateMetadata({ params }) {
+  const article = await fetch(`${ENDPOINT}/${params.id}`).then(res =>
+    res.json()
+  );
+  return {
+    title: article.title,
+    description: article.text,
+  };
+}
+
 // 静的生成用のパラメータを定義
 export async function generateStaticParams() {
   // 実際のAPIから記事IDを取得
