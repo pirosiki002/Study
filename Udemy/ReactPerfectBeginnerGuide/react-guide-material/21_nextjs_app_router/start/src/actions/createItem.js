@@ -1,7 +1,8 @@
 'use server';
 import { ENDPOINT } from '@/constants';
 
-export async function createItem(formData) {
+export async function createItem(state, formData) {
+  console.log(state);
   const id = formData.get('id');
   const title = formData.get('title');
   //   console.log(id, title);
@@ -17,7 +18,8 @@ export async function createItem(formData) {
       body: JSON.stringify({ id, title }),
     });
     const data = await res.json();
-    return data;
+    return `${data.id}:${data.title}の登録が完了しました。`;
+    // return data;
   } catch (e) {
     return { msg: 'register error' };
   }
