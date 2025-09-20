@@ -13,6 +13,8 @@ export const Default = {
       title: 'Test Task',
       state: 'TASK_INBOX',
     },
+    onArchiveTask: () => console.log('Archive'),
+    onPinTask: () => console.log('Pin'),
   },
 };
 
