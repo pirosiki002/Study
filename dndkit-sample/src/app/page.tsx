@@ -47,6 +47,7 @@ function SortableTask({ task }: { task: Task }) {
   };
 
   return (
+    // 各リストの囲い線を処理
     <div
       ref={setNodeRef}
       style={style}
@@ -60,6 +61,7 @@ function SortableTask({ task }: { task: Task }) {
     >
       <div className="flex items-center">
         <div className="w-2 h-2 bg-blue-500 rounded-full mr-3"></div>
+        {/* 各リストの内容を表示 */}
         <span className="text-gray-800">{task.title}</span>
       </div>
     </div>
@@ -70,9 +72,11 @@ export default function Home() {
   const [tasks, setTasks] = useState<Task[]>(initialTasks);
   const [activeTask, setActiveTask] = useState<Task | null>(null);
 
+  // ドラッグ操作を開始するまでの最小移動距離を設定しています。
   const sensors = useSensors(
     useSensor(PointerSensor, {
       activationConstraint: {
+        // マウスを8ピクセル以上移動してからドラッグ操作が開始
         distance: 8,
       },
     })
@@ -108,12 +112,13 @@ export default function Home() {
           <h2 className="text-xl font-semibold text-gray-800 mb-4">
             タスクをドラッグして順序を変更できます
           </h2>
-
+          {/* DndContentでドラッグ＆ドロップの状態管理を行う */}
           <DndContext
-            sensors={sensors}
-            onDragStart={handleDragStart}
-            onDragEnd={handleDragEnd}
+            sensors={sensors} // センサー設定（マウス）
+            onDragStart={handleDragStart} // ドラッグ開始時の処理
+            onDragEnd={handleDragEnd} // ドラッグ終了時の処理
           >
+            {/* ドラッグ可能な要素(DndContentに挟まれた処理が対象) */}
             <SortableContext
               items={tasks}
               strategy={verticalListSortingStrategy}
