@@ -32,27 +32,28 @@ const initialTasks: Task[] = [
 ];
 
 function SortableTask({ task }: { task: Task }) {
+  // ドラッグ可能な要素を作るために必要な全ての機能
   const {
-    attributes,
-    listeners,
-    setNodeRef,
-    transform,
-    transition,
+    attributes, // ドラッグ可能な要素の属性
+    listeners, // ドラッグイベントのリスナー（マウス・タッチイベントを検知）
+    setNodeRef, // DOM要素の参照をDnD Kitに渡し、ドラッグ対象の要素を特定する
+    transform, // ドラッグ中の位置情報（x, y座標）
+    transition, // アニメーション遷移（要素の移動をなめらかにする）
     isDragging,
   } = useSortable({ id: task.id });
 
   const style = {
-    transform: CSS.Transform.toString(transform),
-    transition,
+    transform: CSS.Transform.toString(transform), // ドラッグ中の位置変換
+    transition, // スムーズなアニメーション
   };
 
   return (
     // 各リストの囲い線を処理
     <div
-      ref={setNodeRef}
+      ref={setNodeRef} // DOM要素の参照を設定
       style={style}
       {...attributes}
-      {...listeners}
+      {...listeners} // ドラッグイベントを設定
       className={`
         p-4 mb-2 bg-white border border-gray-300 rounded-lg shadow-sm cursor-grab active:cursor-grabbing
         ${isDragging ? 'opacity-50 shadow-lg' : 'hover:shadow-md'}
@@ -72,31 +73,32 @@ export default function Home() {
   const [tasks, setTasks] = useState<Task[]>(initialTasks);
   const [activeTask, setActiveTask] = useState<Task | null>(null);
 
-  // ドラッグ操作を開始するまでの最小移動距離を設定しています。
+  // ドラッグ操作を開始するまでの最小移動距離を設定（誤クリック防止）
   const sensors = useSensors(
     useSensor(PointerSensor, {
       activationConstraint: {
-        // マウスを8ピクセル以上移動してからドラッグ操作が開始
+        // マウスを8ピクセル以上移動してからドラッグ操作を開始
         distance: 8,
       },
     })
   );
 
   function handleDragStart(event: DragStartEvent) {
-    const { active } = event;
-    const task = tasks.find(t => t.id === active.id);
-    setActiveTask(task || null);
+    const { active } = event; // ドラッグ開始された要素の情報を取得
+    const task = tasks.find(t => t.id === active.id); // 該当するタスクを検索
+    setActiveTask(task || null); // アクティブなタスクを状態に設定
   }
 
   function handleDragEnd(event: DragEndEvent) {
-    const { active, over } = event;
-    setActiveTask(null);
+    const { active, over } = event; // active: ドラッグした要素, over: 移動先の要素
+    setActiveTask(null); // ドラッグ状態をリセット（DragOverlayを非表示）
 
+    // 移動先があり、かつ元の位置と異なる場合のみ処理
     if (over && active.id !== over.id) {
       setTasks(items => {
         const oldIndex = items.findIndex(item => item.id === active.id);
         const newIndex = items.findIndex(item => item.id === over.id);
-        return arrayMove(items, oldIndex, newIndex);
+        return arrayMove(items, oldIndex, newIndex); // 配列内の要素をドロップした位置に移動
       });
     }
   }
@@ -115,13 +117,13 @@ export default function Home() {
           {/* DndContentでドラッグ＆ドロップの状態管理を行う */}
           <DndContext
             sensors={sensors} // センサー設定（マウス）
-            onDragStart={handleDragStart} // ドラッグ開始時の処理
-            onDragEnd={handleDragEnd} // ドラッグ終了時の処理
+            onDragStart={handleDragStart}
+            onDragEnd={handleDragEnd}
           >
             {/* ドラッグ可能な要素(DndContentに挟まれた処理が対象) */}
             <SortableContext
               items={tasks}
-              strategy={verticalListSortingStrategy}
+              strategy={verticalListSortingStrategy} // 上下にドラッグして順序を変更
             >
               <div className="space-y-2">
                 {tasks.map(task => (
@@ -129,7 +131,7 @@ export default function Home() {
                 ))}
               </div>
             </SortableContext>
-
+            {/* ドラッグしている要素のコピーを画面上に浮かせて、マウスカーソルに追従させる */}
             <DragOverlay>
               {activeTask ? (
                 <div className="p-4 bg-white border border-gray-300 rounded-lg shadow-lg cursor-grabbing">
