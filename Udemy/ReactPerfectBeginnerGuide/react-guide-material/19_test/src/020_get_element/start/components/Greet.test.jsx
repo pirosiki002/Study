@@ -21,6 +21,17 @@ test('h1 is available or not', () => {
 
   // const headingEl = screen.getByRole('heading', { name: 'こんにちは' });
   // debug(container);
-  const h2El = container.querySelector('h2');
-  debug(h2El);
+  // const h2El = container.querySelector('h2');
+  // debug(h2El);
+
+  // こちらだとInputの氏名に関連付けられた情報を取得
+  // const elByLabel = screen.getByLabelText('氏名');
+  // debug(elByLabel);
+
+  // udemyと違って、ラベル情報はgetByTextじゃないと取れない
+  // const labelEl = screen.getByText('氏名');
+  // debug(labelEl);
+
+  const elByPlaceholder = screen.getAllByPlaceholderText('codemafia');
+  debug(elByPlaceholder);
 });
