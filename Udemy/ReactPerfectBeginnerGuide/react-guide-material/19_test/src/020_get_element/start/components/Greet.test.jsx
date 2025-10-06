@@ -33,5 +33,5 @@ test('h1 is available or not', () => {
   // debug(labelEl);
 
   const elByPlaceholder = screen.getAllByPlaceholderText('codemafia');
-  debug(elByPlaceholder);
+  // debug(elByPlaceholder);
 });
