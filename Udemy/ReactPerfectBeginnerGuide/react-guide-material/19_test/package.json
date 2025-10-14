@@ -8,6 +8,7 @@
     "start": "vite",
     "build": "vite build",
     "test": "cross-env PORT=3001 vitest run",
+    "json-server": "json-server --watch db.json --port 4030",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
@@ -29,6 +30,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.6",
     "happy-dom": "^13.9.0",
+    "json-server": "^1.0.0-beta.3",
     "react-scripts": "^5.0.1",
     "vite": "^5.1.6",
     "vite-plugin-dynamic-import": "^1.5.0",
