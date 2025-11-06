@@ -24,6 +24,8 @@ const About = () => {
     <div style={{ maxWidth: '500px', margin: '0 auto', padding: '20px' }}>
       <h2>バリデーション練習</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
+        {/* handleSubmitを使わないとバリデーションが聞かない（ボタンが押せてしまう） */}
+        {/* <form onSubmit={onSubmit}> */}
         <div style={{ marginBottom: '15px' }}>
           <label htmlFor="username">ユーザー名:</label>
           <input
