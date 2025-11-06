@@ -5,6 +5,7 @@ const About = () => {
   const {
     register,
     handleSubmit,
+    // formState: { errors, isValid, isSubmitting },
     formState: { errors, isValid },
     watch,
     reset,
@@ -129,6 +130,8 @@ const About = () => {
             </span>
           )}
         </div>
+
+        {/* {console.log('formsState.isSubmitting***************', isSubmitting)} */}
 
         <button
           type="submit"
