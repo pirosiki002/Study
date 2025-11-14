@@ -23,37 +23,37 @@ const fakeRequestPromise = url => {
   });
 };
 
-// go to the hell of callback...
-fakeRequestCallback(
-  'books.com',
-  function (response) {
-    console.log('success!!!');
-    console.log('response data =', response);
-    fakeRequestCallback(
-      'books.com/page2',
-      function (response) {
-        console.log('success2!!!');
-        console.log('response data =', response);
-        fakeRequestCallback(
-          'books.com/page3',
-          function (response) {
-            console.log('success3!!!');
-            console.log('response data =', response);
-          },
-          function (error) {
-            console.log('failure3...');
-          }
-        );
-      },
-      function (error) {
-        console.log('failure2...');
-      }
-    );
-  },
-  function (error) {
-    console.log('failure...');
-  }
-);
+// // go to the hell of callback...
+// fakeRequestCallback(
+//   'books.com',
+//   function (response) {
+//     console.log('success!!!');
+//     console.log('response data =', response);
+//     fakeRequestCallback(
+//       'books.com/page2',
+//       function (response) {
+//         console.log('success2!!!');
+//         console.log('response data =', response);
+//         fakeRequestCallback(
+//           'books.com/page3',
+//           function (response) {
+//             console.log('success3!!!');
+//             console.log('response data =', response);
+//           },
+//           function (error) {
+//             console.log('failure3...');
+//           }
+//         );
+//       },
+//       function (error) {
+//         console.log('failure2...');
+//       }
+//     );
+//   },
+//   function (error) {
+//     console.log('failure...');
+//   }
+// );
 
 // fakeRequestCallback('books.com/page1', function (response) {
 //     console.log('成功！！');
@@ -116,3 +116,35 @@ fakeRequestCallback(
 //     console.log('失敗！！！！');
 //     console.log(err);
 //   });
+
+// const request = fakeRequestPromise('yelp.com/api/coffee');
+// request
+//   .then(() => {
+//     console.log('then success');
+//   })
+//   .catch(() => {
+//     console.log('catch failure...');
+//   });
+
+// promise to the hell..?
+fakeRequestPromise('yelp.com/api/coffee/page1')
+  .then(() => {
+    console.log('then success1');
+    fakeRequestPromise('yelp.com/api/coffee/page2')
+      .then(() => {
+        console.log('then success2');
+        fakeRequestPromise('yelp.com/api/coffee/page3')
+          .then(() => {
+            console.log('then success3');
+          })
+          .catch(() => {
+            console.log('catch failure3...');
+          });
+      })
+      .catch(() => {
+        console.log('catch failure2...');
+      });
+  })
+  .catch(() => {
+    console.log('catch failure1...');
+  });
