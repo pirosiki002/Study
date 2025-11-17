@@ -23,6 +23,23 @@ const fakeRequestPromise = url => {
   });
 };
 
+// promise comes in handy!
+fakeRequestPromise('yelp.com/api/coffee/page1')
+  .then(data => {
+    console.log('success1', data);
+    return fakeRequestPromise('yelp.com/api/coffee/page2');
+  })
+  .then(data => {
+    console.log('success2', data);
+    return fakeRequestPromise('yelp.com/api/coffee/page3');
+  })
+  .then(data => {
+    console.log('success3', data);
+  })
+  .catch(err => {
+    console.log('failure', err);
+  });
+
 // // go to the hell of callback...
 // fakeRequestCallback(
 //   'books.com',
@@ -127,24 +144,24 @@ const fakeRequestPromise = url => {
 //   });
 
 // promise to the hell..?
-fakeRequestPromise('yelp.com/api/coffee/page1')
-  .then(() => {
-    console.log('then success1');
-    fakeRequestPromise('yelp.com/api/coffee/page2')
-      .then(() => {
-        console.log('then success2');
-        fakeRequestPromise('yelp.com/api/coffee/page3')
-          .then(() => {
-            console.log('then success3');
-          })
-          .catch(() => {
-            console.log('catch failure3...');
-          });
-      })
-      .catch(() => {
-        console.log('catch failure2...');
-      });
-  })
-  .catch(() => {
-    console.log('catch failure1...');
-  });
+// fakeRequestPromise('yelp.com/api/coffee/page1')
+//   .then(() => {
+//     console.log('then success1');
+//     fakeRequestPromise('yelp.com/api/coffee/page2')
+//       .then(() => {
+//         console.log('then success2');
+//         fakeRequestPromise('yelp.com/api/coffee/page3')
+//           .then(() => {
+//             console.log('then success3');
+//           })
+//           .catch(() => {
+//             console.log('catch failure3...');
+//           });
+//       })
+//       .catch(() => {
+//         console.log('catch failure2...');
+//       });
+//   })
+//   .catch(() => {
+//     console.log('catch failure1...');
+//   });
