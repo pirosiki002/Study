@@ -1,11 +1,30 @@
-const delayedColorChange = (color, delay) => {
+const fakeRequest = url => {
   return new Promise((resolve, reject) => {
+    const delay = Math.floor(Math.random() * 4500) + 500;
     setTimeout(() => {
-      document.body.style.backgroundColor = color;
-      resolve();
+      if (delay > 4000) {
+        reject('コネクションタイムアウト');
+      } else {
+        resolve(`ダミーデータ(${url})`);
+      }
     }, delay);
   });
 };
+
+async function makeRequest() {
+  const data1 = await fakeRequest('/hoge');
+  console.log('data1=', data1);
+}
+
+makeRequest();
+// const delayedColorChange = (color, delay) => {
+//   return new Promise((resolve, reject) => {
+//     setTimeout(() => {
+//       document.body.style.backgroundColor = color;
+//       resolve();
+//     }, delay);
+//   });
+// };
 
 // delayedColorChange('red', 1000)
 //   .then(() => delayedColorChange('orange', 1000))
@@ -15,18 +34,18 @@ const delayedColorChange = (color, delay) => {
 //   .then(() => delayedColorChange('indigo', 1000))
 //   .then(() => delayedColorChange('violet', 1000));
 
-async function rainbow() {
-  await delayedColorChange('red', 1000);
-  console.log('yahoo!');
-  await delayedColorChange('orange', 1000);
-}
+// async function rainbow() {
+//   await delayedColorChange('red', 1000);
+//   console.log('yahoo!');
+//   await delayedColorChange('orange', 1000);
+// }
 
-async function printRainbow() {
-  await rainbow();
-  console.log('rainbow comp!!!');
-}
+// async function printRainbow() {
+//   await rainbow();
+//   console.log('rainbow comp!!!');
+// }
 
-printRainbow();
+// printRainbow();
 
 // rainbow().then(data => {
 //   console.log('rainbow comp!', data);
