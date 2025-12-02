@@ -12,11 +12,16 @@ const fakeRequest = url => {
 };
 
 async function makeRequest() {
-  const data1 = await fakeRequest('/hoge');
-  console.log('data1=', data1);
+  try {
+    const data1 = await fakeRequest('/hoge');
+    console.log('data1=', data1);
+  } catch (e) {
+    console.log('error occured', e);
+  }
 }
 
 makeRequest();
+
 // const delayedColorChange = (color, delay) => {
 //   return new Promise((resolve, reject) => {
 //     setTimeout(() => {
