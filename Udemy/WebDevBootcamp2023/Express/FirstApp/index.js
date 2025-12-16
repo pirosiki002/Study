@@ -34,6 +34,17 @@ app.get('/r/:subreddit/:postId', (req, res) => {
   res.send(`<h1>here is subreddit ${subreddit}page Post ID: ${postId}</h1>`);
 });
 
+app.get('/search', (req, res) => {
+  // console.log('req.query', req.query);
+  const { q } = req.query;
+  // res.send('hi!!!');
+  if (!q) {
+    res.send(`<h1>please input you'd like to search word after q</h1>`);
+  } else {
+    res.send(`<h1>search result ${q} </h1>`);
+  }
+});
+
 // order is important
 app.get(/(.*)/, (req, res) => {
   res.send('unknown pass');
