@@ -28,6 +28,12 @@ app.get('/', (req, res) => {
   res.send('HP home');
 });
 
+app.get('/r/:subreddit/:postId', (req, res) => {
+  // console.log('params', req.params);
+  const { subreddit, postId } = req.params;
+  res.send(`<h1>here is subreddit ${subreddit}page Post ID: ${postId}</h1>`);
+});
+
 // order is important
 app.get(/(.*)/, (req, res) => {
   res.send('unknown pass');
