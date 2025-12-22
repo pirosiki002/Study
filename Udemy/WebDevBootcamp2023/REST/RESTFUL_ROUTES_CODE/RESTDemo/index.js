@@ -1,10 +1,38 @@
 const express = require('express');
+const { userInfo } = require('os');
 const app = express();
+const path = require('path');
 
 // app.use is all cover method
 app.use(express.urlencoded({ extended: true }));
 // json parse
 app.use(express.json());
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+
+const comments = [
+  {
+    username: 'yamada',
+    comment: 'he is a very funny man',
+  },
+  {
+    username: 'suzuki',
+    comment: 'his hobby is bird watching',
+  },
+  {
+    username: 'tanaka',
+    comment: 'what is funny point about Yamada',
+  },
+  {
+    username: 'bowwow',
+    comment: 'wanwanwan',
+  },
+];
+
+app.get('/comments', (req, res) => {
+  // res.render('comments/index', {comments:comments});
+  res.render('comments/index', { comments });
+});
 
 app.get('/tacos', (req, res) => {
   res.send('GET /tacos response');
