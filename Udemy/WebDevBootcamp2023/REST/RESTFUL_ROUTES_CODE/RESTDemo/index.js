@@ -2,6 +2,7 @@ const express = require('express');
 const { userInfo } = require('os');
 const app = express();
 const path = require('path');
+const { v4: uuid } = require('uuid');
 
 // app.use is all cover method
 app.use(express.urlencoded({ extended: true }));
@@ -12,22 +13,22 @@ app.set('view engine', 'ejs');
 
 const comments = [
   {
-    id: 1,
+    id: uuid(),
     username: 'yamada',
     comment: 'he is a very funny man',
   },
   {
-    id: 2,
+    id: uuid(),
     username: 'suzuki',
     comment: 'his hobby is bird watching',
   },
   {
-    id: 3,
+    id: uuid(),
     username: 'tanaka',
     comment: 'what is funny point about Yamada',
   },
   {
-    id: 4,
+    id: uuid(),
     username: 'bowwow',
     comment: 'wanwanwan',
   },
@@ -45,14 +46,14 @@ app.get('/comments/new', (req, res) => {
 app.post('/comments', (req, res) => {
   // console.log(req.body);
   const { username, comment } = req.body;
-  comments.push({ username, comment });
+  comments.push({ username, comment, id: uuid() });
   // res.send('OK!!!!!!!!!!!');
   res.redirect('/comments');
 });
 
 app.get('/comments/:id', (req, res) => {
-  const { id } = req.params; // string
-  const comment = comments.find(c => c.id === parseInt(id));
+  const { id } = req.params;
+  const comment = comments.find(c => c.id === id);
   res.render('comments/show', { comment });
 });
 
