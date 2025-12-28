@@ -34,6 +34,21 @@ app.get('/comments', (req, res) => {
   res.render('comments/index', { comments });
 });
 
+app.get('/comments/new', (req, res) => {
+  res.render('comments/new');
+});
+
+app.post('/comments', (req, res) => {
+  // console.log(req.body);
+  const { username, comment } = req.body;
+  comments.push({ username, comment });
+  // {
+  //   username: username,
+  //   comment: comment
+  // }
+  res.send('OK!!!!!!!!!!!');
+});
+
 app.get('/tacos', (req, res) => {
   res.send('GET /tacos response');
 });
