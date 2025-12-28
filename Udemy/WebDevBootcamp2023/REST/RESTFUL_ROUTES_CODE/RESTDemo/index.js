@@ -42,11 +42,8 @@ app.post('/comments', (req, res) => {
   // console.log(req.body);
   const { username, comment } = req.body;
   comments.push({ username, comment });
-  // {
-  //   username: username,
-  //   comment: comment
-  // }
-  res.send('OK!!!!!!!!!!!');
+  // res.send('OK!!!!!!!!!!!');
+  res.redirect('/comments');
 });
 
 app.get('/tacos', (req, res) => {
