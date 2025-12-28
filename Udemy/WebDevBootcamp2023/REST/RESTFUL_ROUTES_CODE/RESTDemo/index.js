@@ -12,18 +12,22 @@ app.set('view engine', 'ejs');
 
 const comments = [
   {
+    id: 1,
     username: 'yamada',
     comment: 'he is a very funny man',
   },
   {
+    id: 2,
     username: 'suzuki',
     comment: 'his hobby is bird watching',
   },
   {
+    id: 3,
     username: 'tanaka',
     comment: 'what is funny point about Yamada',
   },
   {
+    id: 4,
     username: 'bowwow',
     comment: 'wanwanwan',
   },
@@ -44,6 +48,12 @@ app.post('/comments', (req, res) => {
   comments.push({ username, comment });
   // res.send('OK!!!!!!!!!!!');
   res.redirect('/comments');
+});
+
+app.get('/comments/:id', (req, res) => {
+  const { id } = req.params; // string
+  const comment = comments.find(c => c.id === parseInt(id));
+  res.render('comments/show', { comment });
 });
 
 app.get('/tacos', (req, res) => {
