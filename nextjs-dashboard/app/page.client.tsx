@@ -1,6 +1,7 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import { useForm, FormProvider, useFormContext } from 'react-hook-form';
+import { getJSON, postJSON } from '@/src/services/api';
 
 /**
  * useFormContext のサンプルページ
@@ -35,6 +36,12 @@ export default function ClientPage() {
       name: 'data',
     });
   }, [reset]); // ❌ never put `methods` as the deps
+
+  // axios動作チェック
+  useEffect(() => {
+    getJSON().catch(error => console.error('GET Error:', error));
+    postJSON().catch(error => console.error('POST Error:', error));
+  }, []);
 
   return (
     <FormProvider {...methods}>
