@@ -1,0 +1,17 @@
+# GET https://jsonplaceholder.typicode.com/todos/1
+
+
+# POST https://jsonplaceholder.typicode.com/posts
+# Content-Type: application/json
+
+# {
+#   "title": "foo",
+#   "body": "bar",
+#   "userId": 1
+# }
+
+GET https://jsonplaceholder.typicode.com/posts/99999
+
+###
+# シャープ３つ（###）で区切ると、１つのファイルに複数のリクエストができる
+GET https://jsonplaceholder.typicode.com/todos/1
