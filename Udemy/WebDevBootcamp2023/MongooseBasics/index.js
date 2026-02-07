@@ -13,9 +13,25 @@ mongoose
     console.log(err);
   });
 
-// const db = mongoose.connection;
-// db.on('error', console.error.bind(console, 'connection error:'));
-// db.once('open', function () {
-//   // we're connected!!!!
-//   console.log('we are connected!!!');
-// });
+// {
+//   title: 'Amadeus',
+//   year: 1986,
+//   score: 9.2,
+//   rating: 'R'
+// }
+
+const movieSchema = new mongoose.Schema({
+  title: String,
+  year: Number,
+  score: Number,
+  rating: String,
+});
+
+const Movie = mongoose.model('Movie', movieSchema);
+
+const Amadeus = new Movie({
+  title: 'Amadeus',
+  year: 1986,
+  score: 9.2,
+  rating: 'R',
+});
