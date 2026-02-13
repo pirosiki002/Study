@@ -1,14 +1,22 @@
 'use client';
 
+import { Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 
-export default function SearchBar() {
+function SearchContent() {
   const searchParams = useSearchParams();
   const search = searchParams.get('search');
 
-  // URL -> `/dashboard?search=my-project`
+  // URL -> `/dashboar222?search=my-project`
   console.log(search); // 'my-project'
 
-  // ...]
-  return <p>{search}</p>;
+  return <p>{search ?? '(none)'}</p>;
+}
+
+export default function SearchBar() {
+  return (
+    <Suspense fallback={<p>Loading...</p>}>
+      <SearchContent />
+    </Suspense>
+  );
 }
