@@ -1,73 +1,14 @@
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
-import Link from 'next/link';
+import BBSCard from './BBSCard';
 
 export default function BBSCardList() {
   return (
     <div className="grid lg:grid-cols-3 px-4 py-4 gap-4">
-      <Card>
-        <CardHeader>
-          <CardTitle>Create Project</CardTitle>
-          <CardDescription>
-            Enter your email below to login to your account
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus,
-          omnis, accusantium velit sunt ipsa libero, magnam earum facilis
-          assumenda temporibus veritatis in possimus? Tenetur maxime cumque
-          nihil assumenda! Commodi, culpa!
-        </CardContent>
-        <CardFooter className="flex-col gap-2">
-          <Link href={'/bbs-posts/1'} className="text-blue-500">
-            Read more
-          </Link>
-        </CardFooter>
-      </Card>
-      <Card>
-        <CardHeader>
-          <CardTitle>Create Project</CardTitle>
-          <CardDescription>
-            Enter your email below to login to your account
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus,
-          omnis, accusantium velit sunt ipsa libero, magnam earum facilis
-          assumenda temporibus veritatis in possimus? Tenetur maxime cumque
-          nihil assumenda! Commodi, culpa!
-        </CardContent>
-        <CardFooter className="flex-col gap-2">
-          <Link href={'/bbs-posts/1'} className="text-blue-500">
-            Read more
-          </Link>
-        </CardFooter>
-      </Card>
-      <Card>
-        <CardHeader>
-          <CardTitle>Create Project</CardTitle>
-          <CardDescription>
-            Enter your email below to login to your account
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus,
-          omnis, accusantium velit sunt ipsa libero, magnam earum facilis
-          assumenda temporibus veritatis in possimus? Tenetur maxime cumque
-          nihil assumenda! Commodi, culpa!
-        </CardContent>
-        <CardFooter className="flex-col gap-2">
-          <Link href={'/bbs-posts/1'} className="text-blue-500">
-            Read more
-          </Link>
-        </CardFooter>
-      </Card>
+      <BBSCard />
+      <BBSCard />
+      <BBSCard />
+      <BBSCard />
+      <BBSCard />
+      <BBSCard />
     </div>
   );
 }
