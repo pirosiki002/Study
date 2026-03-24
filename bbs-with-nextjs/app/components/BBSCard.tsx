@@ -7,24 +7,25 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import Link from 'next/link';
+import { BBSData } from '@/app/types/types';
 
-export default function BBSCard() {
+interface BBSDataProps {
+  bbsData: BBSData;
+}
+
+export default function BBSCard(props: BBSDataProps) {
+  const { bbsData } = props;
   return (
     // <div className="grid lg:grid-cols-3 px-4 py-4 gap-4">
     <div>
       <Card>
         <CardHeader>
-          <CardTitle>Create Project</CardTitle>
+          <CardTitle>{bbsData.title}</CardTitle>
           <CardDescription>
             Enter your email below to login to your account
           </CardDescription>
         </CardHeader>
-        <CardContent>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus,
-          omnis, accusantium velit sunt ipsa libero, magnam earum facilis
-          assumenda temporibus veritatis in possimus? Tenetur maxime cumque
-          nihil assumenda! Commodi, culpa!
-        </CardContent>
+        <CardContent>{bbsData.content}</CardContent>
         <CardFooter className="flex-col gap-2">
           <Link href={'/bbs-posts/1'} className="text-blue-500">
             Read more
