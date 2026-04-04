@@ -13,7 +13,7 @@ async function getBBSAllData() {
 
 export default async function Home() {
   const bbsAllData = await getBBSAllData();
-  console.log(bbsAllData);
+  // console.log(bbsAllData);
 
   return (
     // added bg-white because bg == black
