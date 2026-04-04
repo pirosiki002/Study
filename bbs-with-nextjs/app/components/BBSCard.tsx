@@ -13,21 +13,20 @@ interface BBSDataProps {
   bbsData: BBSData;
 }
 
-export default function BBSCard(props: BBSDataProps) {
-  const { bbsData } = props;
+export default function BBSCard({ bbsData }: BBSDataProps) {
+  // const { bbsData } = props;
+  const { id, title, content, createdAt, username } = bbsData;
   return (
     // <div className="grid lg:grid-cols-3 px-4 py-4 gap-4">
     <div>
       <Card>
         <CardHeader>
-          <CardTitle>{bbsData.title}</CardTitle>
-          <CardDescription>
-            Enter your email below to login to your account
-          </CardDescription>
+          <CardTitle>{title}</CardTitle>
+          <CardDescription>{username}</CardDescription>
         </CardHeader>
-        <CardContent>{bbsData.content}</CardContent>
+        <CardContent>{content}</CardContent>
         <CardFooter className="flex-col gap-2">
-          <Link href={'/bbs-posts/1'} className="text-blue-500">
+          <Link href={`/bbs-posts/${id}`} className="text-blue-500">
             Read more
           </Link>
         </CardFooter>
