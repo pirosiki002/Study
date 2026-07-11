@@ -1,25 +1,26 @@
 'use client';
-import { useState } from 'react';
+import { useState, ChangeEvent } from 'react';
 
 const Lesson1_1 = () => {
-  // const [age, setAge] = useState(0);
   const [age, setAge] = useState<number>(0);
+  const [name, setName] = useState('ShinCode');
+
+  console.log('rendering!!!!!!');
 
   const handleClick = () => {
-    setAge(age + 1);
-    console.log(age);
-    // 更新されていないage 0に１を加える
-    setAge(age + 1);
-    console.log(age);
-    // 更新されていないage 0に１を加える
-    setAge(age + 1);
-    console.log(age);
-    // すべての処理が終わったら再レンダリングで値を反映する
+    setAge(prevAge => prevAge + 1);
+    setAge(prevAge => prevAge + 1);
+    setAge(prevAge => prevAge + 1);
+    console.log(name);
   };
 
   return (
     <div>
-      <input type="text" />
+      <input
+        type="text"
+        value={name}
+        onChange={(e: ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
+      />
       <button
         className="border p-2 rounded-md bg-red-100"
         onClick={handleClick}
