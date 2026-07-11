@@ -2,24 +2,14 @@
 import { useState } from 'react';
 
 const Lesson1_1 = () => {
-  // const [age, setAge] = useState(0);
   const [age, setAge] = useState<number>(0);
 
+  console.log('rendering!!!!!!');
+
   const handleClick = () => {
-    setAge(state => state + 1);
-    console.log(age);
-    setAge(state => state + 1);
-    console.log(age);
-    setAge(state => state + 1);
-    console.log(age);
-    // console.log(age);
-    // // 更新されていないage 0に１を加える
-    // setAge(age + 1);
-    // console.log(age);
-    // // 更新されていないage 0に１を加える
-    // setAge(age + 1);
-    // console.log(age);
-    // すべての処理が終わったら再レンダリングで値を反映する
+    setAge(prevAge => prevAge + 1);
+    setAge(prevAge => prevAge + 1);
+    setAge(prevAge => prevAge + 1);
   };
 
   return (
