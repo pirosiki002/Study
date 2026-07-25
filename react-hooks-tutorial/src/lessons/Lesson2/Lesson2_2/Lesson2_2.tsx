@@ -4,14 +4,16 @@ import { fetchBio } from './fetchBio';
 
 const Lesson2_2 = () => {
   const [person, setPerson] = useState<string>('ShinCode');
+  const [bio, setBio] = useState<string | null>(null);
 
   useEffect(() => {
     const startFetching = async () => {
       const response = await fetchBio(person);
-      console.log(response);
+      // console.log(response);
+      setBio(response);
     };
     startFetching();
-  }, []);
+  }, [person]);
 
   return (
     <div>
@@ -23,7 +25,7 @@ const Lesson2_2 = () => {
 
       <hr />
 
-      <p className="text-black">{'Loading...'}</p>
+      <p className="text-black">{bio ? bio : 'Loading...'}</p>
     </div>
   );
 };
