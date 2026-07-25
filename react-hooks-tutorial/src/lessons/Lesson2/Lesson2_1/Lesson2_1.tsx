@@ -12,6 +12,11 @@ const Lesson2_1 = () => {
       setPosition({ x: e.clientX, y: e.clientY });
     }
     window.addEventListener('pointermove', handleMove);
+
+    return () => {
+      // clearn up function
+      window.removeEventListener('pointermove', handleMove);
+    };
   }, []);
 
   return (
