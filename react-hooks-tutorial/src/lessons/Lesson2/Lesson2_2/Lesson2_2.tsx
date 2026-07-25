@@ -7,12 +7,19 @@ const Lesson2_2 = () => {
   const [bio, setBio] = useState<string | null>(null);
 
   useEffect(() => {
+    let ignore = false;
     const startFetching = async () => {
       const response = await fetchBio(person);
+      console.log(person, 'ignore =', ignore); // ← 追加
       // console.log(response);
-      setBio(response);
+      if (!ignore) setBio(response);
     };
     startFetching();
+
+    // clean up
+    return () => {
+      ignore = true;
+    };
   }, [person]);
 
   return (
