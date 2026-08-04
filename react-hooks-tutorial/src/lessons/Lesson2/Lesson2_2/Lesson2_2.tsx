@@ -5,7 +5,7 @@ import { fetchBio } from './fetchBio';
 const Lesson2_2 = () => {
   const [person, setPerson] = useState<string>('ShinCode');
   const [bio, setBio] = useState<string | null>(null);
-  const [count, setCount] = useState(0);
+  // const [count, setCount] = useState(0);
 
   useEffect(() => {
     let ignore = false;
@@ -36,7 +36,7 @@ const Lesson2_2 = () => {
       <hr />
 
       <p className="text-black">{bio ? bio : 'Loading...'}</p>
-      <p>{count}</p>
+      {/* <p>{count}</p> */}
     </div>
   );
 };
