@@ -1,7 +1,15 @@
-import { useFetchUser } from './hooks/useFetchUser';
+// import { useFetchUser } from './hooks/useFetchUser';
+import useSWR from 'swr';
+
+const fetcher = (url: string) => fetch(url).then(r => r.json());
 
 const Lesson2_3 = () => {
-  const { user, loading } = useFetchUser(3);
+  // const { user, loading } = useFetchUser(3);
+  const {
+    data: user,
+    isLoading: loading,
+    error,
+  } = useSWR(`https://jsonplaceholder.typicode.com/users/2`, fetcher);
 
   if (loading) {
     return <div>Loading...</div>;
