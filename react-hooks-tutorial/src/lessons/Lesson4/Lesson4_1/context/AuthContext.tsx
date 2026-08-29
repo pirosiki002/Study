@@ -1,4 +1,11 @@
-import { createContext, ReactNode, useContext, useState } from 'react';
+import {
+  createContext,
+  ReactNode,
+  useCallback,
+  useContext,
+  useMemo,
+  useState,
+} from 'react';
 
 type User = {
   id: string;
@@ -27,7 +34,7 @@ export const useAuth = () => {
 const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
 
-  const login = (userInfo: User) => {
+  const login = useCallback((userInfo: User) => {
     if (
       userInfo.username === 'testUser' &&
       userInfo.email === 'test@gmail.com'
@@ -36,16 +43,20 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
     } else {
       console.log("You can't logged in");
     }
-  };
-  const logout = () => {
-    setUser(null);
-  };
+  }, []);
 
-  const contextValue = {
-    user,
-    login,
-    logout,
-  };
+  const logout = useCallback(() => {
+    setUser(null);
+  }, []);
+
+  const contextValue = useMemo(
+    () => ({
+      user,
+      login,
+      logout,
+    }),
+    [user, login, logout]
+  );
 
   return (
     <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
