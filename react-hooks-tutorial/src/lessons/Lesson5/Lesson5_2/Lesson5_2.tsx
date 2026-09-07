@@ -3,7 +3,7 @@ import { useToggle } from './hooks/useToggle';
 
 const Lesson5_2 = () => {
   const [count, setCount] = useState(0);
-  const [on, toggle] = useToggle(false);
+  // const [on, toggle] = useToggle(false);
 
   console.log('Parent rendered');
 
@@ -16,7 +16,8 @@ const Lesson5_2 = () => {
       >
         Parent Count
       </button>
-      <Child toggle={toggle} on={on} />
+      {/* <Child toggle={toggle} on={on} /> */}
+      <Child />
     </div>
   );
 };
@@ -24,8 +25,11 @@ const Lesson5_2 = () => {
 export default Lesson5_2;
 
 // eslint-disable-next-line react-refresh/only-export-components
-const Child = memo(({ toggle, on }: { toggle: () => void; on: boolean }) => {
+// const Child = memo(({ toggle, on }: { toggle: () => void; on: boolean }) => {
+const Child = memo(() => {
   console.log('Child rendered');
+  const [on, toggle] = useToggle(false);
+
   // heavy processing...
   let i = 0;
   while (i < 10000000) i++;
